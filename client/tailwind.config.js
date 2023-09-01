@@ -1,0 +1,37 @@
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: [
+    "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./components/**/*.{js,ts,jsx,tsx,mdx}",
+ 
+    // Or if using `src` directory:
+    "./src/**/*.{js,ts,jsx,tsx,mdx}",
+  ],
+  theme: {
+    extend: {
+      fontFamily: {
+        Inter: ["Inter", "sans-serif"],
+        Prompt: ["Prompt", "sans-serif"],
+        Bungee: ["Bungee", "cursive"],
+        ADLaM: ["ADLaM Display", "cursive"],
+        PressStart: ["'Press Start 2P'", "cursive"],
+        Gruppo: ["Gruppo", "sans-serif"]
+      },
+      backgroundImage: {
+        camera: "url('/static/assets/camera.png')",
+        upload: "url('/static/assets/upload.png')",
+        add: "url('/static/assets/add.png')",
+        male: "url('/static/assets/astronot.gif')",
+        rocket: "url('/static/assets/rocket.gif')",
+        google: "url('/static/assets/google.png')",
+        facebook: "url('/static/assets/facebook.png')",
+        twitter: "url('/static/assets/twitter.png')",
+        floating: "url('/static/assets/astronot_1.gif')",
+        planets: "url('/static/assets/two_astronauts.gif')",
+        loading: "url('/static/assets/loading.gif')"
+      }
+    },
+  },
+  plugins: [],
+}
