@@ -133,7 +133,7 @@ router.route("/register").post(async (req, res) => {
                 if (usrData.email_verified) {
                     await pool.query(`
                         INSERT INTO users (username, email, phone, method, password, uid) VALUES ($1, $2, $3, $4, $5, $6);
-                    `, [usrData.name, usrData.email, "", "google", "", 3]);
+                    `, [usrData.name, usrData.email, null, "google", "", 3]);
                     const inDB = await pool.query(`
                         SELECT id, username, email, method, password, uid FROM users WHERE email=$1;
                     `, [usrData.email])

@@ -6,7 +6,7 @@ export default function Navbar() {
     return (
         <>
             <Link href="/challenges"><button className={navStyle}>Challs</button></Link>
-            <Link href="/statistics"><button className={navStyle}>Stats</button></Link>
+            <Link href="/team"><button className={navStyle}>Team</button></Link>
             <Link href="/profile"><button className={navStyle}>Profile</button></Link>
             <Link href="/login"><button className='w-28 px-3 py-2 text-lg font-bold border-2 text-slate-600 bg-violet-600 text-white transition-all'>Login</button></Link>
         </>

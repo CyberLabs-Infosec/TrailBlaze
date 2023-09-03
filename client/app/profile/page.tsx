@@ -61,7 +61,7 @@ export default function Page() {
         loggedin ? 
         <div className="flex absolute justify-center items-center w-full h-full min-h-full bg-slate-900 gap-10">
             <div className="h-96 w-96 bg-cover rounded-xl z-10">
-                <div className="w-full h-full bg-planets bg-s bg-cover bg-center rounded-md"></div>
+                <div className="w-full h-full bg-fastAstro bg-s bg-cover bg-center rounded-md"></div>
             </div>
             <div className='flex flex-col gap-3'>
                 <p className="text-center text-3xl font-bold text-slate-400">EDIT INFO</p>

@@ -3,3 +3,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.custom_border {
+    background-color: rgb(54, 54, 54);
+    mask: url("../assets/border.svg") no-repeat center / contain;
+    -webkit-mask: url("../assets/border.svg") no-repeat center / contain;
+}

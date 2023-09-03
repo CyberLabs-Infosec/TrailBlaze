@@ -29,7 +29,12 @@ module.exports = {
         twitter: "url('/static/assets/twitter.png')",
         floating: "url('/static/assets/astronot_1.gif')",
         planets: "url('/static/assets/two_astronauts.gif')",
-        loading: "url('/static/assets/loading.gif')"
+        loading: "url('/static/assets/loading.gif')",
+        deskOnly: "url('/static/assets/deskOnly.jpg')",
+        cusBorder: "url('/static/assets/border.svg')",
+        fastAstro: "url('/static/assets/fastAstro.gif')",
+        eyeHide: "url('/static/assets/eye_hide.svg')",
+        eyeShow: "url('/static/assets/eye_show.svg')"
       }
     },
   },

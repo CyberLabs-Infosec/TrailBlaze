@@ -13,8 +13,8 @@ const googleAuthURI = `https://accounts.google.com/o/oauth2/v2/auth?
 scope=email profile openid&
 response_type=code&
 state=pass-through value&
-redirect_uri=http://localhost:4999/register/&
-client_id=303871726888-2qlfir2parpg1u54b0ieo4rr9op0l206.apps.googleusercontent.com`
+redirect_uri=${process.env.NEXT_PUBLIC_REDIRECT_URL}/register/&
+client_id=${process.env.NEXT_PUBLIC_CLIENT_ID}`
 
 const handleSubmit = async () => {
     const username = (document.getElementById("username") as HTMLInputElement).value;
@@ -46,6 +46,7 @@ const handleSubmit = async () => {
 export default function RegisterPage() {
     const isMobile = DeviceContxt();
     const [code, setCode] = useState(null);
+    const [view, setView] = useState(false);
     const router = useRouter();
 
     useEffect(() => {
@@ -81,7 +82,11 @@ export default function RegisterPage() {
             }
             getData();
         }
-    }, [code])
+    }, [code]);
+
+    const handleShowHide = () => {
+        setView(!view);
+    }
 
     return (
         <div className="flex absolute justify-center items-center w-full h-full min-h-full bg-slate-900">
@@ -99,7 +104,13 @@ export default function RegisterPage() {
                         <input className={ inpStyle } id="username" name="username" placeholder="username"></input>
                         <input className={ inpStyle } id="email" name="email" placeholder="email"></input>
                         <input className={ inpStyle } id="phone" name="phone" placeholder="phone"></input>
-                        <input className={ inpStyle } id="password" name="password" type="password" placeholder="password"></input>
+                        <div className="flex gap-2 justify-center items-center">
+                            <input className={ inpStyle } id="password" name="password" type={view ? "text" : "password"} placeholder="password"></input>
+                            {view ?
+                                <div onClick={handleShowHide} className="h-8 w-8 bg-center bg-no-repeat bg-contain cursor-pointer bg-eyeShow"></div>:
+                                <div onClick={handleShowHide} className="h-8 w-8 bg-center bg-no-repeat bg-contain cursor-pointer bg-eyeHide"></div>
+                            }
+                        </div>
                         <button onClick={ handleSubmit } className="bg-violet-600 text-white p-3 rounded-md shadow-2xl shadow-violet-500/50">Register</button>
                         <p className="text-center text-slate-400 mt-5 text-sm">OR</p>
                         <hr className="border-slate-500"></hr>

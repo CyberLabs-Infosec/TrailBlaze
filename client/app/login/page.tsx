@@ -13,12 +13,13 @@ const googleAuthURI = `https://accounts.google.com/o/oauth2/v2/auth?
 scope=email profile openid&
 response_type=code&
 state=pass-through value&
-redirect_uri=http://localhost:4999/login/&
-client_id=303871726888-2qlfir2parpg1u54b0ieo4rr9op0l206.apps.googleusercontent.com`
+redirect_uri=${process.env.NEXT_PUBLIC_REDIRECT_URL}/login/&
+client_id=${process.env.NEXT_PUBLIC_CLIENT_ID}`
 
 export default function RegisterPage() {
     const isMobile = DeviceContxt();
     const [code, setCode] = useState(null);
+    const [view, setView] = useState(false);
     const router = useRouter();
 
     const handleSubmit = async () => {
@@ -85,6 +86,10 @@ export default function RegisterPage() {
         }
     }, [code])
 
+    const handleShowHide = () => {
+        setView(!view);
+    }
+
     return (
         <div className="flex absolute justify-center items-center w-full h-full min-h-full bg-slate-900">
             <div className="flex absolute justify-center items-center p-2 rounded-xl bg-transparent">
@@ -99,7 +104,13 @@ export default function RegisterPage() {
                         <p className="text-center text-3xl font-bold text-slate-400">LOGIN</p>
                         <hr className="border-slate-500"></hr>
                         <input className={ inpStyle } id="email" name="email" placeholder="email"></input>
-                        <input className={ inpStyle } id="password" name="password" type="password" placeholder="password"></input>
+                        <div className="flex gap-2 justify-center items-center">
+                            <input className={ inpStyle } id="password" name="password" type={view ? "text" : "password"} placeholder="password"></input>
+                            {view ?
+                                <div onClick={handleShowHide} className="h-8 w-8 bg-center bg-no-repeat bg-contain cursor-pointer bg-eyeShow"></div>:
+                                <div onClick={handleShowHide} className="h-8 w-8 bg-center bg-no-repeat bg-contain cursor-pointer bg-eyeHide"></div>
+                            }
+                        </div>
                         <button onClick={ handleSubmit } className="bg-blue-500 text-white p-3 rounded-md shadow-2xl shadow-blue-500/50">Login</button>
                         <p className="text-center text-slate-400 mt-5 text-sm">OR</p>
                         <hr className="border-slate-500"></hr>
