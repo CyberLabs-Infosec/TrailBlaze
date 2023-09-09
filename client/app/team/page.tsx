@@ -15,11 +15,26 @@ export default function Page() {
     const [team, setTeam] = useState({});
     const router = useRouter();
 
-    useEffect(() => {
-        var div = document.getElementById('chart');
+    const [chartData, setChartData] = useState([[128, 100], [300, 300], [432, 400], [765, 450]]);
+    const [solvedData, setSolvedData] = useState([
+        {
+          value: 5,
+          name: 'Solved (5)'
+        },
+        {
+          value: 15,
+          name: 'Unsolved\n(15)'
+        }
+    ]);
 
-        if (div) {
-            var myChart = echarts.init(div, 'dark');
+    const [cap, setCap] = useState(null);
+
+    useEffect(() => {
+        var chart = document.getElementById('chart');
+        var solved = document.getElementById('solved')
+
+        if (chart) {
+            const myChart = echarts.init(chart, 'dark');
         
             myChart.setOption({
                 title: {},
@@ -30,15 +45,38 @@ export default function Page() {
                 {
                     name: 'Score',
                     type: 'line',
-                    data: [
-                        [128, 100],
-                        [300, 300],
-                        [432, 400],
-                        [765, 450]
-                    ]
+                    data: chartData
                 }
                 ]
             });
+        }
+
+        if (solved) {
+            const myChart = echarts.init(solved, 'dark');
+
+            const option = {
+                title: {
+                  text: 'Team progress',
+                  left: 'center',
+                  top: 'center'
+                },
+                series: [
+                  {
+                    type: 'pie',
+                    emphasis: {
+                        label: {
+                          show: true,
+                          fontSize: '15',
+                          fontWeight: 'bold'
+                        }
+                    },
+                    data: solvedData,
+                    radius: ['50%', '70%']
+                  }
+                ]
+            };
+
+            myChart.setOption(option);
         }
     }, [loggedin])
 
@@ -109,6 +147,9 @@ export default function Page() {
 
         if (jsonData.status == "fail") {
             toast.error(jsonData.error);
+        } else if (jsonData.status == "info") {
+            toast.info(jsonData.info);
+            location.reload();
         } else {
             toast.success("You left the team");
             location.reload();
@@ -143,6 +184,7 @@ export default function Page() {
             const jsonData = await data.json();
             if (jsonData.status == "success") {
                 setTeam(jsonData.data);
+                setCap(jsonData.captain_id);
             }
         }
         if (loggedin) {
@@ -170,12 +212,15 @@ export default function Page() {
         </div> : <div className='flex absolute justify-center items-center w-full h-full min-h-full bg-slate-900'>
             <div className='flex flex-col gap-3'>
                 <p className='text-slate-400 text-4xl font-bold'>{userdata.teamname}</p>
-                <div className='flex gap-2'>
+                <div className='flex gap-3 mt-4'>
                 {
-                    Object.keys(team).map((i) => <div className='text-slate-300 px-3 py-2 bg-slate-800 rounded-md'key={i}>{team[i].username}</div>)
+                    Object.keys(team).map((i) => <div className='text-slate-300 px-3 py-2 bg-slate-800 rounded-md'key={i}>{ cap == team[i].id ? <div className='absolute -translate-y-7 -translate-x-4 w-8 h-8 bg-captain bg-contain bg-center bg-no-repeat rounded-full'></div> : <></> }{team[i].username}</div>)
                 }
                 </div>
-                <div id='chart' className='bg-slate-800 rounded-md' style={{ height: "400px", width: "800px" }}></div>
+                <div className='flex gap-5'>
+                    <div id='chart' className='bg-slate-800 rounded-lg' style={{ height: "400px", width: "800px" }}></div>
+                    <div id='solved' className='bg-slate-800 rounded-lg' style={{ height: "400px", width: "400px" }}></div>
+                </div>
                 <button onClick={handleLeave} className='bg-violet-600 text-white p-2 w-32 rounded-md shadow-md shadow-violet-500/50 grow'>Leave Team</button>
             </div>
         </div> : <div className='text-center text-3xl font-bold text-slate-400'>

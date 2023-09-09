@@ -1,4 +1,4 @@
-// File: /home/atish/cyberTrail/client/app/register/page.tsx
+// File: /home/atish/trailBlaze/client/app/register/page.tsx
 import * as entry from '../../../../app/register/page.js'
 import type { ResolvingMetadata } from 'next/dist/lib/metadata/types/metadata-interface.js'
 

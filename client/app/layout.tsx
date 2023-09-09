@@ -7,6 +7,7 @@ import Navbar from "../components/Navigation";
 import '../public/static/css/globals.css'
 
 import Loading from '../components/Loading';
+
 import Link from 'next/link';
 
 const Context = createContext(null);

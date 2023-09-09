@@ -13,8 +13,10 @@ function init_db() {
         await pool.query(
         `CREATE TABLE IF NOT EXISTS teams(
             team_id serial PRIMARY KEY,
+            captain_id INT,
             teamname varchar(50) NOT NULL UNIQUE,
             secret varchar(100) NOT NULL,
+            team_members INT,
             team_scores integer[][]
         )`
         );
@@ -28,7 +30,7 @@ function init_db() {
             method varchar(50) NOT NULL,
             password varchar(100) NOT NULL,
             uid INT NOT NULL,
-            user_scores integer[][]
+            user_scores integer[][],
             CONSTRAINT fk_team
             FOREIGN KEY(team_id) 
             REFERENCES teams(team_id)
