@@ -47,6 +47,17 @@ function init_db() {
             uid INT NOT NULL
         )`
         );
+        await pool.query(
+        `CREATE TABLE IF NOT EXISTS challenges(
+            id serial PRIMARY KEY,
+            place INT NOT NULL,
+            checkPoint BOOLEAN DEFAULT FALSE,
+            title varchar(50) NOT NULL,
+            answer varchar(50) NOT NULL,
+            prompt varchar(100) NOT NULL,
+            points INT NOT NULL
+        )`
+        );
         resolve()
     });
 }

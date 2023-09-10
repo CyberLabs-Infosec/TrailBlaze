@@ -1,10 +1,11 @@
 'use client'
 
 import React, { useEffect, useState } from "react";
-import { DeviceContxt } from "../layout";
 import Link from "next/link";
 import { useRouter } from 'next/navigation'
 import { toast } from 'react-toastify';
+
+import { User } from "../layout";
 
 const inpStyle = "outline-none rounded-md px-3 py-3 shadow-2xl shadow-slate-950 text-slate-400 bg-transparent";
 const regOptStyle = "p-3 bg-slate-800 rounded-lg shadow-xl hover:shadow-lg hover:-translate-y-0.5 transition-all cursor-pointer flex gap-3";
@@ -44,10 +45,11 @@ const handleSubmit = async () => {
 }
 
 export default function RegisterPage() {
-    const isMobile = DeviceContxt();
     const [code, setCode] = useState(null);
     const [view, setView] = useState(false);
     const router = useRouter();
+
+    const user = User();
 
     useEffect(() => {
         var url = new URL(window.location.href);
@@ -76,8 +78,8 @@ export default function RegisterPage() {
                     router.push("/register");
                 } else {
                     toast.success("Successfully registered");
+                    user.setLoggedin(true);
                     router.push("/")
-
                 }
             }
             getData();

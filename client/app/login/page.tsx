@@ -1,10 +1,11 @@
 'use client'
 
 import React, { useEffect, useState } from "react";
-import { DeviceContxt } from "../layout";
 import Link from "next/link";
 import { useRouter } from 'next/navigation'
 import { toast } from 'react-toastify';
+
+import { User } from "../layout";
 
 const inpStyle = "outline-none rounded-md px-3 py-3 shadow-2xl shadow-slate-950 text-slate-400 bg-transparent";
 const regOptStyle = "p-3 bg-slate-800 rounded-lg shadow-xl hover:shadow-lg hover:-translate-y-0.5 transition-all cursor-pointer flex gap-3";
@@ -16,10 +17,10 @@ state=pass-through value&
 redirect_uri=${process.env.NEXT_PUBLIC_REDIRECT_URL}/login/&
 client_id=${process.env.NEXT_PUBLIC_CLIENT_ID}`
 
-export default function RegisterPage() {
-    const isMobile = DeviceContxt();
+export default function LoginPage() {
     const [code, setCode] = useState(null);
     const [view, setView] = useState(false);
+    const user = User();
     const router = useRouter();
 
     const handleSubmit = async () => {
@@ -45,6 +46,7 @@ export default function RegisterPage() {
             router.push("/login");
         } else {
             toast.success("Welcome!");
+            user.setLoggedin(true);
             router.push("/")
         }
     }
@@ -78,6 +80,7 @@ export default function RegisterPage() {
                     router.push("/login");
                 } else {
                     toast.success("Welcome!");
+                    user.setLoggedin(true);
                     router.push("/")
 
                 }

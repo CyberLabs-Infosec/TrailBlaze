@@ -35,7 +35,8 @@ module.exports = {
         fastAstro: "url('/static/assets/fastAstro.gif')",
         eyeHide: "url('/static/assets/eye_hide.svg')",
         eyeShow: "url('/static/assets/eye_show.svg')",
-        captain: "url('/static/assets/captain.png')"
+        captain: "url('/static/assets/captain.png')",
+        cross: "url('/static/assets/cross.png')"
       }
     },
   },

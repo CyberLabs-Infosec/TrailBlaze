@@ -30,53 +30,55 @@ export default function Page() {
     const [cap, setCap] = useState(null);
 
     useEffect(() => {
-        var chart = document.getElementById('chart');
-        var solved = document.getElementById('solved')
+        if (loggedin) {
+            var chart = document.getElementById('chart');
+            var solved = document.getElementById('solved')
 
-        if (chart) {
-            const myChart = echarts.init(chart, 'dark');
-        
-            myChart.setOption({
-                title: {},
-                tooltip: {},
-                xAxis: {},
-                yAxis: {},
-                series: [
-                {
-                    name: 'Score',
-                    type: 'line',
-                    data: chartData
-                }
-                ]
-            });
-        }
+            if (chart) {
+                const myChart = echarts.init(chart, 'dark');
+            
+                myChart.setOption({
+                    title: {},
+                    tooltip: {},
+                    xAxis: {},
+                    yAxis: {},
+                    series: [
+                    {
+                        name: 'Score',
+                        type: 'line',
+                        data: chartData
+                    }
+                    ]
+                });
+            }
 
-        if (solved) {
-            const myChart = echarts.init(solved, 'dark');
+            if (solved) {
+                const myChart = echarts.init(solved, 'dark');
 
-            const option = {
-                title: {
-                  text: 'Team progress',
-                  left: 'center',
-                  top: 'center'
-                },
-                series: [
-                  {
-                    type: 'pie',
-                    emphasis: {
-                        label: {
-                          show: true,
-                          fontSize: '15',
-                          fontWeight: 'bold'
-                        }
+                const option = {
+                    title: {
+                    text: 'Team progress',
+                    left: 'center',
+                    top: 'center'
                     },
-                    data: solvedData,
-                    radius: ['50%', '70%']
-                  }
-                ]
-            };
+                    series: [
+                    {
+                        type: 'pie',
+                        emphasis: {
+                            label: {
+                            show: true,
+                            fontSize: '15',
+                            fontWeight: 'bold'
+                            }
+                        },
+                        data: solvedData,
+                        radius: ['50%', '70%']
+                    }
+                    ]
+                };
 
-            myChart.setOption(option);
+                myChart.setOption(option);
+            }
         }
     }, [loggedin])
 
@@ -175,20 +177,22 @@ export default function Page() {
     }, [])
 
     useEffect(() => {
-        const getTeamInfo = async () => {
-            const data = await fetch("/api/user/teaminfo", {
-                headers: {
-                    "Authorization": `Bearer ${Cookies.get('token')}`
-                }
-            });
-            const jsonData = await data.json();
-            if (jsonData.status == "success") {
-                setTeam(jsonData.data);
-                setCap(jsonData.captain_id);
-            }
-        }
         if (loggedin) {
-            getTeamInfo();
+            const getTeamInfo = async () => {
+                const data = await fetch("/api/user/teaminfo", {
+                    headers: {
+                        "Authorization": `Bearer ${Cookies.get('token')}`
+                    }
+                });
+                const jsonData = await data.json();
+                if (jsonData.status == "success") {
+                    setTeam(jsonData.data);
+                    setCap(jsonData.captain_id);
+                }
+            }
+            if (loggedin) {
+                getTeamInfo();
+            }
         }
     }, [loggedin])
 

@@ -9,3 +9,23 @@
     mask: url("../assets/border.svg") no-repeat center / contain;
     -webkit-mask: url("../assets/border.svg") no-repeat center / contain;
 }
+
+::-webkit-scrollbar {
+    width: 4px;
+}
+ 
+::-webkit-scrollbar-track {
+  background-color: rgb(26, 31, 54);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgb(66, 66, 66);
+}
+
+.challBox {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  display: table-cell;
+  vertical-align: middle;
+}
