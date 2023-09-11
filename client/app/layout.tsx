@@ -35,8 +35,6 @@ export default function RootLayout({ children, }: { children: React.ReactNode })
             if (jsonData.status == "success") {
                 setUserData(jsonData.data);
                 setLoggedin(true);
-            } else {
-                router.push("/login")
             }
         }
         verify();
