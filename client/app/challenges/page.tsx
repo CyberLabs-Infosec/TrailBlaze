@@ -11,7 +11,7 @@ import challenges from "./challs.json";
 
 export default function Page() {
     const [userdata, setUserData] = useState({ username: "" });
-    const [loggedin, setLoggedin] = useState(true);
+    const [loggedin, setLoggedin] = useState(false);
     const [currChall, setCurrChall] = useState(challenges[0]);
 
     const router = useRouter();
@@ -48,23 +48,23 @@ export default function Page() {
         }
     }, [])
 
-    // useEffect(() => {
-    //     const verify = async () => {
-    //         const data = await fetch("/api/user/verify", {
-    //             headers: {
-    //                 "Authorization": `Bearer ${Cookies.get('token')}`
-    //             }
-    //         });
-    //         const jsonData = await data.json();
-    //         if (jsonData.status == "success") {
-    //             setUserData(jsonData.data);
-    //             setLoggedin(true);
-    //         } else {
-    //             router.push("/login")
-    //         }
-    //     }
-    //     verify();
-    // }, [])
+    useEffect(() => {
+        const verify = async () => {
+            const data = await fetch("/api/user/verify", {
+                headers: {
+                    "Authorization": `Bearer ${Cookies.get('token')}`
+                }
+            });
+            const jsonData = await data.json();
+            if (jsonData.status == "success") {
+                setUserData(jsonData.data);
+                setLoggedin(true);
+            } else {
+                router.push("/login")
+            }
+        }
+        verify();
+    }, [])
 
     return (
         loggedin ? 
