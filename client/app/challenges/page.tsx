@@ -117,7 +117,7 @@ const challenges = [
 
 export default function Page() {
     const [userdata, setUserData] = useState({ username: "" });
-    const [loggedin, setLoggedin] = useState(true);
+    const [loggedin, setLoggedin] = useState(false);
     const [currChall, setCurrChall] = useState(challenges[0]);
 
     const router = useRouter();
@@ -147,8 +147,10 @@ export default function Page() {
     }
 
     useEffect(() => {
-        for (var chall of challenges) {
-            placeOnPath(chall);
+        if (loggedin) {
+            for (var chall of challenges) {
+                placeOnPath(chall);
+            }
         }
     }, [])
 

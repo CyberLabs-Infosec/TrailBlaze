@@ -7,7 +7,7 @@ import { toast } from 'react-toastify';
 
 import { User } from "../layout";
 
-const inpStyle = "outline-none rounded-md px-3 py-3 shadow-2xl shadow-slate-950 text-slate-400 bg-transparent";
+const inpStyle = "outline-none rounded-md px-3 py-3 shadow-3xl shadow-slate-950 text-slate-400 bg-transparent";
 const regOptStyle = "p-3 bg-slate-800 rounded-lg shadow-xl hover:shadow-lg hover:-translate-y-0.5 transition-all cursor-pointer flex gap-3";
 
 const googleAuthURI = `https://accounts.google.com/o/oauth2/v2/auth?

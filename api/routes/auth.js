@@ -101,7 +101,11 @@ router.route("/register").post(async (req, res) => {
                 ],
             };
 
-            await sendMail(options);
+            try {
+                await sendMail(options);
+            } catch (err) {
+                console.log(err);
+            }
         } else {
             return res.status(409).json({ status: "fail", error: "E-mail already registered" })
         }
