@@ -119,7 +119,7 @@ router.route("/register").post(async (req, res) => {
                 'grant_type': 'authorization_code',
                 'client_id': process.env.GOOGLE_CLIENT_ID,
                 'client_secret': process.env.GOOGLE_CLIENT_SECRET,
-                'redirect_uri': 'http://localhost:4999/register/',
+                'redirect_uri': `${process.env.REDIRECT_URL}/register/`,
                 'code': code
             }),
             headers: {
@@ -199,7 +199,7 @@ router.route("/login").post(async (req, res) => {
                 'grant_type': 'authorization_code',
                 'client_id': process.env.GOOGLE_CLIENT_ID,
                 'client_secret': process.env.GOOGLE_CLIENT_SECRET,
-                'redirect_uri': 'http://localhost:4999/login/',
+                'redirect_uri': `${process.env.REDIRECT_URL}/login/`,
                 'code': code
             }),
             headers: {
