@@ -46,7 +46,7 @@ export default function Page() {
                 placeOnPath(chall);
             }
         }
-    }, [])
+    }, [loggedin])
 
     useEffect(() => {
         const verify = async () => {
