@@ -7,117 +7,11 @@ import { useRouter } from 'next/navigation'
 import Loading from '../../components/Loading';
 import Challenge from "../../components/Challenge";
 
-const challenges = [
-    {
-        place: 0,
-        checkPoint: true,
-        title: "Planet X-MAS"
-    },
-    {
-        place: 1,
-        checkPoint: false,
-        title: "Challenge 1"
-    },
-    {
-        place: 2,
-        checkPoint: false,
-        title: "Challenge 2"
-    },
-    {
-        place: 3,
-        checkPoint: true,
-        title: "Planet +=+=+"
-    },
-    {
-        place: 4,
-        checkPoint: false,
-        title: "Challenge 4"
-    },
-    {
-        place: 5,
-        checkPoint: false,
-        title: "Challenge 5"
-    },
-    {
-        place: 6,
-        checkPoint: true,
-        title: "Planet TRASS"
-    },
-    {
-        place: 7,
-        checkPoint: false,
-        title: "Challenge 7"
-    },
-    {
-        place: 8,
-        checkPoint: false,
-        title: "Challenge 8"
-    },
-    {
-        place: 9,
-        checkPoint: false,
-        title: "Challenge 9"
-    },
-    {
-        place: 10,
-        checkPoint: false,
-        title: "Challenge 10"
-    },
-    {
-        place: 11,
-        checkPoint: false,
-        title: "Challenge 11"
-    },
-    {
-        place: 12,
-        checkPoint: true,
-        title: "Planet Jinendra"
-    },
-    {
-        place: 13,
-        checkPoint: false,
-        title: "Challenge 13"
-    },
-    {
-        place: 14,
-        checkPoint: false,
-        title: "Challenge 14"
-    },
-    {
-        place: 15,
-        checkPoint: false,
-        title: "Challenge 15"
-    },
-    {
-        place: 16,
-        checkPoint: false,
-        title: "Challenge 16"
-    },
-    {
-        place: 17,
-        checkPoint: true,
-        title: "Planet Uddagiri"
-    },
-    {
-        place: 18,
-        checkPoint: false,
-        title: "Challenge 18"
-    },
-    {
-        place: 19,
-        checkPoint: false,
-        title: "Challenge 19"
-    },
-    {
-        place: 20,
-        checkPoint: true,
-        title: "Planet EARTH"
-    }
-]
+import challenges from "./challs.json";
 
 export default function Page() {
     const [userdata, setUserData] = useState({ username: "" });
-    const [loggedin, setLoggedin] = useState(false);
+    const [loggedin, setLoggedin] = useState(true);
     const [currChall, setCurrChall] = useState(challenges[0]);
 
     const router = useRouter();
@@ -154,23 +48,23 @@ export default function Page() {
         }
     }, [])
 
-    useEffect(() => {
-        const verify = async () => {
-            const data = await fetch("/api/user/verify", {
-                headers: {
-                    "Authorization": `Bearer ${Cookies.get('token')}`
-                }
-            });
-            const jsonData = await data.json();
-            if (jsonData.status == "success") {
-                setUserData(jsonData.data);
-                setLoggedin(true);
-            } else {
-                router.push("/login")
-            }
-        }
-        verify();
-    }, [])
+    // useEffect(() => {
+    //     const verify = async () => {
+    //         const data = await fetch("/api/user/verify", {
+    //             headers: {
+    //                 "Authorization": `Bearer ${Cookies.get('token')}`
+    //             }
+    //         });
+    //         const jsonData = await data.json();
+    //         if (jsonData.status == "success") {
+    //             setUserData(jsonData.data);
+    //             setLoggedin(true);
+    //         } else {
+    //             router.push("/login")
+    //         }
+    //     }
+    //     verify();
+    // }, [])
 
     return (
         loggedin ? 

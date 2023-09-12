@@ -22,7 +22,7 @@ const handleSubmit = async () => {
     const email = (document.getElementById("email") as HTMLInputElement).value;
     const password = (document.getElementById("password") as HTMLInputElement).value;
     const phone = (document.getElementById("phone") as HTMLInputElement).value;
-    const resp = await fetch("/api/auth/register", {
+    const resp = await toast.promise(fetch("/api/auth/register", {
         method: "POST",
         body: JSON.stringify({
             method: "regular",
@@ -34,6 +34,8 @@ const handleSubmit = async () => {
         headers: {
             "Content-Type": "application/json"
         }
+    }), {
+        pending: "Please wait..."
     });
     const jsonResp = await resp.json();
 
