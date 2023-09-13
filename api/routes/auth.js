@@ -32,7 +32,7 @@ router.route("/verify/:token").get(async (req, res) => {
         return res.status(400).json({ status: "fail", error: "Invalid verification link" });
     } else {
         const result = await pool.query(`
-            SELECT * FROM toverify WHERE email=$1
+            SELECT * FROM toverify WHERE email=$1;
         `, [verified.mail]);
 
         if (result.rows.length != 0) {

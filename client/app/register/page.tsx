@@ -21,14 +21,14 @@ const handleSubmit = async () => {
     const username = (document.getElementById("username") as HTMLInputElement).value;
     const email = (document.getElementById("email") as HTMLInputElement).value;
     const password = (document.getElementById("password") as HTMLInputElement).value;
-    const phone = (document.getElementById("phone") as HTMLInputElement).value;
+    const adm_no = (document.getElementById("adm_no") as HTMLInputElement).value;
     const resp = await toast.promise(fetch("/api/auth/register", {
         method: "POST",
         body: JSON.stringify({
             method: "regular",
             username: username,
             email: email,
-            phone: phone,
+            adm_no: adm_no,
             password: password
         }),
         headers: {
@@ -107,7 +107,7 @@ export default function RegisterPage() {
                         <hr className="border-slate-500"></hr>
                         <input className={ inpStyle } id="username" name="username" placeholder="username"></input>
                         <input className={ inpStyle } id="email" name="email" placeholder="email"></input>
-                        <input className={ inpStyle } id="phone" name="phone" placeholder="phone"></input>
+                        <input className={ inpStyle } id="adm_no" name="adm_no" placeholder="admission number"></input>
                         <div className="flex gap-2 justify-center items-center">
                             <input className={ inpStyle } id="password" name="password" type={view ? "text" : "password"} placeholder="password"></input>
                             {view ?

@@ -11,7 +11,7 @@ const userRoutes = require("./routes/user");
 app.use("/api/auth", authRoutes);
 app.use("/api/user", userRoutes);
 
-var PORT = process.env.SERVICE_PORT || 1337;
+var PORT = process.env.SERVICE_PORT;
 
 async function startApp() {
     await init_db();

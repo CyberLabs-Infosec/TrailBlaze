@@ -1,6 +1,6 @@
 const { google } = require('googleapis');
 const MailComposer = require('nodemailer/lib/mail-composer');
-const credentials = require('../secrets/client_secret_hosteler_mailer.json');
+const credentials = require('../secrets/client_secret_trailblaze_mailer.json');
 const tokens = require('../secrets/token.json');
 
 const getGmailService = () => {

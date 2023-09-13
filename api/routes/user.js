@@ -17,16 +17,16 @@ router.route("/verify").get(async (req, res) => {
 })
 
 router.route("/edit").post(async (req, res) => {
-    const { phone, username } = req.body;
+    const { username } = req.body;
 
-    if (!phone || !username) {
+    if (!username) {
         return res.status(401).json({ status: "fail", error: "All fields are required" });
     }
 
     try {
-        await pool.query("UPDATE users SET phone=$1, username=$2 WHERE email=$3", [phone, username, req.user.email]);
+        await pool.query("UPDATE users SET username=$1 WHERE email=$2", [username, req.user.email]);
     } catch {
-        return res.status(401).json({ status: "fail", error: "The name or phone already exists" });
+        return res.status(401).json({ status: "fail", error: "The name already exists" });
     }
     return res.status(200).json({ status: "success", error: "" });
 })

@@ -1,7 +1,7 @@
 const { google } = require('googleapis');
 const path = require('path');
 const fs = require('fs');
-const credentials = require('../api/secrets/client_secret_hosteler_mailer.json');
+const credentials = require('../api/secrets/client_secret_trailblaze_mailer.json');
 
 const readline = require('node:readline');
 const { stdin: input, stdout: output } = require('node:process');
