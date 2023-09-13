@@ -20,7 +20,7 @@ services:
     volumes:
       - ./api:/home/node/app
     ports:
-      - 1337:1337
+      - 15001:15001
     command: "npm start"
     depends_on:
       postgres:
@@ -35,7 +35,7 @@ services:
     volumes:
       - ./client:/home/node/app
     ports:
-      - 3000:3000
+      - 15002:15002
     command: "npm run start"
     depends_on:
       postgres:

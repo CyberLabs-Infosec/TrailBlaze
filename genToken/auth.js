@@ -1,5 +1,5 @@
 const { google } = require('googleapis');
-const credentials = require('../api/secrets/client_secret_hosteler_mailer.json');
+const credentials = require('../api/secrets/client_secret_trailblaze_mailer.json');
 
 const { client_secret, client_id, redirect_uris } = credentials.installed;
 const oAuth2Client = new google.auth.OAuth2(client_id, client_secret, redirect_uris[0]);
