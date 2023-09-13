@@ -15,7 +15,6 @@ export default function Page() {
 
     const handleSubmit = async () => {
         const username = (document.getElementById("username") as HTMLInputElement).value;
-        const phone = (document.getElementById("phone") as HTMLInputElement).value;
 
         const data = await toast.promise(fetch("/api/user/edit", {
             method: "POST",
@@ -24,7 +23,7 @@ export default function Page() {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                username, phone
+                username
             })
         }), {
             pending: "Editing details..."
@@ -67,7 +66,6 @@ export default function Page() {
                 <p className="text-center text-3xl font-bold text-slate-400">EDIT INFO</p>
                 <hr className="border-slate-500"></hr>
                 <input className={inpStyle} id='username' name='username' placeholder='full name' defaultValue={userdata.username}></input>
-                <input className={inpStyle} id='phone' name='phone' placeholder='phone' defaultValue={userdata.phone}></input>
                 <button onClick={handleSubmit} className="bg-violet-600 text-white p-3 rounded-md shadow-lg shadow-violet-500/50">Submit</button>
             </div>
         </div> : <div className='text-center text-3xl font-bold text-slate-400'>
