@@ -36,22 +36,22 @@ router.route("/verify/:token").get(async (req, res) => {
         `, [verified.mail]);
 
         if (result.rows.length != 0) {
-            const { id, username, email, phone, password, uid } = result.rows[0];
+            const { vid, username, email, adm_no, password, rank } = result.rows[0];
             
             await pool.query(`
-                INSERT INTO users (username, email, phone, method, password, uid) VALUES ($1, $2, $3, $4, $5, $6);
-            `, [username, email, phone, "regular", password, uid]);
+                INSERT INTO users (username, email, adm_no, method, password, rank) VALUES ($1, $2, $3, $4, $5, $6);
+            `, [username, email, adm_no, "regular", password, rank]);
 
             const inDB = await pool.query(`
-                SELECT id, username, email, method, password, uid FROM users WHERE email=$1;
+                SELECT uid, username, email, method, password, rank FROM users WHERE email=$1;
             `, [email])
 
             await pool.query(`
-                DELETE FROM toverify WHERE id=$1;
-            `, [id]);
+                DELETE FROM toverify WHERE vid=$1;
+            `, [vid]);
 
             res.set({
-                'Set-Cookie': `token=${getToken({ id: inDB.rows[0].id, username: username, email: email, phone: phone, uid: uid }, "12h")}; Path=/`
+                'Set-Cookie': `token=${getToken({ uid: inDB.rows[0].uid, username: username, email: email, adm_no: adm_no, rank: rank }, "12h")}; Path=/`
             });
             return res.status(200).redirect("/");
             
@@ -66,33 +66,34 @@ router.route("/register").post(async (req, res) => {
     const { method } = reqBody;
 
     if (method == "regular") {
-        const { username, email, phone, password } = reqBody;
+        const { username, email, adm_no, password } = reqBody;
 
-        // uids -> 1 = admin
+        // rank -> 1 = admin
         //         2 = manager
         //         3 = student
 
-        if (!(email && password && username && phone)) {
+        if (!(email && password && username && adm_no)) {
             return res.status(400).json({ status: "fail", error: "All fields are required!" });
         }
 
         const hashedPassword = await bcrypt.hash(password, 10);
 
         const result = await pool.query(`
-            SELECT id FROM users WHERE email=$1;
+            SELECT uid FROM users WHERE email=$1;
         `, [email]);
         
         if (result.rows.length == 0) {
             const token = getToken({ email: email }, "1h");
             await pool.query(`
-                INSERT INTO toverify (username, email, phone, password, uid) VALUES ($1, $2, $3, $4, $5) ON CONFLICT (email) DO UPDATE SET username = excluded.username, password = excluded.password, uid = excluded.uid, phone = excluded.phone;
-            `, [username, email, phone, hashedPassword, 3]);
+                INSERT INTO toverify (username, email, adm_no, password, rank) VALUES ($1, $2, $3, $4, $5) ON CONFLICT (email) DO UPDATE SET username = excluded.username, password = excluded.password, rank = excluded.rank, adm_no = excluded.adm_no;
+            `, [username, email, adm_no, hashedPassword, 3]);
             const options =  {
                 to: email,
-                subject: "Verify your mail",
+                subject: "Activate your account",
                 html: `
                 <div>
-                    <h1>Click the following <a href=${process.env.API_URL}/auth/verify/${token}>link</a> to verify your mail</h1>
+                    <p>Welcome to TrailBlaze: Lost in Space! Click on link below to verify your account</p>
+                    <br><a href=${process.env.API_URL}/auth/verify/${token}>${process.env.API_URL}/auth/verify/${token}</a>
                 </div>
                 `,
                 textEncoding: 'base64',
@@ -130,19 +131,19 @@ router.route("/register").post(async (req, res) => {
         if (jsonData.error == undefined) {
             const usrData = JSON.parse(atob(jsonData.id_token.split(".")[1]));
             const result = await pool.query(`
-                SELECT id FROM users WHERE email=$1;
+                SELECT uid FROM users WHERE email=$1;
             `, [usrData.email]);
 
             if (result.rows.length == 0) {
                 if (usrData.email_verified) {
                     await pool.query(`
-                        INSERT INTO users (username, email, phone, method, password, uid) VALUES ($1, $2, $3, $4, $5, $6);
-                    `, [usrData.name, usrData.email, null, "google", "", 3]);
+                        INSERT INTO users (username, email, adm_no, method, password, rank) VALUES ($1, $2, $3, $4, $5, $6);
+                    `, [usrData.name, usrData.email, "", "google", "", 3]);
                     const inDB = await pool.query(`
-                        SELECT id, username, email, method, password, uid FROM users WHERE email=$1;
+                        SELECT uid, username, email, method, password, rank FROM users WHERE email=$1;
                     `, [usrData.email])
                     res.set({
-                        'Set-Cookie': `token=${getToken({ id: inDB.rows[0].id, username: usrData.name, email: usrData.email, uid: 3 }, "12h")}; Path=/`
+                        'Set-Cookie': `token=${getToken({ uid: inDB.rows[0].uid, username: inDB.rows[0].username, email: inDB.rows[0].email, rank: 3 }, "12h")}; Path=/`
                     });
                     return res.status(200).json({ status: "success", error: "" })
                 } else {
@@ -166,10 +167,10 @@ router.route("/login").post(async (req, res) => {
 
         if (loginEmail && loginPassword) {
             const result = await pool.query(`
-                SELECT id, username, email, method, password, uid FROM users WHERE email=$1;
+                SELECT uid, username, email, method, password, rank FROM users WHERE email=$1;
             `, [loginEmail])
             if (result.rowCount != 0) {
-                const { id, username, email, method, password, uid } = result.rows[0];
+                const { uid, username, email, method, password, rank } = result.rows[0];
 
                 if (method != loginMethod) {
                     return res.status(401).json({ status: "fail", error: "Please use your login method same as the registration method" });
@@ -179,7 +180,7 @@ router.route("/login").post(async (req, res) => {
                 
                 if (match) {
                     res.set({
-                        'Set-Cookie': `token=${getToken({ id: id, username: username, email: email, uid: uid }, "12h")}; Path=/`
+                        'Set-Cookie': `token=${getToken({ uid: uid, username: username, email: email, rank: rank }, "12h")}; Path=/`
                     });
                     res.status(200).json({ status: "success", error: "" });
                 } else {
@@ -210,14 +211,14 @@ router.route("/login").post(async (req, res) => {
         if (jsonData.error == undefined) {
             const usrData = JSON.parse(atob(jsonData.id_token.split(".")[1]));
             const result = await pool.query(`
-                SELECT id FROM users WHERE email=$1;
+                SELECT uid FROM users WHERE email=$1;
             `, [usrData.email]);
 
             if (result.rowCount == 0) {
                 return res.status(400).json({ status: "fail", error: "E-mail is not registered" });
             } else {
                 res.set({
-                    'Set-Cookie': `token=${getToken({ id: result.rows[0].id, username: usrData.name, email: usrData.email, uid: 3 }, "12h")}; Path=/`
+                    'Set-Cookie': `token=${getToken({ uid: result.rows[0].uid, username: usrData.name, email: usrData.email, rank: 3 }, "12h")}; Path=/`
                 });
                 return res.status(200).json({ status: "success", error: "" });
             }

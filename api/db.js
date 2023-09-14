@@ -11,52 +11,67 @@ const pool = new Pool({
 function init_db() {
     return new Promise(async (resolve) => {
         await pool.query(
-        `CREATE TABLE IF NOT EXISTS teams(
-            team_id serial PRIMARY KEY,
-            captain_id INT,
-            teamname varchar(50) NOT NULL UNIQUE,
-            secret varchar(100) NOT NULL,
-            team_members INT,
-            team_scores integer[][]
-        )`
+            `CREATE TABLE IF NOT EXISTS challenges(
+                chall_id SERIAL PRIMARY KEY,
+                title VARCHAR(50) NOT NULL,
+                prompt VARCHAR(100) NOT NULL,
+                place integer NOT NULL,
+                checkPoint boolean DEFAULT FALSE,
+                flag VARCHAR(50) NOT NULL,
+                points integer NOT NULL,
+                hints text[],
+                solves integer,
+                visible boolean DEFAULT TRUE
+            )`
         );
         await pool.query(
-        `CREATE TABLE IF NOT EXISTS users(
-            id serial PRIMARY KEY,
-            team_id INT,
-            username varchar(50) NOT NULL,
-            email varchar(50) NOT NULL UNIQUE,
-            phone varchar(50) UNIQUE,
-            method varchar(50) NOT NULL,
-            password varchar(100) NOT NULL,
-            uid INT NOT NULL,
-            user_scores integer[][],
-            CONSTRAINT fk_team
-            FOREIGN KEY(team_id) 
-            REFERENCES teams(team_id)
-            ON DELETE SET NULL
-        );`
+            `CREATE TABLE IF NOT EXISTS teams(
+                team_id SERIAL PRIMARY KEY,
+                teamname VARCHAR(50) NOT NULL UNIQUE,
+                secret VARCHAR(100) NOT NULL,
+                captain_id integer NOT NULL,
+                team_members integer,
+                team_scores integer[][],
+                last_solved integer
+            );`
         );
         await pool.query(
-        `CREATE TABLE IF NOT EXISTS toverify(
-            id serial PRIMARY KEY,
-            username varchar(50) NOT NULL,
-            email varchar(50) NOT NULL UNIQUE,
-            phone varchar(50) NOT NULL UNIQUE,
-            password varchar(100) NOT NULL,
-            uid INT NOT NULL
-        )`
+            `CREATE TABLE IF NOT EXISTS users(
+                uid SERIAL PRIMARY KEY,
+                username VARCHAR(50) NOT NULL,
+                team_id integer,
+                rank integer NOT NULL,
+                user_scores integer[][],
+                email VARCHAR(50) NOT NULL UNIQUE,
+                method VARCHAR(50) NOT NULL,
+                adm_no VARCHAR(10) NOT NULL,
+                password VARCHAR(100) NOT NULL,
+                CONSTRAINT fk_team
+                FOREIGN KEY(team_id) 
+                REFERENCES teams(team_id)
+                ON DELETE SET NULL
+            );`
         );
         await pool.query(
-        `CREATE TABLE IF NOT EXISTS challenges(
-            id serial PRIMARY KEY,
-            place INT NOT NULL,
-            checkPoint BOOLEAN DEFAULT FALSE,
-            title varchar(50) NOT NULL,
-            answer varchar(50) NOT NULL,
-            prompt varchar(100) NOT NULL,
-            points INT NOT NULL
-        )`
+            `CREATE TABLE IF NOT EXISTS toverify(
+                vid SERIAL PRIMARY KEY,
+                username VARCHAR(50) NOT NULL,
+                email VARCHAR(50) NOT NULL UNIQUE,
+                adm_no VARCHAR(10) NOT NULL,
+                password VARCHAR(100) NOT NULL,
+                rank integer NOT NULL
+            );`
+        );
+        await pool.query(
+            `CREATE TABLE IF NOT EXISTS sublogs(
+                sid SERIAL PRIMARY KEY,
+                chall_id integer NOT NULL REFERENCES challenges(chall_id),
+                team_id integer,
+                flag VARCHAR(50) NOT NULL,
+                ip inet NOT NULL,
+                subtime TIMESTAMP NOT NULL,
+                correct boolean NOT NULL
+            );`
         );
         resolve()
     });

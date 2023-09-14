@@ -14,7 +14,7 @@ module.exports = async function User(req, res, next) {
             return res.status(400).json({ status: "fail", error: "Invalid token" });
         } else {
             const user = await pool.query(`
-                SELECT u.id, u.team_id, u.username, u.phone, u.email, u.uid, t.teamname FROM users AS u LEFT JOIN teams AS t ON u.team_id=t.team_id WHERE u.email=$1;
+                SELECT u.uid, u.team_id, u.username, u.adm_no, u.email, u.rank, t.teamname FROM users AS u LEFT JOIN teams AS t ON u.team_id=t.team_id WHERE u.email=$1;
             `, [decoded.email]);
             if (user.rowCount == 0) {
                 return res.status(400).json({ status: "fail", error: "User not found in database" });

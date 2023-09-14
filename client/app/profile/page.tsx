@@ -9,12 +9,13 @@ import Loading from '../../components/Loading';
 
 export default function Page() {
     const inpStyle = "outline-none rounded-md px-3 py-3 shadow-2xl shadow-slate-950 text-slate-400 bg-transparent";
-    const [userdata, setUserData] = useState({ username: "", phone: "" });
+    const [userdata, setUserData] = useState({ username: "", adm_no: "" });
     const [loggedin, setLoggedin] = useState(false)
     const router = useRouter();
 
     const handleSubmit = async () => {
         const username = (document.getElementById("username") as HTMLInputElement).value;
+        const adm_no = (document.getElementById("adm_no") as HTMLInputElement).value;
 
         const data = await toast.promise(fetch("/api/user/edit", {
             method: "POST",
@@ -23,7 +24,8 @@ export default function Page() {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                username
+                username,
+                adm_no
             })
         }), {
             pending: "Editing details..."
@@ -66,6 +68,7 @@ export default function Page() {
                 <p className="text-center text-3xl font-bold text-slate-400">EDIT INFO</p>
                 <hr className="border-slate-500"></hr>
                 <input className={inpStyle} id='username' name='username' placeholder='full name' defaultValue={userdata.username}></input>
+                <input className={inpStyle} id='adm_no' name='adm_no' placeholder='Admission No' defaultValue={userdata.adm_no}></input>
                 <button onClick={handleSubmit} className="bg-violet-600 text-white p-3 rounded-md shadow-lg shadow-violet-500/50">Submit</button>
             </div>
         </div> : <div className='text-center text-3xl font-bold text-slate-400'>
