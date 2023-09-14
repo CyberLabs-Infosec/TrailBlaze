@@ -218,7 +218,7 @@ export default function Page() {
                 <p className='text-slate-400 text-4xl font-bold'>{userdata.teamname}</p>
                 <div className='flex gap-3 mt-4'>
                 {
-                    Object.keys(team).map((i) => <div className='text-slate-300 px-3 py-2 bg-slate-800 rounded-md'key={i}>{ cap == team[i].id ? <div className='absolute -translate-y-7 -translate-x-4 w-8 h-8 bg-captain bg-contain bg-center bg-no-repeat rounded-full'></div> : <></> }{team[i].username}</div>)
+                    Object.keys(team).map((i) => <div className='text-slate-300 px-3 py-2 bg-slate-800 rounded-md'key={i}>{ cap == team[i].uid ? <div className='absolute -translate-y-7 -translate-x-4 w-8 h-8 bg-captain bg-contain bg-center bg-no-repeat rounded-full'></div> : <></> }{team[i].username}</div>)
                 }
                 </div>
                 <div className='flex gap-5'>
