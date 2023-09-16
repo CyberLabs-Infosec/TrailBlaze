@@ -2,6 +2,9 @@
 
 import Link from 'next/link';
 import React, { useEffect } from 'react';
+import { toast } from 'react-toastify';
+
+import { setNotification, getNotification } from '../utils/notification';
 
 export default function Page() {
     const vals = ["REACH EARTH", "SOLVE CHALLS", "HACK GALAXY"];
@@ -18,6 +21,29 @@ export default function Page() {
             if (val == vals.length) val = 0;
             return () => clearInterval(interval);
         }, 2000)
+    }, [])
+
+    useEffect(() => {
+        const {toShow, type, message} = getNotification();
+        if (toShow === "true") {
+            switch (type) {
+                case "info":
+                    toast.info(message);
+                    break;
+                case "success":
+                    toast.success(message);
+                    break;
+                case "warn":
+                    toast.warn(message);
+                    break;
+                case "error":
+                    toast.error(message);
+                default:
+                    toast(message);
+                    break;
+            }
+            setNotification();
+        }
     }, [])
 
     return(

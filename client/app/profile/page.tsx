@@ -7,6 +7,8 @@ import { useRouter } from 'next/navigation'
 
 import Loading from '../../components/Loading';
 
+import { setNotification, getNotification } from '../../utils/notification';
+
 export default function Page() {
     const inpStyle = "outline-none rounded-md px-3 py-3 shadow-2xl shadow-slate-950 text-slate-400 bg-transparent";
     const [userdata, setUserData] = useState({ username: "", adm_no: "" });
@@ -56,6 +58,38 @@ export default function Page() {
             }
         }
         verify();
+    }, [])
+
+    useEffect(() => {
+        const params = new URLSearchParams(window.location.search);
+        const info = params.get("info");
+        console.log(info);
+        if (info) {
+            toast.info(info);
+        }
+    }, [])
+
+    useEffect(() => {
+        const {toShow, type, message} = getNotification();
+        if (toShow === "true") {
+            switch (type) {
+                case "info":
+                    toast.info(message);
+                    break;
+                case "success":
+                    toast.success(message);
+                    break;
+                case "warn":
+                    toast.warn(message);
+                    break;
+                case "error":
+                    toast.error(message);
+                default:
+                    toast(message);
+                    break;
+            }
+            setNotification();
+        }
     }, [])
 
     return(
