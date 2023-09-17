@@ -1,7 +1,4 @@
-/api/node_modules
-/client/node_modules
-/client/.next
-/client/build
-/genToken/node_modules
-api/package-lock.json
-client/package-lock.json
+/*/node_modules
+/*/.next*
+/*/build
+/*/package-lock*.json
