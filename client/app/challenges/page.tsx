@@ -10,9 +10,10 @@ import Challenge from "../../components/Challenge";
 import { setNotification, getNotification } from '../../utils/notification';
 import { toast } from "react-toastify";
 
+import { User } from "../layout";
+
 export default function Page() {
-    const [userdata, setUserData] = useState({ username: "" });
-    const [loggedin, setLoggedin] = useState(false);
+    const { loggedin, respHook, userData } = User();
     const [currChall, setCurrChall] = useState(null);
     const [challenges, setChallenges] = useState([]);
 
@@ -50,34 +51,37 @@ export default function Page() {
         }
     }, [currChall])
 
-    useEffect(() => {
-        const getChalls = async () => {
-            const challs = await fetch("/api/chall/getchalls", {
-                headers: {
-                    "Authorization": `Bearer ${Cookies.get('token')}`
-                }
-            });
-            const challsToJson = await challs.json();
-            if (challsToJson.status == "success") {
-                if (!challsToJson.user.team_id) {
-                    setNotification(true, "info", "Please join a team first!");
-                    return router.push("/team");
-                } else {
-                    setUserData(challsToJson.user);
-                    setLoggedin(true);
-                }
-            } else {
-                setNotification(true, "error", "Please login");
-                return router.push("/");
+    const getChalls = async () => {
+        const challs = await fetch("/api/chall/getchalls", {
+            headers: {
+                "Authorization": `Bearer ${Cookies.get('token')}`
             }
-            setChallenges(challsToJson.data);
+        });
+        const challsToJson = await challs.json();
+        if (challsToJson.status == "error")  {
+            setNotification(true, "error", "Please login again");
+            return router.push("/logout");
         }
-        getChalls();
-    }, [])
+        setChallenges(challsToJson.data);
+    }
 
     useEffect(() => {
         setCurrChall(challenges[0]);
     }, [challenges])
+
+    useEffect(() => {
+        if (respHook && !loggedin) {
+            setNotification(true, "info", "Please login first");
+            router.push("/login");
+        } else if (respHook && loggedin) {
+            if (userData.team_id == null) {
+                setNotification(true, "info", "You need to be in a team to play challenges");
+                router.push("/team");
+            } else {
+                getChalls();
+            }
+        }
+    }, [respHook])
 
     useEffect(() => {
         const {toShow, type, message} = getNotification();

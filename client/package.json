@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "animejs": "^3.2.1",
     "echarts": "^5.4.3",
     "js-cookie": "^3.0.5",
     "next": "^13.4.12",

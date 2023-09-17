@@ -9,10 +9,11 @@ import Loading from '../../components/Loading';
 
 import { setNotification, getNotification } from '../../utils/notification';
 
+import { User } from '../layout';
+
 export default function Page() {
     const inpStyle = "outline-none rounded-md px-3 py-3 shadow-2xl shadow-slate-950 text-slate-400 bg-transparent";
-    const [userdata, setUserData] = useState({ username: "", adm_no: "" });
-    const [loggedin, setLoggedin] = useState(false)
+    const { loggedin, userData, respHook } = User();
     const router = useRouter();
 
     const handleSubmit = async () => {
@@ -39,35 +40,16 @@ export default function Page() {
             toast.error(jsonData.error);
         } else {
             toast.success("Your profile info was edited");
+            location.reload();
         }
     }
 
     useEffect(() => {
-        const verify = async () => {
-            const data = await fetch("/api/user/verify", {
-                headers: {
-                    "Authorization": `Bearer ${Cookies.get('token')}`
-                }
-            });
-            const jsonData = await data.json();
-            if (jsonData.status == "success") {
-                setUserData(jsonData.data);
-                setLoggedin(true);
-            } else {
-                router.push("/login")
-            }
+        if (respHook && !loggedin) {
+            setNotification(true, "info", "Please login first");
+            router.push("/login");
         }
-        verify();
-    }, [])
-
-    useEffect(() => {
-        const params = new URLSearchParams(window.location.search);
-        const info = params.get("info");
-        console.log(info);
-        if (info) {
-            toast.info(info);
-        }
-    }, [])
+    }, [respHook])
 
     useEffect(() => {
         const {toShow, type, message} = getNotification();
@@ -101,8 +83,8 @@ export default function Page() {
             <div className='flex flex-col gap-3'>
                 <p className="text-center text-3xl font-bold text-slate-400">EDIT INFO</p>
                 <hr className="border-slate-500"></hr>
-                <input className={inpStyle} id='username' name='username' placeholder='full name' defaultValue={userdata.username}></input>
-                <input className={inpStyle} id='adm_no' name='adm_no' placeholder='Admission No' defaultValue={userdata.adm_no}></input>
+                <input className={inpStyle} id='username' name='username' placeholder='full name' defaultValue={userData.username}></input>
+                <input className={inpStyle} id='adm_no' name='adm_no' placeholder='Admission No' defaultValue={userData.adm_no}></input>
                 <button onClick={handleSubmit} className="bg-violet-600 text-white p-3 rounded-md shadow-lg shadow-violet-500/50">Submit</button>
             </div>
         </div> : <div className='text-center text-3xl font-bold text-slate-400'>

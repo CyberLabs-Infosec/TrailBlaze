@@ -145,7 +145,10 @@ router.route("/register").post(async (req, res) => {
                     res.set({
                         'Set-Cookie': `token=${getToken({ uid: inDB.rows[0].uid, username: inDB.rows[0].username, email: inDB.rows[0].email, rank: 3 }, "12h")}; Path=/`
                     });
-                    return res.status(200).json({ status: "success", error: "" })
+                    const user = await pool.query(`
+                        SELECT u.uid, u.team_id, u.username, u.adm_no, u.email, u.rank, t.teamname FROM users AS u LEFT JOIN teams AS t ON u.team_id=t.team_id WHERE u.email=$1;
+                    `, [inDB.rows[0].email]);
+                    return res.status(200).json({ status: "success", error: "", user: user.rows[0] })
                 } else {
                     return res.status(400).json({ status: "fail", error: "Your email is not verified" })
                 }
@@ -182,7 +185,10 @@ router.route("/login").post(async (req, res) => {
                     res.set({
                         'Set-Cookie': `token=${getToken({ uid: uid, username: username, email: email, rank: rank }, "12h")}; Path=/`
                     });
-                    res.status(200).json({ status: "success", error: "" });
+                    const user = await pool.query(`
+                        SELECT u.uid, u.team_id, u.username, u.adm_no, u.email, u.rank, t.teamname FROM users AS u LEFT JOIN teams AS t ON u.team_id=t.team_id WHERE u.email=$1;
+                    `, [email]);
+                    res.status(200).json({ status: "success", error: "", user: user.rows[0] });
                 } else {
                     res.status(401).json({ status: "fail", error: "You entrered wrong credentials" });
                 }
@@ -220,7 +226,10 @@ router.route("/login").post(async (req, res) => {
                 res.set({
                     'Set-Cookie': `token=${getToken({ uid: result.rows[0].uid, username: usrData.name, email: usrData.email, rank: 3 }, "12h")}; Path=/`
                 });
-                return res.status(200).json({ status: "success", error: "" });
+                const user = await pool.query(`
+                    SELECT u.uid, u.team_id, u.username, u.adm_no, u.email, u.rank, t.teamname FROM users AS u LEFT JOIN teams AS t ON u.team_id=t.team_id WHERE u.email=$1;
+                `, [usrData.email]);
+                return res.status(200).json({ status: "success", error: "", user: user.rows[0] });
             }
         } else {
             return res.status(400).json({ status: "fail", error: jsonData.error });
