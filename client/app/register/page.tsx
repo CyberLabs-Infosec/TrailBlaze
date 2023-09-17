@@ -82,6 +82,7 @@ export default function RegisterPage() {
                 } else {
                     setNotification(true, "success", "Registered successfully");
                     user.setLoggedin(true);
+                    user.setUserData(jsonResult.user);
                     router.push("/")
                 }
             }

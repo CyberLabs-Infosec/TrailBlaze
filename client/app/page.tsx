@@ -38,6 +38,7 @@ export default function Page() {
                     break;
                 case "error":
                     toast.error(message);
+                    break;
                 default:
                     toast(message);
                     break;

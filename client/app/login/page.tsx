@@ -48,6 +48,7 @@ export default function LoginPage() {
         } else {
             setNotification(true, "success", "Welcome");
             user.setLoggedin(true);
+            user.setUserData(jsonResp.user);
             router.push("/")
         }
     }
@@ -82,8 +83,8 @@ export default function LoginPage() {
                 } else {
                     setNotification(true, "success", "Welcome");
                     user.setLoggedin(true);
+                    user.setUserData(jsonResult.user);
                     router.push("/")
-
                 }
             }
             getData();

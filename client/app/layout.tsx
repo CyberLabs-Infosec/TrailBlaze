@@ -10,14 +10,13 @@ import Loading from '../components/Loading';
 
 import Link from 'next/link';
 import Cookies from 'js-cookie';
-import { useRouter } from 'next/navigation'
 
 const Context = createContext(null);
 
 export default function RootLayout({ children, }: { children: React.ReactNode }) {
     const [isMobile, setisMoblie] = useState(null);
-    const [isLoggedin, setLoggedin] = useState(false);
-    const router = useRouter();
+    const [loggedin, setLoggedin] = useState(false);
+    const [respHook, setRespHook] = useState(false);
     const [userData, setUserData] = useState({ username: "", phone: "" });
 
     useEffect(() => {
@@ -36,6 +35,7 @@ export default function RootLayout({ children, }: { children: React.ReactNode })
                 setUserData(jsonData.data);
                 setLoggedin(true);
             }
+            setRespHook(true);
         }
         verify();
     }, [])
@@ -49,14 +49,14 @@ export default function RootLayout({ children, }: { children: React.ReactNode })
                         <>
                             <div className='absolute text-center font-Bungee text-4xl py-2 text-slate-500 w-min left-4'><Link href="/">{process.env.NEXT_PUBLIC_EVENT_NAME}</Link></div>
                             <div className='absolute flex right-4 gap-3'>
-                                <Navbar loggedin={isLoggedin}></Navbar>
+                                <Navbar loggedin={loggedin}></Navbar>
                             </div>
-                        </> ) : <Loading></Loading> }
+                        </> ) : <Loading text=""></Loading> }
                 </div>
                 {isMobile != null ? ( isMobile ? <div className='absolute flex flex-col justify-center items-center top-0 end-0 bg-slate-800 h-screen w-screen'>
                     <p className='mt-20 text-slate-400'>THIS IS A DESKTOP APPLICATION</p>
                     <div className='bg-deskOnly h-full w-full bg-contain bg-no-repeat bg-center'></div>
-                </div> : <Context.Provider value={{ isLoggedin, setLoggedin, userData }}> { children } </Context.Provider>) : <></>}
+                </div> : <Context.Provider value={{ loggedin, setLoggedin, userData, respHook, setUserData }}> { children } </Context.Provider>) : <></>}
                 <ToastContainer
                     position="top-center"
                     autoClose={5000}

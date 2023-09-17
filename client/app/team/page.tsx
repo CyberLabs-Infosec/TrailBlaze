@@ -10,10 +10,11 @@ import * as echarts from 'echarts';
 
 import { setNotification, getNotification } from "../../utils/notification";
 
+import { User } from '../layout';
+
 export default function Page() {
     const inpStyle = "outline-none rounded-md px-3 py-3 shadow-2xl shadow-slate-950 text-slate-400 bg-transparent";
-    const [userdata, setUserData] = useState({ username: null, phone: null, teamname: null });
-    const [loggedin, setLoggedin] = useState(false);
+    const { loggedin, userData, respHook } = User();
     const [team, setTeam] = useState({});
     const router = useRouter();
 
@@ -160,48 +161,32 @@ export default function Page() {
         }
     }
 
-    useEffect(() => {
-        const verify = async () => {
-            const data = await fetch("/api/user/verify", {
-                headers: {
-                    "Authorization": `Bearer ${Cookies.get('token')}`
-                }
-            });
-            const jsonData = await data.json();
-            if (jsonData.status == "success") {
-                if (jsonData.data.adm_no == "") {
-                    setNotification(true, "info", "Please add admission number");
-                    router.push("/profile");
-                } else {
-                    setUserData(jsonData.data);
-                    setLoggedin(true);
-                }
-            } else {
-                router.push("/login")
+    const getTeamInfo = async () => {
+        const data = await fetch("/api/user/teaminfo", {
+            headers: {
+                "Authorization": `Bearer ${Cookies.get('token')}`
             }
+        });
+        const jsonData = await data.json();
+        if (jsonData.status == "success") {
+            setTeam(jsonData.data);
+            setCap(jsonData.captain_id);
         }
-        verify();
-    }, [])
+    }
 
     useEffect(() => {
-        if (loggedin) {
-            const getTeamInfo = async () => {
-                const data = await fetch("/api/user/teaminfo", {
-                    headers: {
-                        "Authorization": `Bearer ${Cookies.get('token')}`
-                    }
-                });
-                const jsonData = await data.json();
-                if (jsonData.status == "success") {
-                    setTeam(jsonData.data);
-                    setCap(jsonData.captain_id);
-                }
-            }
-            if (loggedin) {
+        if (respHook && !loggedin) {
+            setNotification(true, "info", "Please login first");
+            router.push("/login");
+        } else if (respHook && loggedin) {
+            if (userData.adm_no == "") {
+                setNotification(true, "info", "Please add your admission number");
+                router.push("/profile");
+            } else {
                 getTeamInfo();
             }
         }
-    }, [loggedin])
+    }, [respHook])
 
     useEffect(() => {
         const {toShow, type, message} = getNotification();
@@ -228,7 +213,7 @@ export default function Page() {
 
     return(
         loggedin ?
-        userdata.teamname == null ?
+        userData.teamname == null ?
         <div className="flex absolute justify-center items-center w-full h-full min-h-full bg-slate-900 gap-10">
             <div className="h-96 w-96 bg-cover rounded-xl z-10">
                 <div className="w-full h-full bg-planets bg-s bg-cover bg-center rounded-md"></div>
@@ -245,7 +230,7 @@ export default function Page() {
             </div>
         </div> : <div className='flex absolute justify-center items-center w-full h-full min-h-full bg-slate-900'>
             <div className='flex flex-col gap-3'>
-                <p className='text-slate-400 text-4xl font-bold'>{userdata.teamname}</p>
+                <p className='text-slate-400 text-4xl font-bold'>{userData.teamname}</p>
                 <div className='flex gap-3 mt-4'>
                 {
                     Object.keys(team).map((i) => <div className='text-slate-300 px-3 py-2 bg-slate-800 rounded-md'key={i}>{ cap == team[i].uid ? <div className='absolute -translate-y-7 -translate-x-4 w-8 h-8 bg-captain bg-contain bg-center bg-no-repeat rounded-full'></div> : <></> }{team[i].username}</div>)
@@ -258,7 +243,7 @@ export default function Page() {
                 <button onClick={handleLeave} className='bg-violet-600 text-white p-2 w-32 rounded-md shadow-md shadow-violet-500/50 grow'>Leave Team</button>
             </div>
         </div> : <div className='text-center text-3xl font-bold text-slate-400'>
-            <Loading></Loading>
+            <Loading text=""></Loading>
         </div>
     )
 }
