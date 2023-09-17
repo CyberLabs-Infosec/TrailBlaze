@@ -8,6 +8,8 @@ import { useRouter } from 'next/navigation'
 import Loading from '../../components/Loading';
 import * as echarts from 'echarts';
 
+import { setNotification, getNotification } from "../../utils/notification";
+
 export default function Page() {
     const inpStyle = "outline-none rounded-md px-3 py-3 shadow-2xl shadow-slate-950 text-slate-400 bg-transparent";
     const [userdata, setUserData] = useState({ username: null, phone: null, teamname: null });
@@ -104,7 +106,7 @@ export default function Page() {
         if (jsonData.status == "fail") {
             toast.error(jsonData.error);
         } else {
-            toast.success("Congrats, you started a team!");
+            setNotification(true, "success", "You just took control of your ship");
             location.reload();
         }
     }
@@ -131,7 +133,7 @@ export default function Page() {
         if (jsonData.status == "fail") {
             toast.error(jsonData.error);
         } else {
-            toast.success("Congrats, you joined a team!");
+            setNotification(true, "success", "You just joined a team!");
             location.reload();
         }
     }
@@ -150,10 +152,10 @@ export default function Page() {
         if (jsonData.status == "fail") {
             toast.error(jsonData.error);
         } else if (jsonData.status == "info") {
-            toast.info(jsonData.info);
+            setNotification(true, "warn", "The team was deleted since you were the captain");
             location.reload();
         } else {
-            toast.success("You left the team");
+            setNotification(true, "success", "You left the team");
             location.reload();
         }
     }
@@ -167,8 +169,13 @@ export default function Page() {
             });
             const jsonData = await data.json();
             if (jsonData.status == "success") {
-                setUserData(jsonData.data);
-                setLoggedin(true);
+                if (jsonData.data.adm_no == "") {
+                    setNotification(true, "info", "Please add admission number");
+                    router.push("/profile");
+                } else {
+                    setUserData(jsonData.data);
+                    setLoggedin(true);
+                }
             } else {
                 router.push("/login")
             }
@@ -195,6 +202,29 @@ export default function Page() {
             }
         }
     }, [loggedin])
+
+    useEffect(() => {
+        const {toShow, type, message} = getNotification();
+        if (toShow === "true") {
+            switch (type) {
+                case "info":
+                    toast.info(message);
+                    break;
+                case "success":
+                    toast.success(message);
+                    break;
+                case "warn":
+                    toast.warn(message);
+                    break;
+                case "error":
+                    toast.error(message);
+                default:
+                    toast(message);
+                    break;
+            }
+            setNotification();
+        }
+    }, [])
 
     return(
         loggedin ?

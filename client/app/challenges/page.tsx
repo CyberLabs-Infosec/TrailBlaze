@@ -9,6 +9,9 @@ import Challenge from "../../components/Challenge";
 
 import challenges from "./challs.json";
 
+import { setNotification, getNotification } from '../../utils/notification';
+import { toast } from "react-toastify";
+
 export default function Page() {
     const [userdata, setUserData] = useState({ username: "" });
     const [loggedin, setLoggedin] = useState(false);
@@ -57,13 +60,41 @@ export default function Page() {
             });
             const jsonData = await data.json();
             if (jsonData.status == "success") {
-                setUserData(jsonData.data);
-                setLoggedin(true);
+                if (!jsonData.data.team_id) {
+                    setNotification(true, "info", "Please join a team first!");
+                    router.push("/team");
+                } else {
+                    setUserData(jsonData.data);
+                    setLoggedin(true);
+                }
             } else {
                 router.push("/login")
             }
         }
         verify();
+    }, [])
+
+    useEffect(() => {
+        const {toShow, type, message} = getNotification();
+        if (toShow === "true") {
+            switch (type) {
+                case "info":
+                    toast.info(message);
+                    break;
+                case "success":
+                    toast.success(message);
+                    break;
+                case "warn":
+                    toast.warn(message);
+                    break;
+                case "error":
+                    toast.error(message);
+                default:
+                    toast(message);
+                    break;
+            }
+            setNotification();
+        }
     }, [])
 
     return (

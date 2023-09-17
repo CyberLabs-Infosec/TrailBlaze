@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation'
 import { toast } from 'react-toastify';
 
 import { User } from "../layout";
+import { setNotification } from "../../utils/notification";
 
 const inpStyle = "outline-none rounded-md px-3 py-3 shadow-3xl shadow-slate-950 text-slate-400 bg-transparent";
 const regOptStyle = "p-3 bg-slate-800 rounded-lg shadow-xl hover:shadow-lg hover:-translate-y-0.5 transition-all cursor-pointer flex gap-3";
@@ -42,7 +43,7 @@ const handleSubmit = async () => {
     if (jsonResp.status == "fail") {
         toast.error(jsonResp.error);
     } else {
-        toast.success("Please verify your mail");
+        toast.success("A verification link was sent to your mail");
     }
 }
 
@@ -79,7 +80,7 @@ export default function RegisterPage() {
                     toast.error(jsonResult.error);
                     router.push("/register");
                 } else {
-                    toast.success("Successfully registered");
+                    setNotification(true, "success", "Registered successfully");
                     user.setLoggedin(true);
                     router.push("/")
                 }
