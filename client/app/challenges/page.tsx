@@ -112,10 +112,10 @@ export default function Page() {
             </svg>
         </div></>: 
         <div className='text-center text-3xl font-bold text-slate-400'>
-            <Loading></Loading>
+            <Loading text="Loading challenges"></Loading>
         </div>:
         <div className='text-center text-3xl font-bold text-slate-400'>
-            <Loading></Loading>
+            <Loading text=""></Loading>
         </div>
     )
 }

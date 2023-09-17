@@ -258,7 +258,7 @@ export default function Page() {
                 <button onClick={handleLeave} className='bg-violet-600 text-white p-2 w-32 rounded-md shadow-md shadow-violet-500/50 grow'>Leave Team</button>
             </div>
         </div> : <div className='text-center text-3xl font-bold text-slate-400'>
-            <Loading></Loading>
+            <Loading text=""></Loading>
         </div>
     )
 }

@@ -51,7 +51,7 @@ export default function RootLayout({ children, }: { children: React.ReactNode })
                             <div className='absolute flex right-4 gap-3'>
                                 <Navbar loggedin={isLoggedin}></Navbar>
                             </div>
-                        </> ) : <Loading></Loading> }
+                        </> ) : <Loading text=""></Loading> }
                 </div>
                 {isMobile != null ? ( isMobile ? <div className='absolute flex flex-col justify-center items-center top-0 end-0 bg-slate-800 h-screen w-screen'>
                     <p className='mt-20 text-slate-400'>THIS IS A DESKTOP APPLICATION</p>

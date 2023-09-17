@@ -106,7 +106,7 @@ export default function Page() {
                 <button onClick={handleSubmit} className="bg-violet-600 text-white p-3 rounded-md shadow-lg shadow-violet-500/50">Submit</button>
             </div>
         </div> : <div className='text-center text-3xl font-bold text-slate-400'>
-            <Loading></Loading>
+            <Loading text=""></Loading>
         </div>
     )
 }
