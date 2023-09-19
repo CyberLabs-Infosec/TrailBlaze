@@ -2,6 +2,8 @@
 
 import React, { useEffect, useRef, useState } from "react"
 import anime from "animejs/lib/anime.es.js";
+import Cookies from 'js-cookie';
+import { toast } from "react-toastify";
 
 export default function Challenge(props) {
     const successAnime = useRef(null);
@@ -11,8 +13,26 @@ export default function Challenge(props) {
         document.getElementById("challPrompt").classList.add("hidden");
     }
 
-    const handleSubmit = () => {
-        successAnime.current.play();
+    const handleSubmit = async () => {
+        const flag = (document.getElementById("flag") as HTMLInputElement).value;
+        console.log(flag, props.chall.chall_id);
+        
+        const res = await fetch("/api/chall/submit", {
+            method: "POST",
+            body: JSON.stringify({ flag, chall_id: props.chall.chall_id }),
+            headers: {
+                "Authorization": `Bearer ${Cookies.get('token')}`,
+                "Content-Type": "application/json"
+            }
+        })
+
+        const jsonRes = await res.json();
+
+        if (jsonRes.status == "success") {
+            jsonRes.correct ? successAnime.current.play() : wrongAnime.current.play()
+        } else {
+            toast.error(jsonRes.error);
+        }
     }
 
     useEffect(() => {
@@ -81,7 +101,7 @@ export default function Challenge(props) {
                 <div className="h-full p-4">{props.chall.prompt}</div>
                 <hr className="w-full border-slate-500"></hr>
                 <div className="flex gap-2 bottom-0 mt-3 w-full px-5">
-                    <input className="outline-none px-2 py-3 bg-transparent border-2 border-slate-500 text-slate-300 w-full" placeholder="Enter flag here"></input>
+                    <input id="flag" className="outline-none px-2 py-3 bg-transparent border-2 border-slate-500 text-slate-300 w-full" placeholder="Enter flag here"></input>
                     <button onClick={handleSubmit} className="border-2 px-3 text-slate-300 border-slate-300 font-bold bg-violet-500">Submit</button>
                 </div>
             </div>
