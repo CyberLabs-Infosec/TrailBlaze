@@ -1,32 +1,90 @@
 import React from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { motion } from "framer-motion";
+import { useState } from "react";
 
 interface Props{
     loggedin: boolean
 }
 
 function NavBar(props: Props){
-    var routes = {
-        "/": "Dashboard",
-        "/challs": "Challenges",
-        "/logs": "Submissions",
-        "/users": "Users"
-    }
+    var routes = [
+        {
+            path: "/",
+            name: "Home",
+        },
+        {
+            path: "/challs",
+            name: "Challenges",
+        },
+        {
+            path: "/logs",
+            name: "Submissions",
+        },
+        {
+            path: "/users",
+            name: "Users",
+        },
+    ]
 
     if (props.loggedin){
-        routes["/logout" as keyof typeof routes] = "Logout";
+        routes.push({
+            path: "/logout",
+            name: "Logout",
+        });
     } else {
-        routes["/login" as keyof typeof routes] = "Login";
+        routes.push({
+            path: "/login",
+            name: "Login",
+        });
     }
- 
+
+    let pathname = usePathname() || "/";
+    const [hoveredPath, setHoveredPath] = useState(pathname);
+
     return (
-        <div className="flex flex-col w-48 h-3/5 self-center justify-center rounded-md fixed backdrop-blur-sm ml-4" style={{ backgroundColor: "rgba(255, 255, 255, 0.1)" }}>
-            {
-                Object.entries(routes)
-                .map( ([key, value]) => <div className="flex flex-col items-center" key={ key } ><Link href={ key }><button className="px-2 py-2 text-center font-mono hover:bg-violet-800 w-48 rounded-lg transition duration-300"> { value } </button></Link><div id="seperator"></div></div>)
-            }
+        <div className="p-2 rounded-lg mb-12 sticky top-6 z-[100] self-center" style={{ backgroundColor: "rgba(255, 255, 255, 0.1)", backdropFilter: "blur(2px)" }}>
+            <nav className="flex gap-2 relative justify-center w-full z-[100]  rounded-lg">
+                {routes.map((item, index) => {
+                    const isActive = item.path === pathname;
+    
+                    return (
+                        <Link
+                            key={item.path}
+                            className={`px-7 py-2 rounded-md text-sm lg:text-base font-mono relative no-underline duration-300 ease-in ${
+                                    isActive ? "text-zinc-100" : "text-zinc-100"
+                                }`}
+                            data-active={isActive}
+                            href={item.path}
+                            onMouseOver={() => setHoveredPath(item.path)}
+                            onMouseLeave={() => setHoveredPath(pathname)}
+                        >
+                            <span>{item.name}</span>
+                            {item.path === hoveredPath && (
+                                <motion.div
+                                    className="absolute bottom-0 left-0 h-full rounded-md -z-10"
+                                    layoutId="navbar"
+                                    aria-hidden="true"
+                                    style={{
+                                        width: "100%",
+                                        backgroundColor: "rgba(76, 0, 255, 0.6)"
+                                    }}
+                                    transition={{
+                                        type: "spring",
+                                        bounce: 0.25,
+                                        stiffness: 130,
+                                        damping: 12,
+                                        duration: 0.3,
+                                    }}
+                                />
+                            )}
+                        </Link>
+                    );
+                })}
+            </nav>
         </div>
-    )
+    );
 }
 
 export default NavBar;
