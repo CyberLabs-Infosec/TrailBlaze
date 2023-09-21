@@ -18,6 +18,7 @@ export default function RootLayout({ children, }: { children: React.ReactNode })
     const [loggedin, setLoggedin] = useState(false);
     const [respHook, setRespHook] = useState(false);
     const [userData, setUserData] = useState({ username: "", phone: "" });
+    const [cache, setCache] = useState(false);
 
     useEffect(() => {
         setisMoblie(window.innerWidth <= 640);
@@ -40,6 +41,20 @@ export default function RootLayout({ children, }: { children: React.ReactNode })
         verify();
     }, [])
 
+    useEffect(() => {
+        async function preloadImages(array) {
+            for (var i = 0; i < array.length; i++) {
+                await new Promise((resolve, reject) => {
+                    var img = new Image();
+                    img.src = array[i];
+                    img.onload = () => { resolve("loaded") };
+                })
+            }
+            setCache(true);
+        }
+        preloadImages(["http://localhost:15000/static/assets/rocket.gif", "http://localhost:15000/static/assets/astronot.gif", "http://localhost:15000/static/assets/two_astronauts.gif", "http://localhost:15000/static/assets/fastAstro.gif"]);
+    }, [])
+
     return (
         <html lang='en'>
             <body className='flex flex-col w-screen min-h-screen overflow-x-hidden'>
@@ -56,7 +71,7 @@ export default function RootLayout({ children, }: { children: React.ReactNode })
                 {isMobile != null ? ( isMobile ? <div className='absolute flex flex-col justify-center items-center top-0 end-0 bg-slate-800 h-screen w-screen'>
                     <p className='mt-20 text-slate-400'>THIS IS A DESKTOP APPLICATION</p>
                     <div className='bg-deskOnly h-full w-full bg-contain bg-no-repeat bg-center'></div>
-                </div> : <Context.Provider value={{ loggedin, setLoggedin, userData, respHook, setUserData }}> { children } </Context.Provider>) : <></>}
+                </div> : cache ? <Context.Provider value={{ loggedin, setLoggedin, userData, respHook, setUserData }}> { children } </Context.Provider> : <Loading text="Loading assets"></Loading>) : <></>}
                 <ToastContainer
                     position="top-center"
                     autoClose={5000}

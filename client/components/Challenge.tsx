@@ -15,15 +15,22 @@ export default function Challenge(props) {
 
     const handleSubmit = async () => {
         const flag = (document.getElementById("flag") as HTMLInputElement).value;
-        console.log(flag, props.chall.chall_id);
+        if (!flag) {
+            toast.error("Enter a flag first!");
+            return;
+        }
+
+        (document.getElementById("flag") as HTMLInputElement).value = "";
         
-        const res = await fetch("/api/chall/submit", {
+        const res = await toast.promise(fetch("/api/chall/submit", {
             method: "POST",
-            body: JSON.stringify({ flag, chall_id: props.chall.chall_id }),
+            body: JSON.stringify({ flag: flag.trim(), chall_id: props.chall.chall_id }),
             headers: {
                 "Authorization": `Bearer ${Cookies.get('token')}`,
                 "Content-Type": "application/json"
             }
+        }), {
+            pending: "Sending flag..."
         })
 
         const jsonRes = await res.json();
@@ -90,6 +97,13 @@ export default function Challenge(props) {
                 }
             });
         }
+    }, []);
+
+    useEffect(() => {
+        const flagField = document.getElementById("flag");
+        flagField.addEventListener("keydown", (e) => {
+            if (e.code === 'Enter') handleSubmit();
+        })
     }, [])
 
     return (
@@ -102,10 +116,10 @@ export default function Challenge(props) {
                 <hr className="w-full border-slate-500"></hr>
                 <div className="flex gap-2 bottom-0 mt-3 w-full px-5">
                     <input id="flag" className="outline-none px-2 py-3 bg-transparent border-2 border-slate-500 text-slate-300 w-full" placeholder="Enter flag here"></input>
-                    <button onClick={handleSubmit} className="border-2 px-3 text-slate-300 border-slate-300 font-bold bg-violet-500">Submit</button>
+                    <button onClick={handleSubmit} onSubmit={handleSubmit} className="border-2 px-3 text-slate-300 border-slate-300 font-bold bg-violet-500">Submit</button>
                 </div>
             </div>
-            <div id="fbtnBg" className="absolute backdrop-blur-lg h-full w-full flex items-center justify-center hidden" style={{ backgroundColor: "rgba(50, 50, 50, 0.5)" }}>
+            <div id="fbtnBg" className="absolute backdrop-blur-lg h-full w-full flex items-center justify-center hidden" style={{ backgroundColor: "rgba(30, 41, 59, 0.5)" }}>
                 <div id="fbtn-correct" className="border-t-2 border-b-2 border-green-300 overflow-hidden flex justify-center items-center hidden">
                     <p className="text-slate-200 text-3xl m-8 text-green-300">CORRECT</p>
                 </div>

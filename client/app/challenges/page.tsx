@@ -110,6 +110,15 @@ export default function Page() {
         loggedin ? currChall != null ?
         <>
         <div className="absolute flex justify-center items-center w-full min-h-screen bg-slate-900 gap-10 h-fit" id="map">
+            <div id="fuel" className="fixed top-20 right-4 backdrop-blur z-20 flex flex-col gap-2 px-2 py-3 rounded-md justify-center items-center" style={{ backgroundColor: "rgba(30, 41, 59, 0.5)" }}>
+                <p className="text-slate-400 font-bold text-xl">FUEL ({69}%)</p>
+                <div className="h-36 w-5 bg-slate-700 flex items-end">
+                    <span className="bg-green-300 w-full" style={{ height: "69%" }}></span>
+                </div>
+                <div>
+                    <p className="text-slate-400 font-bold">Rate: -{1}% per hr</p>
+                </div>
+            </div>
             <Challenge chall={currChall}></Challenge>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 350 350" id="container">
                 <path id="trail" d="m 54 29 c 87 12.6667 208 -9 261 38 c 28 27 23 62 -11 73 c -80 16 -172 -19 -250 15 c -33 16 -21 66 4 69 c 89 11 161 -33 257 14 c 29 17 27 25 21 48 c -7 27 -101.6667 13 -151 18" stroke="#32374d" strokeWidth="1" strokeLinecap="round" strokeDasharray="3,3" fill="none"/>
