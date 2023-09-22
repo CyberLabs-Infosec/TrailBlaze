@@ -32,8 +32,8 @@ export default function Page() {
         var chall = document.createElement("div");
         chall.setAttribute("class", "challBox");
         chall.classList.add(`${isCheckPoint ? "hover:bg-violet-300" : "hover:bg-slate-600"}`, `${isCheckPoint ? 'bg-violet-500' : 'bg-slate-800'}`, "cursor-pointer", "transition-all", `${isCheckPoint ? "h-24" : "h-20"}`, `${isCheckPoint ? "w-24" : "w-20"}`);
-        chall.style.left = (conatiner.clientHeight / 350) * loc.x + "px";
-        chall.style.top = (conatiner.clientWidth / 350) * loc.y + "px";
+        chall.style.left = (conatiner.clientHeight / 730) * loc.x + "px";
+        chall.style.top = (conatiner.clientWidth / 430) * loc.y + "px";
         chall.setAttribute("challNo", obj.place.toString());
         chall.addEventListener("click", (e) => {
             var prompt = (document.getElementById("challPrompt") as HTMLElement);
@@ -120,8 +120,11 @@ export default function Page() {
                 </div>
             </div>
             <Challenge chall={currChall}></Challenge>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 350 350" id="container">
+            {/* <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 350 350" id="container">
                 <path id="trail" d="m 54 29 c 87 12.6667 208 -9 261 38 c 28 27 23 62 -11 73 c -80 16 -172 -19 -250 15 c -33 16 -21 66 4 69 c 89 11 161 -33 257 14 c 29 17 27 25 21 48 c -7 27 -101.6667 13 -151 18" stroke="#32374d" strokeWidth="1" strokeLinecap="round" strokeDasharray="3,3" fill="none"/>
+            </svg> */}
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 430 730" id="container">
+                <path id="trail" d="m 40 51 c 87 12.6667 208 -9 311 44 c 32 21 98 121 -16 150 c -80 16 -172 -19 -257 43 c -28 20 -97 100 5 146 c 104 35 194 -5 267 71 c 33 39 16 87 -3 115 c -25 36 -101.6667 13 -275 53" stroke="#32374d" strokeWidth="1" strokeLinecap="round" strokeDasharray="3,3" fill="none"/>
             </svg>
         </div></>: 
         <div className='text-center text-3xl font-bold text-slate-400'>

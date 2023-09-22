@@ -52,7 +52,7 @@ export default function RootLayout({ children, }: { children: React.ReactNode })
             }
             setCache(true);
         }
-        preloadImages(["http://localhost:15000/static/assets/rocket.gif", "http://localhost:15000/static/assets/astronot.gif", "http://localhost:15000/static/assets/two_astronauts.gif", "http://localhost:15000/static/assets/fastAstro.gif"]);
+        preloadImages(["/static/assets/rocket.gif", "/static/assets/astronot.gif", "/static/assets/two_astronauts.gif", "/static/assets/fastAstro.gif"]);
     }, [])
 
     return (
@@ -63,7 +63,7 @@ export default function RootLayout({ children, }: { children: React.ReactNode })
                         <></>:
                         <>
                             <div className='absolute text-center font-Bungee text-4xl py-2 text-slate-500 w-min left-4'><Link href="/">{process.env.NEXT_PUBLIC_EVENT_NAME}</Link></div>
-                            <div className='absolute flex right-4 gap-3'>
+                            <div className='absolute flex right-2 gap-3'>
                                 <Navbar loggedin={loggedin}></Navbar>
                             </div>
                         </> ) : <Loading text=""></Loading> }
