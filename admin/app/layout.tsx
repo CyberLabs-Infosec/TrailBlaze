@@ -3,20 +3,58 @@
 import NavBar from '@/components/Navigation'
 import '../public/static/css/globals.css'
 import '../public/static/css/stars.sass'
-import { useState } from 'react'
+import { useState, useContext, createContext, useEffect } from 'react'
+import Cookies from 'js-cookie'
+
+// const [hell, test] = useState(true);
+// interface stateVars{
+//     loggedin: boolean
+//     setLoggedin: Dispatch<typeof test>
+//     respHook: boolean
+// }
+
+// const Context = createContext<stateVars | null>(null)
+const Context = createContext(null)
 
 export default function RootLayout({ children, }: { children: React.ReactNode }) {
-	const [loggedin, setLogin] = useState(false);
+    const [loggedin, setLoggedin] = useState(false);
+    const [respHook, setRespHook] = useState(false);
+    const [isMobile, setMobile] = useState(false)
+
+    useEffect(() => {
+        setMobile(window.innerWidth <= 640);
+    }, [])
+
+    useEffect(() => {
+        const verify = async () => {
+            const data = await fetch("/api/user/verify", {
+                headers: {
+                    "Authorization": `Bearer ${Cookies.get('token')}`
+                }
+            });
+            const jsonData = await data.json();
+            if (jsonData.status == "success") {
+                setLoggedin(true);
+            }
+            setRespHook(true);
+        }
+        verify();
+    }, [])
+	
 	return (
 		<html lang="en">
 			<body className="flex flex-col h-screen w-screen text-white font-Inter">
-				<NavBar loggedin={ loggedin }/>
+				<NavBar loggedin={ loggedin } isMobile={ isMobile }/>
 				<div id="stars" className='-z-30'></div>
 				<div id="stars2" className='-z-40'></div>
 				<div id="stars3" className='-z-50'></div>
-				<div className='flex justify-center w-screen'>{ children }</div>
+				<Context.Provider className='flex justify-center w-screen' value={{ loggedin, setLoggedin, respHook }}> { children } </Context.Provider>
 				<div className='z-40 fixed bottom-5 end-5 text-slate-500'>made by titans@titancrew 👀</div>
 			</body>
 		</html>
 	)
+}
+
+export function User() {
+    return useContext(Context);
 }

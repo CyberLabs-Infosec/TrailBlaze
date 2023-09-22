@@ -6,6 +6,7 @@ import { useState } from "react";
 
 interface Props{
     loggedin: boolean
+    isMobile: boolean
 }
 
 function NavBar(props: Props){
@@ -13,18 +14,22 @@ function NavBar(props: Props){
         {
             path: "/",
             name: "Home",
+            icon: "home_icon"
         },
         {
             path: "/challs",
             name: "Challenges",
+            icon: "challs_icon",
         },
         {
             path: "/logs",
             name: "Submissions",
+            icon: "logs_icon",
         },
         {
             path: "/users",
             name: "Users",
+            icon: "users_icon"
         },
     ]
 
@@ -32,11 +37,13 @@ function NavBar(props: Props){
         routes.push({
             path: "/logout",
             name: "Logout",
+            icon: "logout_icon"
         });
     } else {
         routes.push({
             path: "/login",
             name: "Login",
+            icon: "login_icon",
         });
     }
 
@@ -44,6 +51,27 @@ function NavBar(props: Props){
     const [hoveredPath, setHoveredPath] = useState(pathname);
 
     return (
+        <>{props.isMobile ? 
+        <div className="z-[100] sticky top-6 mb-12 p-2 rounded-lg self-center" style={{ backgroundColor: "rgba(255, 255, 255, 0.1)", backdropFilter: "blur(2px)" }}>
+            <nav className="flex gap-4">
+                {routes.map((item, index) => {
+                    const isActive = item.path === pathname;
+
+                    return (
+                        <Link
+                            key={item.path}
+                            href={item.path}
+                            className="rounded-lg p-2"
+                            style={{
+                                backgroundColor: `${ isActive ? "rgba(76, 0, 255, 0.6)": ""}`
+                            }}
+                        >
+                            <img src={ `/static/assets/${ item.icon }.svg` } width="30px"></img>
+                        </Link>
+                    )
+                })}
+            </nav>
+        </div>: 
         <div className="p-2 rounded-lg mb-12 sticky top-6 z-[100] self-center" style={{ backgroundColor: "rgba(255, 255, 255, 0.1)", backdropFilter: "blur(2px)" }}>
             <nav className="flex gap-2 relative justify-center w-full z-[100]  rounded-lg">
                 {routes.map((item, index) => {
@@ -84,6 +112,7 @@ function NavBar(props: Props){
                 })}
             </nav>
         </div>
+    }</>
     );
 }
 
