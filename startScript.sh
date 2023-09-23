@@ -1,1 +1,1 @@
-cd client; npm i; npm run build; cd ../api; npm i; docker compose up -d
+cd client; npm i; npm run build; cd ../admin; npm i; npm run build; cd ../api; npm i; docker compose up -d
