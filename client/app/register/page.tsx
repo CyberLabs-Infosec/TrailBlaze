@@ -108,7 +108,7 @@ export default function RegisterPage() {
                         <p className="text-center text-3xl font-bold text-slate-400">REGISTER</p>
                         <hr className="border-slate-500"></hr>
                         <input className={ inpStyle } id="username" name="username" placeholder="username"></input>
-                        <input className={ inpStyle } id="email" name="email" placeholder="email"></input>
+                        <input className={ inpStyle } id="email" type="email" name="email" placeholder="email"></input>
                         <input className={ inpStyle } id="adm_no" name="adm_no" placeholder="admission number"></input>
                         <div className="flex gap-2 justify-center items-center">
                             <input className={ inpStyle } id="password" name="password" type={view ? "text" : "password"} placeholder="password"></input>

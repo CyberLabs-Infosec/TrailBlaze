@@ -8,7 +8,7 @@ import { toast } from 'react-toastify';
 import { User } from "../layout";
 import { setNotification } from "../../utils/notification";
 
-const inpStyle = "outline-none rounded-md px-3 py-3 shadow-3xl shadow-slate-950 text-slate-400 bg-transparent";
+const inpStyle = "outline-none rounded-sm px-3 py-3 shadow-3xl shadow-slate-950 text-slate-400 bg-transparent";
 const regOptStyle = "p-3 bg-slate-800 rounded-lg shadow-xl hover:shadow-lg hover:-translate-y-0.5 transition-all cursor-pointer flex gap-3";
 
 const googleAuthURI = `https://accounts.google.com/o/oauth2/v2/auth?
@@ -27,6 +27,13 @@ export default function LoginPage() {
     const handleSubmit = async () => {
         const email = (document.getElementById("email") as HTMLInputElement).value;
         const password = (document.getElementById("password") as HTMLInputElement).value;
+
+        if (!email || !password) {
+            if (!email) (document.getElementById("email") as HTMLInputElement).classList.add("outline-1", "outline-red-400");
+            if (!password) (document.getElementById("password") as HTMLInputElement).classList.add("outline-1", "outline-red-400");
+            return;
+        }
+
         const resp = await toast.promise(fetch("/api/auth/login", {
             method: "POST",
             body: JSON.stringify({
@@ -58,6 +65,15 @@ export default function LoginPage() {
         var c = url.searchParams.get("code");
 
         setCode(c);
+    }, []);
+
+    useEffect(() => {
+        (document.getElementById("email") as HTMLInputElement).addEventListener("focus", (e) => {
+            (e.target as HTMLElement).classList.remove("outline-1", "outline-red-400")
+        });
+        (document.getElementById("password") as HTMLInputElement).addEventListener("focus", (e) => {
+            (e.target as HTMLElement).classList.remove("outline-1", "outline-red-400")
+        })
     }, [])
 
     useEffect(() => {
