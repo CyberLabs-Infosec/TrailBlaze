@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Card from "./EditCard";
 
 export interface challItem{
@@ -19,12 +20,15 @@ interface Props{
 
 function Challenge(props: Props){
 
+    const [isVisible, setVisible] = useState(false)
+
     function handleEdit(){
-        console.log("Button clicked!")
+        setVisible(!isVisible);
     }
 
     return (
-        <div className="w-80 h-80 rounded-lg transform transition duration-500 hover:scale-105 relative" style={{ backgroundColor: "rgba(255, 255, 255, 0.1)", backdropFilter: "blur(2px)" }}>
+
+        <div className="w-80 h-80 rounded-lg transform transition duration-500 hover:scale-105" style={{ backgroundColor: "rgba(255, 255, 255, 0.1)", backdropFilter: "blur(2px)" }}>
             <div className="flex justify-center absolute self-center w-80">
                 <div className="py-8 font-bungee text-2xl font-thin uppercase">
                     {props.challJSON.title}
@@ -39,7 +43,7 @@ function Challenge(props: Props){
                         <img src="/static/assets/edit_icon.svg" width="30px"/>
                     </button>
                 </div>
-                <Card isVisible={ true } challJSON={ props.challJSON }></Card>
+                <Card isVisible={ isVisible } setVisible={ setVisible } challJSON={ props.challJSON }></Card>
             </div>
         </div>
     )
