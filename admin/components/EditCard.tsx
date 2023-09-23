@@ -7,7 +7,7 @@ interface Props{
 
 function Card(props: Props){
     return(
-        <div className={`${ props.isVisible ? "": "hidden"}`}>EditCard for chall, flag: { props.challJSON.flag }</div>
+        <div className={`${ props.isVisible ? "": "hidden"}`}>EditCard for chall, flag: { props.challJSON.title }</div>
     )
 }
 
