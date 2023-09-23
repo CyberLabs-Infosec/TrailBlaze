@@ -21,6 +21,9 @@ module.exports = {
 				Logout: "url('/static/assets/logout_icon.svg')",
 
 			},
+			spacing: {
+				'150': '36rem',
+			},
 		},
 	},
 	plugins: [],

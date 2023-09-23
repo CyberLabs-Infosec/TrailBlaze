@@ -1,6 +1,19 @@
-/*/node_modules
-/*/.next*
-/*/build
-/*/package-lock*.json
-/*/.DS_Store
-.DS_Store
+# Node modules
+client/node_modules
+admin/node_modules
+api/node_modules
+genToken/node_modules
+
+# Next caches
+client/.next
+admin/.next
+
+# package-lock files
+client/package-lock.json
+admin/package-lock.json
+api/package-lock.json
+genToken/package-lock.json
+
+# Build caches
+client/build
+admin/build

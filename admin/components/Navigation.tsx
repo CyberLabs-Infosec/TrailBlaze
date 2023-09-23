@@ -52,7 +52,7 @@ function NavBar(props: Props){
 
     return (
         <>{props.isMobile ? 
-        <div className="z-[100] sticky top-6 mb-12 p-2 rounded-lg self-center" style={{ backgroundColor: "rgba(255, 255, 255, 0.1)", backdropFilter: "blur(2px)" }}>
+        <div className="z-100 sticky top-6 mb-12 p-2 rounded-lg self-center" style={{ backgroundColor: "rgba(255, 255, 255, 0.1)", backdropFilter: "blur(2px)" }}>
             <nav className="flex gap-4">
                 {routes.map((item, index) => {
                     const isActive = item.path === pathname;
