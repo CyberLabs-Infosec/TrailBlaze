@@ -24,7 +24,6 @@ function Challenges(){
             return router.push("/logout");
         }
         setChallenges(challJson.data);
-        console.log(challenges);
     }
 
     useEffect(() => {
@@ -39,8 +38,8 @@ function Challenges(){
         <div className="flex overflow-y-auto flex-wrap gap-5 justify-center p-8">
             {
                 challenges.map((item, index) =>
-                            <Challenge key={ index } title={ item.title } prompt={ item.prompt }/>
-                    )
+                    <Challenge key={ index } challJSON={ item }/>
+                )
             }
         </div>
     )

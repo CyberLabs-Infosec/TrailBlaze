@@ -6,15 +6,14 @@ import '../public/static/css/stars.sass'
 import { useState, useContext, createContext, useEffect } from 'react'
 import Cookies from 'js-cookie'
 
-// const [hell, test] = useState(true);
-// interface stateVars{
-//     loggedin: boolean
-//     setLoggedin: Dispatch<typeof test>
-//     respHook: boolean
-// }
+interface stateVars{
+    loggedin: boolean
+    setLoggedin: any
+    respHook: boolean
+}
 
-// const Context = createContext<stateVars | null>(null)
-const Context = createContext(null)
+const Context = createContext<stateVars>({loggedin: false, setLoggedin: false, respHook: false})
+// const Context = createContext(null)
 
 export default function RootLayout({ children, }: { children: React.ReactNode }) {
     const [loggedin, setLoggedin] = useState(false);
@@ -48,12 +47,14 @@ export default function RootLayout({ children, }: { children: React.ReactNode })
 				<div id="stars" className='-z-30'></div>
 				<div id="stars2" className='-z-40'></div>
 				<div id="stars3" className='-z-50'></div>
-				<Context.Provider className='flex justify-center w-screen' value={{ loggedin, setLoggedin, respHook }}> { children } </Context.Provider>
+				<Context.Provider value={{ loggedin, setLoggedin, respHook }}> { children } </Context.Provider>
 				<div className='z-40 fixed bottom-5 end-5 text-slate-500'>made by titans@titancrew 👀</div>
 			</body>
 		</html>
 	)
 }
+
+// className='flex justify-center w-screen'  in case necessary
 
 export function User() {
     return useContext(Context);
