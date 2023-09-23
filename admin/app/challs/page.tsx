@@ -6,11 +6,25 @@ import { useRouter } from 'next/navigation'
 
 import Challenge from "@/components/Challenge";
 import { User } from "../layout";
+import EditPrompt from "@/components/EditPrompt";
+import { challItem } from "@/components/Challenge";
 
 function Challenges(){
     const { loggedin, respHook } = User();
     const [challenges, setChallenges] = useState([])
     const router = useRouter()
+    const [isVisible, setVisible] = useState(false)
+    const [cValue, setValue] = useState<challItem>({chall_id: -1,
+        title: "",
+        prompt: "",
+        place: -1,
+        checkPoint: false,
+        flag: "",
+        points: -1,
+        hints: [""],
+        solves: -1,
+        visible: false
+    })
 
     const getChalls = async () => {
         const challList = await fetch("/api/chall/getchalls", {
@@ -35,13 +49,18 @@ function Challenges(){
     }, [respHook])
 
     return (
-        <div className="flex overflow-y-auto flex-wrap gap-5 justify-center p-8">
-            {
-                challenges.map((item, index) =>
-                    <Challenge key={ index } challJSON={ item }/>
-                )
-            }
-        </div>
+        <>
+            <div className={ `z-30 flex justify-center items-center fixed w-full h-screen backdrop-blur-2xl ${isVisible ? "": "hidden"}` }>
+                <EditPrompt challJSON={ cValue } setVisible={ setVisible }></EditPrompt>
+            </div>
+            <div className={ `flex overflow-y-auto flex-wrap gap-5 justify-center p-8` }>
+                {
+                    challenges.map((item, index) =>
+                        <Challenge key={ index } challJSON={ item } setVisible={ setVisible } setValue={ setValue } />
+                    )
+                }
+            </div>
+        </>
     )
 }
 

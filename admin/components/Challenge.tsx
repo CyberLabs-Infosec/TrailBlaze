@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Card from "./EditCard";
 
 export interface challItem{
     chall_id: number
@@ -16,14 +15,15 @@ export interface challItem{
 
 interface Props{
     challJSON: challItem
+    setVisible: any
+    setValue: any
 }
 
 function Challenge(props: Props){
-
-    const [isVisible, setVisible] = useState(false)
-
     function handleEdit(){
-        setVisible(!isVisible);
+        console.log("tried to open me!")
+        props.setVisible(true);
+        props.setValue(props.challJSON);
     }
 
     return (
@@ -35,15 +35,14 @@ function Challenge(props: Props){
                 </div>
             </div>
             <div className="flex flex-col mt-16 h-64 justify-evenly">
-                <div className="flex p-3 justify-center">
-                    {props.challJSON.prompt}
+                <div className="flex p-3 justify-center text-ellipsis overflow-scroll">
+                    { props.challJSON.prompt }
                 </div>
-                <div className="flex gap-2 justify-center w-80">
-                    <button className="w-14 h-14 flex justify-center items-center rounded-full hover:border" onClick={ handleEdit } style={{ backgroundColor: "rgba(76, 0, 255)"}}>
+                <div className="flex gap-2 justify-center w-80 mb-4">
+                    <button className="w-14 h-14 flex justify-center items-center rounded-full hover:border" onClick={ handleEdit } style={{ backgroundColor: "rgba(76, 0, 255, 0.6)"}}>
                         <img src="/static/assets/edit_icon.svg" width="30px"/>
                     </button>
                 </div>
-                <Card isVisible={ isVisible } setVisible={ setVisible } challJSON={ props.challJSON }></Card>
             </div>
         </div>
     )

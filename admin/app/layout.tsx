@@ -6,7 +6,7 @@ import '../public/static/css/stars.sass'
 import { useState, useContext, createContext, useEffect } from 'react'
 import Cookies from 'js-cookie'
 
-interface stateVars{
+export interface stateVars{
     loggedin: boolean
     setLoggedin: any
     respHook: boolean
