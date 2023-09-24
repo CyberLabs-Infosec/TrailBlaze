@@ -57,7 +57,7 @@ export default function RootLayout({ children, }: { children: React.ReactNode })
 
     return (
         <html lang='en'>
-            <body className='flex flex-col w-screen min-h-screen overflow-x-hidden'>
+            <body className='flex flex-col w-screen min-h-screen overflow-x-hidden bg-slate-900'>
                 <div className='fixed bg-slate-800 shadow-lg h-14 w-full flex justify-center items-center transition-all z-50'>
                     { isMobile != null ? ( isMobile ?
                         <></>:
