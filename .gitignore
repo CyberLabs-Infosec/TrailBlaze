@@ -8,12 +8,6 @@ genToken/node_modules
 client/.next
 admin/.next
 
-# package-lock files
-client/package-lock.json
-admin/package-lock.json
-api/package-lock.json
-genToken/package-lock.json
-
 # Build caches
 client/build
 admin/build
