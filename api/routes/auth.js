@@ -38,9 +38,14 @@ router.route("/verify/:token").get(async (req, res) => {
         if (result.rows.length != 0) {
             const { vid, username, email, adm_no, password, rank } = result.rows[0];
             
-            await pool.query(`
-                INSERT INTO users (username, email, adm_no, method, password, rank) VALUES ($1, $2, $3, $4, $5, $6);
-            `, [username, email, adm_no, "regular", password, rank]);
+            try {
+                await pool.query(`
+                    INSERT INTO users (username, email, adm_no, method, password, rank) VALUES ($1, $2, $3, $4, $5, $6);
+                `, [username, email, adm_no, "regular", password, rank]);
+            } catch(err) {
+                console.log(`Error inserting in database\n${err}`);
+                return res.status(500).json({ status: "fail", error: "There was an internal error, Please contact admin" });
+            }
 
             const inDB = await pool.query(`
                 SELECT uid, username, email, method, password, rank FROM users WHERE email=$1;
@@ -56,7 +61,7 @@ router.route("/verify/:token").get(async (req, res) => {
             return res.status(200).redirect("/");
             
         } else {
-            return res.status(400).redirect("/register?error=Unable to verify your E-mail, please register again");
+            return res.status(400).redirect("/register");
         }
     }
 })
@@ -84,16 +89,23 @@ router.route("/register").post(async (req, res) => {
         
         if (result.rows.length == 0) {
             const token = getToken({ email: email }, "1h");
-            await pool.query(`
-                INSERT INTO toverify (username, email, adm_no, password, rank) VALUES ($1, $2, $3, $4, $5) ON CONFLICT (email) DO UPDATE SET username = excluded.username, password = excluded.password, rank = excluded.rank, adm_no = excluded.adm_no;
-            `, [username, email, adm_no, hashedPassword, 3]);
+
+            try {
+                await pool.query(`
+                    INSERT INTO toverify (username, email, adm_no, password, rank) VALUES ($1, $2, $3, $4, $5) ON CONFLICT (email) DO UPDATE SET username = excluded.username, password = excluded.password, rank = excluded.rank, adm_no = excluded.adm_no;
+                `, [username, email, adm_no, hashedPassword, 3]);
+            } catch(err) {
+                console.log(`Error inserting in database\n${err}`);
+                return res.status(500).json({ status: "fail", error: "There was an internal error, Please contact admin" });
+            }
+
             const options =  {
                 to: email,
                 subject: "Activate your account",
                 html: `
                 <div>
                     <p>Welcome to TrailBlaze: Lost in Space! Click on link below to verify your account</p>
-                    <br><a href=${process.env.API_URL}/auth/verify/${token}>${process.env.API_URL}/auth/verify/${token}</a>
+                    <br><a href=${req.get('origin')}/api/auth/verify/${token}>${req.get('origin')}/api/auth/verify/${token}</a>
                 </div>
                 `,
                 textEncoding: 'base64',
@@ -106,6 +118,7 @@ router.route("/register").post(async (req, res) => {
                 await sendMail(options);
             } catch (err) {
                 console.log(err);
+                return res.status(500).json({ status: "fail", error: "There was an email error, Please contact admin" });
             }
         } else {
             return res.status(409).json({ status: "fail", error: "E-mail already registered" })
@@ -120,7 +133,7 @@ router.route("/register").post(async (req, res) => {
                 'grant_type': 'authorization_code',
                 'client_id': process.env.GOOGLE_CLIENT_ID,
                 'client_secret': process.env.GOOGLE_CLIENT_SECRET,
-                'redirect_uri': `${process.env.REDIRECT_URL}/register/`,
+                'redirect_uri': `${req.get('origin')}/register/`,
                 'code': code
             }),
             headers: {
@@ -136,9 +149,16 @@ router.route("/register").post(async (req, res) => {
 
             if (result.rows.length == 0) {
                 if (usrData.email_verified) {
-                    await pool.query(`
-                        INSERT INTO users (username, email, adm_no, method, password, rank) VALUES ($1, $2, $3, $4, $5, $6);
-                    `, [usrData.name, usrData.email, "", "google", "", 3]);
+
+                    try {
+                        await pool.query(`
+                            INSERT INTO users (username, email, adm_no, method, password, rank) VALUES ($1, $2, $3, $4, $5, $6);
+                        `, [usrData.name, usrData.email, "", "google", "", 3]);
+                    } catch(err) {
+                        console.log(err);
+                        return res.status(500).json({ status: "fail", error: "There was an internal error, Please contact admin" });
+                    }
+
                     const inDB = await pool.query(`
                         SELECT uid, username, email, method, password, rank FROM users WHERE email=$1;
                     `, [usrData.email])
@@ -206,7 +226,7 @@ router.route("/login").post(async (req, res) => {
                 'grant_type': 'authorization_code',
                 'client_id': process.env.GOOGLE_CLIENT_ID,
                 'client_secret': process.env.GOOGLE_CLIENT_SECRET,
-                'redirect_uri': `${process.env.REDIRECT_URL}/login/`,
+                'redirect_uri': `${req.get('origin')}/login/`,
                 'code': code
             }),
             headers: {

@@ -11,16 +11,10 @@ import { setNotification } from "../../utils/notification";
 const inpStyle = "outline-none rounded-sm px-3 py-3 shadow-3xl shadow-slate-950 text-slate-400 bg-transparent";
 const regOptStyle = "p-3 bg-slate-800 rounded-lg shadow-xl hover:shadow-lg hover:-translate-y-0.5 transition-all cursor-pointer flex gap-3";
 
-const googleAuthURI = `https://accounts.google.com/o/oauth2/v2/auth?
-scope=email profile openid&
-response_type=code&
-state=pass-through value&
-redirect_uri=${process.env.NEXT_PUBLIC_REDIRECT_URL}/login/&
-client_id=${process.env.NEXT_PUBLIC_CLIENT_ID}`
-
 export default function LoginPage() {
     const [code, setCode] = useState(null);
     const [view, setView] = useState(false);
+    const [googleAuthURI, setGoogleAuthURI] = useState("");
     const user = User();
     const router = useRouter();
 
@@ -63,7 +57,6 @@ export default function LoginPage() {
     useEffect(() => {
         var url = new URL(window.location.href);
         var c = url.searchParams.get("code");
-
         setCode(c);
     }, []);
 
@@ -74,6 +67,10 @@ export default function LoginPage() {
         (document.getElementById("password") as HTMLInputElement).addEventListener("focus", (e) => {
             (e.target as HTMLElement).classList.remove("outline-1", "outline-red-400")
         })
+    }, [])
+
+    useEffect(() => {
+        setGoogleAuthURI(`https://accounts.google.com/o/oauth2/v2/auth?scope=email profile openid&response_type=code&state=pass-through value&redirect_uri=${location.origin}/login/&client_id=${process.env.NEXT_PUBLIC_CLIENT_ID}`);
     }, [])
 
     useEffect(() => {

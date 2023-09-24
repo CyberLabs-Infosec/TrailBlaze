@@ -11,13 +11,6 @@ import { setNotification } from "../../utils/notification";
 const inpStyle = "outline-none rounded-md px-3 py-3 shadow-3xl shadow-slate-950 text-slate-400 bg-transparent";
 const regOptStyle = "p-3 bg-slate-800 rounded-lg shadow-xl hover:shadow-lg hover:-translate-y-0.5 transition-all cursor-pointer flex gap-3";
 
-const googleAuthURI = `https://accounts.google.com/o/oauth2/v2/auth?
-scope=email profile openid&
-response_type=code&
-state=pass-through value&
-redirect_uri=${process.env.NEXT_PUBLIC_REDIRECT_URL}/register/&
-client_id=${process.env.NEXT_PUBLIC_CLIENT_ID}`
-
 const handleSubmit = async () => {
     const username = (document.getElementById("username") as HTMLInputElement).value;
     const email = (document.getElementById("email") as HTMLInputElement).value;
@@ -50,6 +43,7 @@ const handleSubmit = async () => {
 export default function RegisterPage() {
     const [code, setCode] = useState(null);
     const [view, setView] = useState(false);
+    const [googleAuthURI, setGoogleAuthURI] = useState("");
     const router = useRouter();
 
     const user = User();
@@ -59,6 +53,10 @@ export default function RegisterPage() {
         var c = url.searchParams.get("code");
 
         setCode(c);
+    }, [])
+
+    useEffect(() => {
+        setGoogleAuthURI(`https://accounts.google.com/o/oauth2/v2/auth?scope=email profile openid&response_type=code&state=pass-through value&redirect_uri=${location.origin}/register/&client_id=${process.env.NEXT_PUBLIC_CLIENT_ID}`);
     }, [])
 
     useEffect(() => {
