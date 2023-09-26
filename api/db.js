@@ -32,7 +32,8 @@ function init_db() {
                 captain_id integer NOT NULL,
                 team_members integer,
                 team_scores integer[][],
-                last_solved integer
+                last_solved integer,
+                current_point integer
             );`
         );
         await pool.query(

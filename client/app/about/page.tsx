@@ -4,7 +4,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useEffect } from "react";
 
-const storyStyle = "text-slate-400 text-5xl"
+const storyStyle = "text-slate-300 text-4xl px-32 tracking-wider font-Raleway leading-10 text-center"
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -114,19 +114,28 @@ export default function() {
             </div>
             <p id="heading" className="fixed top-32 opacity-0 w-full text-base font-bold text-slate-300 text-center z-20 scale-0">THE LOST ASTRONAUT</p>
             <div id="storyBoard" className="h-screen flex" style={{ width: "300vw" }}>
-                <div className="story h-full w-full bg-slate-900 flex justify-center items-center">
-                    <div className="bg-slate-700 h-full w-full flex justify-center items-center">
-                        <p className={storyStyle}>Astronaut starts from earth</p>
+                <div className="story h-full w-full bg-slate-900 flex justify-center items-center bg-center bg-no-repeat bg-cover" style={{ backgroundImage: "url('/static/assets/slide_1.jpg')" }}>
+                    <div className="relative h-full w-full flex justify-center items-center" style={{ backgroundColor: "rgba(20, 20, 20, 0.75)" }}>
+                        <p className={storyStyle}>
+                            The Gaia Dominion, humanity’s newest world level government, created in 3000 AD, enlists Commander Alex Mercer, as the vanguard in their space exploration trying to extend their reaches towards the uncharted expanse outside the milky way. Alex's spacecraft, the Odyssey, hurtles through the fabric of spacetime on a fateful mission to explore the Triangulum Galaxy.
+                        </p>
+                        <p className="absolute text-slate-400 font-md bottom-32">Image credits: Hello Games (No Man's Sky)</p>
                     </div>
                 </div>
-                <div className="story h-full w-full bg-slate-900 justify-center items-center">
-                    <div className="bg-slate-800 h-full w-full flex justify-center items-center">
-                        <p className={storyStyle}>Astronaut's rocket is wrecked</p>
+                <div className="story h-full w-full bg-slate-900 flex justify-center items-center bg-center bg-no-repeat bg-cover" style={{ backgroundImage: "url('/static/assets/slide_2.jpg')" }}>
+                    <div className="relative h-full w-full flex justify-center items-center" style={{ backgroundColor: "rgba(20, 20, 20, 0.75)" }}>
+                        <p className={storyStyle}>
+                            Suddenly, a catastrophic malfunction engulfs his ship, spiralling it out of control and forcing a crash-landing on an uncharted planet within the Triangulum Galaxy. Regaining consciousness after the crash, Alex finds himself alone and stranded. The Odyssey lies in ruins, scattered across a landscape adorned with unknown flora and peculiar geological formations. The sky above is a mesmerising blend of colours, dancing with an otherworldly light.
+                        </p>
+                        <p className="absolute text-slate-400 font-md bottom-32">Image credits: Hello Games (No Man's Sky)</p>
                     </div>
                 </div>
-                <div className="story h-full w-full bg-slate-900 justify-center items-center">
-                    <div className="bg-slate-700 h-full w-full flex justify-center items-center">
-                        <p className={storyStyle}>Help astronaut reach earth..</p>
+                <div className="story h-full w-full bg-slate-900 flex justify-center items-center bg-center bg-no-repeat bg-cover" style={{ backgroundImage: "url('/static/assets/slide_3.jpg')" }}>
+                    <div className="relative h-full w-full flex justify-center items-center" style={{ backgroundColor: "rgba(20, 20, 20, 0.75)" }}>
+                        <p className={storyStyle}>
+                            Survival becomes Alex's immediate priority. On further exploration Alex finds the ruins of an ancient technology civilization on the planet and learns about their usage of ‘luminite’ as a fuel to power their devices. Armed with his specialised cybersecurity skills during the astronaut training program, Alex embarks on this mission to reach home.
+                        </p>
+                        <p className="absolute text-slate-400 font-md bottom-32">Image credits: Hello Games (No Man's Sky)</p>
                     </div>
                 </div>
             </div>

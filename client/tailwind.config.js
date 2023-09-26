@@ -17,7 +17,8 @@ module.exports = {
         ADLaM: ["ADLaM Display", "cursive"],
         PressStart: ["'Press Start 2P'", "cursive"],
         Gruppo: ["Gruppo", "sans-serif"],
-        Dela: ["'Dela Gothic One'", "cursive"]
+        Dela: ["'Dela Gothic One'", "cursive"],
+        Raleway: ["Raleway", "sans-serif"]
       },
       backgroundImage: {
         camera: "url('/static/assets/camera.png')",

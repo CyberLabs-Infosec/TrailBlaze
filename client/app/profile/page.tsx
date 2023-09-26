@@ -39,7 +39,7 @@ export default function Page() {
         if (jsonData.status == "fail") {
             toast.error(jsonData.error);
         } else {
-            toast.success("Your profile info was edited");
+            setNotification(true, "info", "Your profile info was edited");
             location.reload();
         }
     }
