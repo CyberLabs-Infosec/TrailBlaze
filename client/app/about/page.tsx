@@ -147,7 +147,7 @@ export default function() {
             <div className="h-screen w-full bg-slate-900"></div>
             <p id="howtoHeading" className="fixed top-32 opacity-0 w-full text-base font-bold text-slate-300 text-center z-20 scale-0 mix-blend-exclusion">JOIN US AT WORKSHOP</p>
             <div id="howTo" className="w-full h-screen bg-slate-900 p-32 flex justify-center items-center">
-                <div className="relative top-4 h-full w-full rounded-lg bg-bottom bg-cover bg-no-repeat" style={{ backgroundImage: "url('https://img.redbull.com/images/c_limit,w_1500,h_1000,f_auto,q_auto/redbullcom/2016/09/15/1331818231340_2/a-typical-scene-from-a-planet-in-no-man-s-sky-space-exploration-video-game')" }}>
+                <div className="relative top-4 h-full w-full rounded-lg bg-bottom bg-cover bg-no-repeat" style={{ backgroundImage: "url('/static/assets/venue.png')" }}>
                     <div className="h-full w-full rounded-lg backdrop-blur-sm grid grid-cols-2 grid-rows-2 gap-8 p-8" style={{ backgroundColor: "rgba(50, 50, 50, 0.7)" }}>
                         <div className="flex grid-cols-1 grid-rows-1 rounded-lg flex flex-col items-center p-4 gap-4">
                             <p className="text-slate-300 font-bold text-5xl text-center">VENUE</p>

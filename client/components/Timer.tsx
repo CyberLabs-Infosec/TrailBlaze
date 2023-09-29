@@ -12,7 +12,8 @@ export default function() {
         const countDown = setInterval(() => {
             try {
                 const timeLeft = eventStart - new Date().getTime();
-                document.getElementById("hours").innerText = Math.floor((timeLeft) / (hour)).toString().padStart(2, '0'),
+                document.getElementById("days").innerText = Math.floor((timeLeft) / (day)).toString().padStart(2, '0'),
+                document.getElementById("hours").innerText = Math.floor((timeLeft % (day)) / (hour)).toString().padStart(2, '0'),
                 document.getElementById("minutes").innerText = Math.floor((timeLeft % (hour)) / (minute)).toString().padStart(2, '0'),
                 document.getElementById("seconds").innerText = Math.floor((timeLeft % (minute)) / second).toString().padStart(2, '0');
                 return () => clearInterval(countDown);
@@ -24,7 +25,9 @@ export default function() {
 
     return (
         <span className="flex">
-            <span className="flex flex-col items-center"><span id="hours"></span><span className="text-base">HOUR</span></span>
+            <span className="flex flex-col items-center"><span id="days"></span><span className="text-base">DAYS</span></span>
+            <span>:</span>
+            <span className="flex flex-col items-center"><span id="hours"></span><span className="text-base">HOURS</span></span>
             <span>:</span>
             <span className="flex flex-col items-center"><span id="minutes"></span><span className="text-base">MIN</span></span>
             <span>:</span>
