@@ -51,12 +51,12 @@ export default function Page() {
     }, [])
 
     return(
-        <div className="flex absolute justify-center items-center w-full min-h-full bg-slate-900 flex flex-col gap-32 overflow-y-scroll">
-            <div className='flex flex-col justify-center items-center gap-10 min-h-96'>
+        <div className="flex absolute items-center w-full min-h-full bg-slate-900 flex flex-col gap-18 overflow-y-scroll">
+            <div className='relative flex flex-col justify-center items-center gap-10 -translate-y-1/2' style={{ top: "50vh" }}>
                 <p className='font-PressStart text-slate-200 text-8xl text-center'>LET'S <span id='varVal' className='text-violet-400'>{vals[0]}</span></p>
                 <p className='font-ADLaM text-slate-300 text-6xl flex gap-5'><span>Event begins in</span> <Timer></Timer></p>
             </div>
-            <div>
+            <div className='relative' style={{ top: "50vh" }}>
                 <p className='text-slate-400 text-4xl font-bold'>- OUR SPONSORS -</p>
                 <hr className='border-2 border-slate-500'></hr>
                 <div className='flex p-10 justify-center items-center'>
