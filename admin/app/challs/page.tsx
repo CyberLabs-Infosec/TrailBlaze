@@ -27,16 +27,17 @@ function Challenges(){
     })
 
     const getChalls = async () => {
-        const challList = await fetch("/api/chall/getchalls", {
+        const challList = await fetch("/api/admin/getchalls", {
             headers: {
                 "Authorization": `Bearer ${Cookies.get('token')}`
             }
         });
 
         const challJson = await challList.json();
-        if (challJson.status == "error")  {
+        if (challJson.status == "fail")  {
             return router.push("/logout");
         }
+        console.log(challJson);
         setChallenges(challJson.data);
     }
 
