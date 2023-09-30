@@ -37,8 +37,25 @@ export default function Challenge(props) {
 
         if (jsonRes.status == "success") {
             jsonRes.correct ? successAnime.current.play() : wrongAnime.current.play()
+            if (jsonRes.correct) {
+                const challBox = document.getElementById(`chall-${props.chall.chall_id}`);
+                const nextChallBox = document.getElementById(`chall-${props.chall.chall_id + 1}`);
+                challBox.classList.remove('bg-yellow-200', 'hover:bg-yellow-100');
+                challBox.classList.add('bg-green-400', 'hover:bg-green-200');
+
+                if (nextChallBox) {
+                    nextChallBox.classList.remove('bg-slate-800', 'hover:bg-violet-300', 'bg-violet-500', 'hover:bg-slate-600');
+                    nextChallBox.classList.add('bg-yellow-200', 'hover:bg-yellow-100');
+                }
+            }
         } else {
             toast.error(jsonRes.error);
+        }
+    }
+
+    const handleEnter = async (event) => {
+        if (event.code == "Enter") {
+            handleSubmit();
         }
     }
 
@@ -99,13 +116,6 @@ export default function Challenge(props) {
         }
     }, []);
 
-    useEffect(() => {
-        const flagField = document.getElementById("flag");
-        flagField.addEventListener("keydown", (e) => {
-            if (e.code === 'Enter') handleSubmit();
-        })
-    }, [])
-
     return (
         <div id="challPrompt" className="fixed flex justify-center items-center top-0 left-0 h-screen w-full z-20 backdrop-blur hidden">
             <div className="bg-slate-800 rounded-xl p-4 flex flex-col items-center" style={{ height: "400px", width: "600px" }}>
@@ -115,8 +125,8 @@ export default function Challenge(props) {
                 <div className="h-full p-4">{props.chall.prompt}</div>
                 <hr className="w-full border-slate-500"></hr>
                 <div className="flex gap-2 bottom-0 mt-3 w-full px-5">
-                    <input id="flag" className="outline-none px-2 py-3 bg-transparent border-2 border-slate-500 text-slate-300 w-full" placeholder="Enter flag here"></input>
-                    <button onClick={handleSubmit} onSubmit={handleSubmit} className="border-2 px-3 text-slate-300 border-slate-300 font-bold bg-violet-500">Submit</button>
+                    <input onKeyDown={handleEnter} id="flag" className="outline-none px-2 py-3 bg-transparent border-2 border-slate-500 text-slate-300 w-full" placeholder="Enter flag here"></input>
+                    <button onClick={handleSubmit} className="border-2 px-3 text-slate-300 border-slate-300 font-bold bg-violet-500">Submit</button>
                 </div>
             </div>
             <div id="fbtnBg" className="absolute backdrop-blur-lg h-full w-full flex items-center justify-center hidden" style={{ backgroundColor: "rgba(30, 41, 59, 0.5)" }}>

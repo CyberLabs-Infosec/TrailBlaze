@@ -16,6 +16,8 @@ export default function Page() {
     const { loggedin, respHook, userData } = User();
     const [currChall, setCurrChall] = useState(null);
     const [challenges, setChallenges] = useState([]);
+    const [placed, setPlaced] = useState(false);
+    const [solved, setSolved] = useState(0);
 
     const router = useRouter();
 
@@ -31,10 +33,17 @@ export default function Page() {
 
         var chall = document.createElement("div");
         chall.setAttribute("class", "challBox");
-        chall.classList.add(`${isCheckPoint ? "hover:bg-violet-300" : "hover:bg-slate-600"}`, `${isCheckPoint ? 'bg-violet-500' : 'bg-slate-800'}`, "cursor-pointer", "transition-all", `${isCheckPoint ? "h-24" : "h-20"}`, `${isCheckPoint ? "w-24" : "w-20"}`);
+        if (obj.place < solved) {
+            chall.classList.add(`"hover:bg-green-200"`, `bg-green-400`, "cursor-pointer", "transition-all", `${isCheckPoint ? "h-24" : "h-20"}`, `${isCheckPoint ? "w-24" : "w-20"}`);
+        } else if (obj.place > solved) {
+            chall.classList.add(`${isCheckPoint ? "hover:bg-violet-300" : "hover:bg-slate-600"}`, `${isCheckPoint ? 'bg-violet-500' : 'bg-slate-800'}`, "cursor-pointer", "transition-all", `${isCheckPoint ? "h-24" : "h-20"}`, `${isCheckPoint ? "w-24" : "w-20"}`);
+        } else {
+            chall.classList.add("hover:bg-yellow-100", "bg-yellow-200", "cursor-pointer", "transition-all", `${isCheckPoint ? "h-24" : "h-20"}`, `${isCheckPoint ? "w-24" : "w-20"}`);
+        }
         chall.style.left = (conatiner.clientHeight / 730) * loc.x + "px";
         chall.style.top = (conatiner.clientWidth / 430) * loc.y + "px";
         chall.setAttribute("challNo", obj.place.toString());
+        chall.id = `chall-${obj.chall_id.toString()}`;
         chall.addEventListener("click", (e) => {
             var prompt = (document.getElementById("challPrompt") as HTMLElement);
             prompt.classList.remove("hidden");
@@ -44,10 +53,11 @@ export default function Page() {
     }
 
     useEffect(() => {
-        if (loggedin && currChall != null) {
+        if (loggedin && currChall != null && !placed) {
             for (var chall of challenges) {
                 placeOnPath(chall);
             }
+            setPlaced(true)
         }
     }, [currChall])
 
@@ -63,6 +73,7 @@ export default function Page() {
             return router.push("/logout");
         }
         setChallenges(challsToJson.data);
+        setSolved(challsToJson.solved);
     }
 
     useEffect(() => {
@@ -128,7 +139,7 @@ export default function Page() {
             </svg>
         </div></>: 
         <div className='text-center text-3xl font-bold text-slate-400'>
-            <Loading text="Loading challenges"></Loading>
+            <Loading text={JSON.stringify(["Loading challenges"])}></Loading>
         </div>:
         <div className='text-center text-3xl font-bold text-slate-400'>
             <Loading text=""></Loading>

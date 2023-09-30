@@ -57,7 +57,11 @@ export default function RootLayout({ children, }: { children: React.ReactNode })
 
     return (
         <html lang='en'>
-            <body className='flex flex-col w-screen min-h-screen overflow-x-hidden'>
+            <head>
+                <title>TrailBlaze</title>
+                <link rel='icon' type='image/x-icon' href='/static/assets/favicon.ico'></link>
+            </head>
+            <body className='flex flex-col w-screen min-h-screen overflow-x-hidden bg-slate-900'>
                 <div className='fixed bg-slate-800 shadow-lg h-14 w-full flex justify-center items-center transition-all z-50'>
                     { isMobile != null ? ( isMobile ?
                         <></>:
@@ -71,7 +75,7 @@ export default function RootLayout({ children, }: { children: React.ReactNode })
                 {isMobile != null ? ( isMobile ? <div className='absolute flex flex-col justify-center items-center top-0 end-0 bg-slate-800 h-screen w-screen'>
                     <p className='mt-20 text-slate-400'>THIS IS A DESKTOP APPLICATION</p>
                     <div className='bg-deskOnly h-full w-full bg-contain bg-no-repeat bg-center'></div>
-                </div> : cache ? <Context.Provider value={{ loggedin, setLoggedin, userData, respHook, setUserData }}> { children } </Context.Provider> : <Loading text="Loading assets"></Loading>) : <></>}
+                </div> : cache ? <Context.Provider value={{ loggedin, setLoggedin, userData, respHook, setUserData }}> { children } </Context.Provider> : <Loading text={ JSON.stringify(["loading assets", "initializing worlds", "hacking planet", "compromising galaxy", "helping earth"]) }></Loading>) : <></>}
                 <ToastContainer
                     position="top-center"
                     autoClose={5000}

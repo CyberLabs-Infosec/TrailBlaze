@@ -18,7 +18,7 @@ export default function Page() {
     const [team, setTeam] = useState({});
     const router = useRouter();
 
-    const [chartData, setChartData] = useState([[128, 100], [300, 300], [432, 400], [765, 450]]);
+    const [chartData, setChartData] = useState([[128.24356, 100], [300, 300], [432, 400], [765, 450]]);
     const [solvedData, setSolvedData] = useState([
         {
           value: 5,

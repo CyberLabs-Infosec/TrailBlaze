@@ -16,7 +16,9 @@ module.exports = {
         Bungee: ["Bungee", "cursive"],
         ADLaM: ["ADLaM Display", "cursive"],
         PressStart: ["'Press Start 2P'", "cursive"],
-        Gruppo: ["Gruppo", "sans-serif"]
+        Gruppo: ["Gruppo", "sans-serif"],
+        Dela: ["'Dela Gothic One'", "cursive"],
+        Raleway: ["Raleway", "sans-serif"]
       },
       backgroundImage: {
         camera: "url('/static/assets/camera.png')",
@@ -36,7 +38,9 @@ module.exports = {
         eyeHide: "url('/static/assets/eye_hide.svg')",
         eyeShow: "url('/static/assets/eye_show.svg')",
         captain: "url('/static/assets/captain.png')",
-        cross: "url('/static/assets/cross.png')"
+        cross: "url('/static/assets/cross.png')",
+        rocketImg: "url('/static/assets/rocket.svg')",
+        downArrow: "url('/static/assets/down-arrow.svg')"
       }
     },
   },

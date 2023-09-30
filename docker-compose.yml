@@ -10,6 +10,7 @@ services:
       timeout: 60s
       retries: 5
       start_period: 80s
+    restart: always
 
   backend:
     image: node:latest
@@ -25,6 +26,7 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
+    restart: always
 
   frontend:
     image: node:latest
@@ -40,6 +42,7 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
+    restart: always
 
   admin:
     image: node:latest
