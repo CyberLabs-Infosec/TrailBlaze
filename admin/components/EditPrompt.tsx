@@ -9,6 +9,8 @@ interface Props{
 
 function EditPrompt(props: Props){
     const [ hints, setHints ] = useState(["this is fake :)"])
+    const [ challVisibility, setChallVisibilty ] = useState(props.challJSON.visible)
+    const [ points, setPoints ] = useState(props.challJSON.points)
     
     useEffect(() => {
         if (props) {
@@ -17,14 +19,20 @@ function EditPrompt(props: Props){
     }, [props])
 
     async function submitData(){
+        const chall_id = props.challJSON.chall_id;
+        const title = (document.getElementById("challtitle") as HTMLDivElement).innerText
+        const prompt = (document.getElementById("prompt") as HTMLDivElement).innerText
+        const flag = (document.getElementById("flag") as HTMLDivElement).innerText
+        const hintArray = hints
+
         const req = await fetch("/api/admin/editchall", {
             headers: {
-                "Authorization": `Bearer ${Cookies.get('token')}`
+                "Authorization": `Bearer ${Cookies.get('token')}`,
+                "Content-Type": "application/json"
             },
             method: "POST",
             body: JSON.stringify({
-                chall_id: props.challJSON.chall_id,
-                title: document.getElementById("challtitle")
+                chall_id, title, prompt, flag, hintArray
             })
         })
         props.setVisible(false)
@@ -39,6 +47,12 @@ function EditPrompt(props: Props){
 
     const addHint = () => {
         setHints([...hints, ""]);
+    }
+
+    const changePoints = () => {
+        const pointsInput = (document.getElementById("points") as HTMLDivElement).innerText
+        setPoints(parseInt(pointsInput))
+        console.log(points)
     }
 
     const handleChange = (event) => {
@@ -81,6 +95,16 @@ function EditPrompt(props: Props){
                             )
                         })
                     }
+                </div>
+            </div>
+            <div className="flex justify-around w-full p-2">
+                <div className="flex items-center gap-2">
+                    <div className="text-slate-400">points</div>
+                    <div id="points" className="p-1 bg-transparent outline-none border-b" onChange={ changePoints }>100</div>
+                </div>
+                <div id="visibility" className="bg-black">
+                    <div className="w-10 h-2 bg-gray-500"></div>
+                    <div>visible</div>
                 </div>
             </div>
 
