@@ -20,7 +20,7 @@ export default function Page() {
     const [pie, setPie] = useState(null);
     const router = useRouter();
 
-    const [chartData, setChartData] = useState([[128.24356, 100], [300, 300], [432, 400], [765, 450]]);
+    const [chartData, setChartData] = useState([]);
     const [solvedData, setSolvedData] = useState({ solved: 5, unsolved: 15 });
 
     const [cap, setCap] = useState(null);
@@ -46,8 +46,20 @@ export default function Page() {
         if (chart) {
             chart.setOption({
                 title: {},
-                tooltip: {},
-                xAxis: {},
+                tooltip: {
+                    trigger: 'axis',
+                    formatter: function (params) {
+                        params = params[0].value[0];
+                        return `T+${Math.floor(params / 3600).toString().padStart(2, '0')}:${Math.floor((params % 3600) / 60).toString().padStart(2, '0')}:${((params % 3600) % 60).toString().padStart(2, '0')}`;
+                    }
+                },
+                xAxis: {
+                    axisLabel: {
+                        formatter: function (params) {
+                            return `T+${(params / 3600).toFixed().padStart(2, '0')}:${((params % 3600) / 60).toFixed().padStart(2, '0')}:${((params % 3600) % 60).toFixed().padStart(2, '0')}`;
+                        }
+                    }
+                },
                 yAxis: {},
                 series: [
                 {
