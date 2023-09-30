@@ -16,19 +16,12 @@ export default function Page() {
     const inpStyle = "outline-none rounded-md px-3 py-3 shadow-2xl shadow-slate-950 text-slate-400 bg-transparent";
     const { loggedin, userData, respHook } = User();
     const [team, setTeam] = useState({});
+    const [chart, setChart] = useState(null);
+    const [pie, setPie] = useState(null);
     const router = useRouter();
 
-    const [chartData, setChartData] = useState([[128.24356, 100], [300, 300], [432, 400], [765, 450]]);
-    const [solvedData, setSolvedData] = useState([
-        {
-          value: 5,
-          name: 'Solved (5)'
-        },
-        {
-          value: 15,
-          name: 'Unsolved\n(15)'
-        }
-    ]);
+    const [chartData, setChartData] = useState([]);
+    const [solvedData, setSolvedData] = useState({ solved: 5, unsolved: 15 });
 
     const [cap, setCap] = useState(null);
 
@@ -39,51 +32,79 @@ export default function Page() {
 
             if (chart) {
                 const myChart = echarts.init(chart, 'dark');
-            
-                myChart.setOption({
-                    title: {},
-                    tooltip: {},
-                    xAxis: {},
-                    yAxis: {},
-                    series: [
-                    {
-                        name: 'Score',
-                        type: 'line',
-                        data: chartData
-                    }
-                    ]
-                });
+                setChart(myChart);
             }
 
             if (solved) {
                 const myChart = echarts.init(solved, 'dark');
-
-                const option = {
-                    title: {
-                    text: 'Team progress',
-                    left: 'center',
-                    top: 'center'
-                    },
-                    series: [
-                    {
-                        type: 'pie',
-                        emphasis: {
-                            label: {
-                            show: true,
-                            fontSize: '15',
-                            fontWeight: 'bold'
-                            }
-                        },
-                        data: solvedData,
-                        radius: ['50%', '70%']
-                    }
-                    ]
-                };
-
-                myChart.setOption(option);
+                setPie(myChart);
             }
         }
     }, [loggedin])
+
+    useEffect(() => {
+        if (chart) {
+            chart.setOption({
+                title: {},
+                tooltip: {
+                    trigger: 'axis',
+                    formatter: function (params) {
+                        params = params[0].value[0];
+                        return `T+${Math.floor(params / 3600).toString().padStart(2, '0')}:${Math.floor((params % 3600) / 60).toString().padStart(2, '0')}:${((params % 3600) % 60).toString().padStart(2, '0')}`;
+                    }
+                },
+                xAxis: {
+                    axisLabel: {
+                        formatter: function (params) {
+                            return `T+${(params / 3600).toFixed().padStart(2, '0')}:${((params % 3600) / 60).toFixed().padStart(2, '0')}:${((params % 3600) % 60).toFixed().padStart(2, '0')}`;
+                        }
+                    }
+                },
+                yAxis: {},
+                series: [
+                {
+                    name: 'Score',
+                    type: 'line',
+                    data: chartData
+                }
+                ]
+            });
+        }
+    }, [chart, chartData])
+
+    useEffect(() => {
+        if (pie) {
+            pie.setOption({
+                title: {
+                text: 'Team progress',
+                left: 'center',
+                top: 'center'
+                },
+                series: [
+                {
+                    type: 'pie',
+                    emphasis: {
+                        label: {
+                        show: true,
+                        fontSize: '15',
+                        fontWeight: 'bold'
+                        }
+                    },
+                    data: [
+                        {
+                            value: solvedData.solved,
+                            name: `Solved(${solvedData.solved})`
+                        }, {
+                            value: solvedData.unsolved,
+                            name: `Unsolved(${solvedData.unsolved})`
+                        }
+                    ],
+                    radius: ['50%', '70%']
+                }
+                ]
+            });
+        }
+    }, [pie, solvedData])
 
     const handleCreate = async () => {
         const teamname = (document.getElementById("teamname") as HTMLInputElement).value;
@@ -170,6 +191,8 @@ export default function Page() {
         const jsonData = await data.json();
         if (jsonData.status == "success") {
             setTeam(jsonData.data);
+            setChartData(jsonData.team_scores);
+            setSolvedData(jsonData.solves);
             setCap(jsonData.captain_id);
         }
     }
@@ -238,7 +261,7 @@ export default function Page() {
                 </div>
                 <div className='flex gap-5'>
                     <div id='chart' className='bg-slate-800 rounded-lg' style={{ height: "400px", width: "800px" }}></div>
-                    <div id='solved' className='bg-slate-800 rounded-lg' style={{ height: "400px", width: "400px" }}></div>
+                    <div id='solved' className='bg-slate-800 rounded-lg' style={{ height: "400px", width: "500px" }}></div>
                 </div>
                 <button onClick={handleLeave} className='bg-violet-600 text-white p-2 w-32 rounded-md shadow-md shadow-violet-500/50 grow'>Leave Team</button>
             </div>

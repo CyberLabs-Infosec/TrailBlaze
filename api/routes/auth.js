@@ -40,8 +40,8 @@ router.route("/verify/:token").get(async (req, res) => {
             
             try {
                 await pool.query(`
-                    INSERT INTO users (username, email, adm_no, method, password, rank) VALUES ($1, $2, $3, $4, $5, $6);
-                `, [username, email, adm_no, "regular", password, rank]);
+                    INSERT INTO users (username, email, adm_no, method, password, rank, user_scores) VALUES ($1, $2, $3, $4, $5, $6, $7);
+                `, [username, email, adm_no, "regular", password, rank, [[0, 0]]]);
             } catch(err) {
                 console.log(`Error inserting in database\n${err}`);
                 return res.status(500).json({ status: "fail", error: "There was an internal error, Please contact admin" });
@@ -152,8 +152,8 @@ router.route("/register").post(async (req, res) => {
 
                     try {
                         await pool.query(`
-                            INSERT INTO users (username, email, adm_no, method, password, rank) VALUES ($1, $2, $3, $4, $5, $6);
-                        `, [usrData.name, usrData.email, "", "google", "", 3]);
+                            INSERT INTO users (username, email, adm_no, method, password, rank, user_scores) VALUES ($1, $2, $3, $4, $5, $6, $7);
+                        `, [usrData.name, usrData.email, "", "google", "", 3, [[0, 0]]]);
                     } catch(err) {
                         console.log(err);
                         return res.status(500).json({ status: "fail", error: "There was an internal error, Please contact admin" });
