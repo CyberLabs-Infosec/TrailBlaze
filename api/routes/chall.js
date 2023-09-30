@@ -49,6 +49,8 @@ router.route("/submit").post(async (req, res) => {
                 var deltaTime = ((new Date() - new Date(process.env.EVENT_START)) / 1000) / 60;
                 
                 await pool.query(`UPDATE teams SET team_scores=(SELECT array_cat(team_scores, '{${deltaTime.toFixed()}, ${currPoint + chall.rows[0].points}}') FROM teams WHERE team_id=$1) WHERE team_id=$1`, [req.user.team_id]);
+                await pool.query(`UPDATE users SET user_scores=(SELECT array_cat(user_scores, '{${deltaTime.toFixed()}, ${currPoint + chall.rows[0].points}}') FROM users WHERE uid=$1) WHERE uid=$1`, [req.user.uid]);
+
                 await pool.query("UPDATE teams SET current_point=$1, last_solved=$2", [currPoint + chall.rows[0].points, place + 1]);
 
                 return res.status(200).json({ status: "success", correct: true, error: "" });

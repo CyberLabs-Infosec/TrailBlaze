@@ -92,7 +92,7 @@ router.route("/register").post(async (req, res) => {
 
             try {
                 await pool.query(`
-                    INSERT INTO toverify (username, email, adm_no, password, rank) VALUES ($1, $2, $3, $4, $5) ON CONFLICT (email) DO UPDATE SET username = excluded.username, password = excluded.password, rank = excluded.rank, adm_no = excluded.adm_no;
+                    INSERT INTO toverify (username, email, adm_no, password, rank, user_scores) VALUES ($1, $2, $3, $4, $5, $6) ON CONFLICT (email) DO UPDATE SET username = excluded.username, password = excluded.password, rank = excluded.rank, adm_no = excluded.adm_no, {{0, 0}};
                 `, [username, email, adm_no, hashedPassword, 3]);
             } catch(err) {
                 console.log(`Error inserting in database\n${err}`);
@@ -152,8 +152,8 @@ router.route("/register").post(async (req, res) => {
 
                     try {
                         await pool.query(`
-                            INSERT INTO users (username, email, adm_no, method, password, rank) VALUES ($1, $2, $3, $4, $5, $6);
-                        `, [usrData.name, usrData.email, "", "google", "", 3]);
+                            INSERT INTO users (username, email, adm_no, method, password, rank, user_scores) VALUES ($1, $2, $3, $4, $5, $6, $7);
+                        `, [usrData.name, usrData.email, "", "google", "", 3, [[0, 0]]]);
                     } catch(err) {
                         console.log(err);
                         return res.status(500).json({ status: "fail", error: "There was an internal error, Please contact admin" });
