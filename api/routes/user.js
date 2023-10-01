@@ -17,7 +17,8 @@ router.route("/verify").get(async (req, res) => {
 })
 
 router.route("/edit").post(async (req, res) => {
-    const { username, adm_no } = req.body;
+    let { username, adm_no } = req.body;
+    adm_no = adm_no.toUpperCase();
 
     if (!username || !adm_no) {
         return res.status(401).json({ status: "fail", error: "All fields are required" });
