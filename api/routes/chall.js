@@ -19,7 +19,8 @@ router.route("/getchalls").get(async (req, res) => {
 
 router.route("/submit").post(async (req, res) => {
     const { chall_id, flag } = req.body;
-    var ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress 
+    var ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
+    ip = ip.split(", ")[1];
 
     if (!chall_id || !flag) {
         return res.status(400).json({ status: "fail", error: "Please submit a flag!" });
