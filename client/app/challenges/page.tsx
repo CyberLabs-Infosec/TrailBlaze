@@ -47,7 +47,7 @@ export default function Page() {
         chall.addEventListener("click", (e) => {
             var prompt = (document.getElementById("challPrompt") as HTMLElement);
             prompt.classList.remove("hidden");
-            setCurrChall(challenges[parseInt((e.target as HTMLElement).getAttribute("challNo"))]);
+            setCurrChall(challenges.filter((c) => `chall-${c.chall_id}` == (e.target as HTMLElement).id)[0]);
         })
         document.getElementById("map").appendChild(chall);
     }
