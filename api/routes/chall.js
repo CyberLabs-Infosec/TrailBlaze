@@ -19,6 +19,7 @@ router.route("/getchalls").get(async (req, res) => {
 
 router.route("/submit").post(async (req, res) => {
     const { chall_id, flag } = req.body;
+    var ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress 
 
     if (!chall_id || !flag) {
         return res.status(400).json({ status: "fail", error: "Please submit a flag!" });
@@ -48,7 +49,7 @@ router.route("/submit").post(async (req, res) => {
                 const currPoint = result.rows[0].current_point;
                 var deltaTime = ((new Date() - new Date(process.env.EVENT_START)) / 1000);
 
-                await pool.query("INSERT INTO sublogs (chall_id, team_id, flag, ip, subtime, correct) VALUES ($1, $2, $3, $4, $5, $6)", [chall_id, req.user.team_id, flag, req.socket.remoteAddress, new Date(), true]);
+                await pool.query("INSERT INTO sublogs (chall_id, team_id, flag, ip, subtime, correct) VALUES ($1, $2, $3, $4, $5, $6)", [chall_id, req.user.team_id, flag, ip, new Date(), true]);
                 
                 await pool.query(`UPDATE teams SET team_scores=(SELECT array_cat(team_scores, '{${deltaTime.toFixed()}, ${currPoint + chall.rows[0].points}}') FROM teams WHERE team_id=$1) WHERE team_id=$1`, [req.user.team_id]);
                 await pool.query(`UPDATE users SET user_scores=(SELECT array_cat(user_scores, '{${deltaTime.toFixed()}, ${currPoint + chall.rows[0].points}}') FROM users WHERE uid=$1) WHERE uid=$1`, [req.user.uid]);
@@ -57,7 +58,7 @@ router.route("/submit").post(async (req, res) => {
 
                 return res.status(200).json({ status: "success", correct: true, error: "" });
             } else {
-                await pool.query("INSERT INTO sublogs (chall_id, team_id, flag, ip, subtime, correct) VALUES ($1, $2, $3, $4, $5, $6)", [chall_id, req.user.team_id, flag, req.socket.remoteAddress, new Date(), false]);
+                await pool.query("INSERT INTO sublogs (chall_id, team_id, flag, ip, subtime, correct) VALUES ($1, $2, $3, $4, $5, $6)", [chall_id, req.user.team_id, flag, ip, new Date(), false]);
                 return res.status(200).json({ status: "success", correct: false, error: "" });
             }
         } catch(err) {
