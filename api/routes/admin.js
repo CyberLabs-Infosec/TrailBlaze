@@ -6,12 +6,42 @@ router.use(userMiddleware);
 
 const { pool } = require("../db");
 
-router.route("/editchall").get(async (req, res) => {
-    if (req.user.rank != 3){
-        res.status(401).json({ status: "failure", error: "unauthorized", data: [] })
-    }
-    const challs = await pool.query("SELECT chall_id, title, prompt, place, checkpoint, points, hints, solves, visible FROM challenges");
-    res.status(200).json({ status: "success", error: "", data: challs.rows });
+router.route("/getchalls").get(async (req, res) => {
+    pool.query("SELECT chall_id, title, prompt, place, checkPoint, flag, points, hints, solves, visible FROM challenges ORDER BY place;", [], (error, result) => {
+        if (error){
+            console.log(error)
+            res.status(500).json({ status: "failure", error: "InternalServerError: Please check logs", data: "" });
+        } else {
+            res.status(200).json({ status: "success", error: "", data: result.rows })
+        }
+    });
+})
+
+router.route("/editchall").post(async (req, res) => {
+    const { chall_id, titlePost, promptPost, flagPost, hintArray, pointsPost, visiblePost } = req.body;
+
+    // REMOVE THIS
+    console.log(
+        `
+        challID: ${chall_id}
+        title: ${titlePost}
+        prompt: ${promptPost}
+        flag: ${flagPost}
+        hints: ${hintArray}
+        points: ${pointsPost}
+        visibility: ${visiblePost}
+        `
+    )
+    // REMOVE THIS
+
+    pool.query("UPDATE challenges SET title=$1, prompt=$2, flag=$3, points=$4, hints=$5 WHERE chall_id=$6;", [titlePost, promptPost, flagPost, pointsPost, hintArray, chall_id], (error, result) => {
+        if (error){
+            console.log(error)
+            res.status(500).json({ status: "failure", error: "InternalServerError: Please check logs", data: "" });
+        } else {
+            res.status(200).json({ status: "success", error: "", data: "" });
+        }
+    })
 })
 
 module.exports = router;
