@@ -17,7 +17,8 @@ router.route("/verify").get(async (req, res) => {
 })
 
 router.route("/edit").post(async (req, res) => {
-    const { username, adm_no } = req.body;
+    let { username, adm_no } = req.body;
+    adm_no = adm_no.toUpperCase();
 
     if (!username || !adm_no) {
         return res.status(401).json({ status: "fail", error: "All fields are required" });
@@ -118,10 +119,14 @@ router.route("/leaveteam").get(async (req, res) => {
 
 router.route("/teaminfo").get(async (req, res) => {
     try {
-        const members = await pool.query("SELECT u.username, u.uid, u.user_scores FROM users AS u WHERE u.team_id=$1;", [req.user.team_id]);
-        const captain = await pool.query("SELECT t.captain_id, t.team_scores, t.last_solved FROM teams AS t WHERE t.team_id=$1", [req.user.team_id]);
-        const totalChalls = await(pool.query("SELECT COUNT(*) FROM challenges"));
-        return res.status(200).json({ status: "success", error: "", data: members.rows, captain_id: captain.rows[0].captain_id, team_scores: captain.rows[0].team_scores, solves: { solved: captain.rows[0].last_solved, unsolved: totalChalls.rows[0].count - captain.rows[0].last_solved } });
+        if (req.user.team_id) {
+            const members = await pool.query("SELECT u.username, u.uid, u.user_scores FROM users AS u WHERE u.team_id=$1;", [req.user.team_id]);
+            const captain = await pool.query("SELECT t.captain_id, t.team_scores, t.last_solved FROM teams AS t WHERE t.team_id=$1", [req.user.team_id]);
+            const totalChalls = await(pool.query("SELECT COUNT(*) FROM challenges"));
+            return res.status(200).json({ status: "success", error: "", data: members.rows, captain_id: captain.rows[0].captain_id, team_scores: captain.rows[0].team_scores, solves: { solved: captain.rows[0].last_solved, unsolved: totalChalls.rows[0].count - captain.rows[0].last_solved } });
+        } else {
+            res.status(200).json({ status: "success", error: ""})
+        }
     } catch(err) {
         console.log(err);
         return res.status(500).json({ status: "fail", error: "This shouldn't happen, please contact the admin" });

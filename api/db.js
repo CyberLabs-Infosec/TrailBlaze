@@ -21,7 +21,8 @@ function init_db() {
                 points integer NOT NULL,
                 hints text[],
                 solves integer,
-                visible boolean DEFAULT TRUE
+                visible boolean DEFAULT TRUE,
+                files text[] DEFAULT ARRAY[]::text[]
             )`
         );
         await pool.query(

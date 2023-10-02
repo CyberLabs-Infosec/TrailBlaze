@@ -71,7 +71,7 @@ router.route("/register").post(async (req, res) => {
     const { method } = reqBody;
 
     if (method == "regular") {
-        const { username, email, adm_no, password } = reqBody;
+        let { username, email, adm_no, password } = reqBody;
 
         // rank -> 1 = admin
         //         2 = manager
@@ -80,6 +80,8 @@ router.route("/register").post(async (req, res) => {
         if (!(email && password && username && adm_no)) {
             return res.status(400).json({ status: "fail", error: "All fields are required!" });
         }
+
+        adm_no = adm_no.toUpperCase();
 
         const hashedPassword = await bcrypt.hash(password, 10);
 

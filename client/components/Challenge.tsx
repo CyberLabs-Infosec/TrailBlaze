@@ -122,7 +122,12 @@ export default function Challenge(props) {
                 <div onClick={togglePrompt} className="bg-cross bg-center bg-contain bg-no-repeat relative h-10 w-10 rounded-full left-1/2 ml-7 -mt-7 cursor-pointer"></div>
                 <div className="font-bold text-4xl text-slate-400 mb-3">{props.chall.title}</div>
                 <hr className="w-full border-slate-500"></hr>
-                <div className="h-full p-4">{props.chall.prompt}</div>
+                <div className="h-full p-4 text-slate-400 text-lg">{props.chall.prompt}</div>
+                <div className="flex gap-3 m-3">
+                    {
+                        props.chall.files.map((k, i) => <a href={k} key={i} className="text-blue-400 underline">{k.split("/").slice(-1)}</a>)
+                    }
+                </div>
                 <hr className="w-full border-slate-500"></hr>
                 <div className="flex gap-2 bottom-0 mt-3 w-full px-5">
                     <input onKeyDown={handleEnter} id="flag" className="outline-none px-2 py-3 bg-transparent border-2 border-slate-500 text-slate-300 w-full" placeholder="Enter flag here"></input>
