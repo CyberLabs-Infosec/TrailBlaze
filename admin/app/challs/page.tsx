@@ -51,7 +51,7 @@ function Challenges(){
 
     return (
         <>
-            <div className={ `z-30 flex justify-center items-center fixed w-full h-screen backdrop-blur-2xl ${isVisible ? "": "hidden"}` }>
+            <div className={ `z-30 flex fixed justify-center w-full h-screen backdrop-blur-2xl ${isVisible ? "": "hidden"}` }>
                 <EditPrompt challJSON={ cValue } setVisible={ setVisible }></EditPrompt>
             </div>
             <div className={ `flex overflow-y-auto flex-wrap gap-5 justify-center p-8` }>

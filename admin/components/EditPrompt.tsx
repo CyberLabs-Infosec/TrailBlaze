@@ -1,6 +1,9 @@
+'use client'
+
 import { useEffect, useState } from "react";
 import { challItem } from "./Challenge";
 import Cookies from "js-cookie";
+import { useRouter } from "next/navigation";
 
 interface Props{
     setVisible: any
@@ -8,22 +11,33 @@ interface Props{
 }
 
 function EditPrompt(props: Props){
+    const [ title, setTitle ] = useState("this is fake title")
+    const [ prompt, setPrompt ] = useState("fake prompt")
     const [ hints, setHints ] = useState(["this is fake :)"])
-    const [ challVisibility, setChallVisibilty ] = useState(props.challJSON.visible)
-    const [ points, setPoints ] = useState(props.challJSON.points)
-    
+    const [ flag, setFlag ] = useState("fake flag")
+    const [ challVisibility, setChallVisibilty ] = useState(false)
+    const [ points, setPoints ] = useState(0)
+    const router = useRouter()
+
     useEffect(() => {
         if (props) {
+            setTitle(props.challJSON.title)
+            setPrompt(props.challJSON.prompt)
             setHints(props.challJSON.hints)
+            setFlag(props.challJSON.flag)
+            setChallVisibilty(props.challJSON.visible)
+            setPoints(props.challJSON.points)
         }
     }, [props])
 
     async function submitData(){
-        const chall_id = props.challJSON.chall_id;
-        const title = (document.getElementById("challtitle") as HTMLDivElement).innerText
-        const prompt = (document.getElementById("prompt") as HTMLDivElement).innerText
-        const flag = (document.getElementById("flag") as HTMLDivElement).innerText
+        const chall_id = props.challJSON.chall_id
+        const titlePost = title
+        const promptPost = prompt
+        const flagPost = flag
         const hintArray = hints
+        const pointsPost = points
+        const visiblePost = challVisibility
 
         const req = await fetch("/api/admin/editchall", {
             headers: {
@@ -32,10 +46,19 @@ function EditPrompt(props: Props){
             },
             method: "POST",
             body: JSON.stringify({
-                chall_id, title, prompt, flag, hintArray
+                chall_id, titlePost, promptPost, flagPost, hintArray, pointsPost, visiblePost
             })
         })
-        props.setVisible(false)
+
+        const response = await req.json()
+        if (response.status == "success"){
+            props.setVisible(false)
+            alert(`Successfully Updated!`)
+            return location.reload()
+        }
+        alert(`Update failure
+            error: ${response.error}
+        `)
     }
 
     const removeHint = (event) => {
@@ -49,10 +72,24 @@ function EditPrompt(props: Props){
         setHints([...hints, ""]);
     }
 
+    const changeTitle = () => {
+        const titleInput = (document.getElementById("challtitle") as HTMLInputElement).value
+        setTitle(titleInput)
+    }
+
+    const changePrompt = () => {
+        const promptInput = (document.getElementById("prompt") as HTMLTextAreaElement).value
+        setPrompt(promptInput)
+    }
+
+    const changeFlag = () => {
+        const flagInput = (document.getElementById("flag") as HTMLInputElement).value
+        setFlag(flagInput)
+    }
+
     const changePoints = () => {
-        const pointsInput = (document.getElementById("points") as HTMLDivElement).innerText
-        setPoints(parseInt(pointsInput))
-        console.log(points)
+        const pointsInput = (document.getElementById("points") as HTMLInputElement).value
+        setPoints(Number.isNaN(parseInt(pointsInput)) ? 0: parseInt(pointsInput))
     }
 
     const handleChange = (event) => {
@@ -62,32 +99,34 @@ function EditPrompt(props: Props){
         setHints(data);
     }
 
+    const visibility = () => {
+        setChallVisibilty(!challVisibility)
+    }
+
     return(
-        <div className="w-11/12 sm:w-fit flex flex-col justify-center rounded-lg pt-4 px-5 pb-5 gap-4" style={{ backgroundColor: "rgba(255, 255, 255, 0.1)"}}>
-            <div id="challtitle" className="sm:w-150 bg-transparent pb-1 uppercase font-bungee text-xl outline-none  focus:border-purple-600 border-b-2 border-gray-500 text-center" contentEditable="true"> { props.challJSON.title } </div>
+        <div className="relative w-11/12 sm:w-fit flex flex-col justify-center rounded-lg pt-4 px-5 pb-5 gap-4 top-32 h-fit" style={{ backgroundColor: "rgba(255, 255, 255, 0.1)"}}>
+            <button className="bg-red-600 hover:bg-red-400 rounded w-fit self-end transition ease-in-out duration-300" onClick={ () => props.setVisible(false) }> <img src="/static/assets/close_icon.svg" width="30px"/> </button>
+            <input id="challtitle" className="sm:w-150 bg-transparent pb-1 uppercase font-bungee text-xl outline-none focus:border-indigo-600 border-b-2 border-gray-500 text-center" value={ title }  onChange={ changeTitle }></input>
             <div>
                 <div className="text-slate-400">prompt</div>
-                <div className="sm:w-150 bg-transparent p-2 border-2 rounded-md outline-none border-gray-500 focus:border-purple-600 h-fit" id="prompt" contentEditable="true"> { props.challJSON.prompt } </div>
+                <textarea className="sm:w-150 bg-transparent p-2 border-2 rounded-md outline-none border-gray-500 focus:border-indigo-600 h-fit" id="prompt" value={ prompt }  onChange={ changePrompt }></textarea>
             </div>
             <div>
                 <div className="text-slate-400">flag</div>
-                <div id="flag" className="sm:w-150 bg-transparent p-2 outline-none  focus:border-purple-600 border-2 border-gray-500 rounded-md" contentEditable="true"> { props.challJSON.flag } </div>
+                <input id="flag" className="sm:w-150 bg-transparent p-2 outline-none  focus:border-indigo-600 border-2 border-gray-500 rounded-md" value={ flag } onChange={ changeFlag }></input>
             </div>
             <div></div>
             <div>
                 <div className="text-slate-400">hints</div>
                 <div className="sm:w-150 flex flex-col bg-transparent px-3 py-4 border-2 rounded-md outline-none border-gray-500 h-fit gap-3" id="hints">
-                    <div className="flex gap-3 justify-center">
-                        <button onClick={ addHint } className="p-2 flex justify-center items-center gap-2 hover:bg-zinc-600 transition ease-in-out duration-300 rounded-md">
-                            <img src="/static/assets/add_icon.svg" width="30px"/>
-                            Add hint
-                        </button>
-                    </div>
                     {
                         hints.map((hint, index) => {
                             return(
                                 <div id={ `div-${ index }` }key={ index } className="flex gap-3 items-center">
-                                    <input id={`input-${ index }` } className="bg-transparent outline-none  focus:border-purple-600 border-b-2 border-gray-500 grow px-2" value={ hint } onChange={ handleChange }></input>
+                                    <input id={`input-${ index }` } className="bg-transparent outline-none  focus:border-indigo-600 border-b-2 border-gray-500 grow px-2" value={ hint } onChange={ handleChange }></input>
+                                    <button className="w-10 h-10 flex justify-center items-center hover:border rounded-full border-transparent transition ease-in-out duration-300 hover:bg-green-500 outline-none" onClick={ addHint }>
+                                        <img src="/static/assets/add_icon.svg" width="30px"/>
+                                    </button>
                                     <button className="w-10 h-10 flex justify-center items-center hover:border rounded-full border-transparent transition ease-in-out duration-300 bg-red-600 hover:bg-red-400 outline-none" onClick={ removeHint }>
                                         <img id={ `${ index }` } src="/static/assets/delete_icon.svg" width="30px"/>
                                     </button>
@@ -100,15 +139,14 @@ function EditPrompt(props: Props){
             <div className="flex justify-around w-full p-2">
                 <div className="flex items-center gap-2">
                     <div className="text-slate-400">points</div>
-                    <div id="points" className="p-1 bg-transparent outline-none border-b" onChange={ changePoints }>100</div>
+                    <input id="points" className="p-1 w-20 text-center bg-transparent outline-none border-b-2 focus:border-indigo-600 border-gray-500" onChange={ changePoints } value={ points }></input>
                 </div>
-                <div id="visibility" className="bg-black">
-                    <div className="w-10 h-2 bg-gray-500"></div>
-                    <div>visible</div>
+                <div className="flex gap-2 items-center">
+                    <div className="text-slate-400">visible</div>
+                    <button onClick={ visibility } className="p-2 rounded-md" style={{backgroundColor: `${challVisibility ? "rgba(76, 0, 255, 0.6)": "#94a3b8"} `}}>{challVisibility ? "True": "False"}</button>
                 </div>
             </div>
-
-            <button className="sm:w-1/2 self-center rounded-md text-center p-2 transition duration-500 ease-in hover:border" onClick={ submitData } style={{backgroundColor: "rgba(76, 0, 255, 0.6)"}}>Save</button>
+            <button className="rounded-md text-center p-2 transition duration-500 ease-in hover:border" onClick={ submitData } style={{backgroundColor: "rgba(76, 0, 255, 0.6)"}}>Save</button>
         </div>
     )
 }
