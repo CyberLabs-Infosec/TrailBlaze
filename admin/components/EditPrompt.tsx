@@ -14,10 +14,10 @@ function EditPrompt(props: Props){
     const [ title, setTitle ] = useState("this is fake title")
     const [ prompt, setPrompt ] = useState("fake prompt")
     const [ hints, setHints ] = useState(["this is fake :)"])
+    const [ files, setFiles ] = useState(["fake link"])
     const [ flag, setFlag ] = useState("fake flag")
     const [ challVisibility, setChallVisibilty ] = useState(false)
     const [ points, setPoints ] = useState(0)
-    const router = useRouter()
 
     useEffect(() => {
         if (props) {
@@ -27,6 +27,7 @@ function EditPrompt(props: Props){
             setFlag(props.challJSON.flag)
             setChallVisibilty(props.challJSON.visible)
             setPoints(props.challJSON.points)
+            setFiles(props.challJSON.files)
         }
     }, [props])
 
@@ -38,6 +39,7 @@ function EditPrompt(props: Props){
         const hintArray = hints
         const pointsPost = points
         const visiblePost = challVisibility
+        const filesPost = files
 
         const req = await fetch("/api/admin/editchall", {
             headers: {
@@ -46,7 +48,7 @@ function EditPrompt(props: Props){
             },
             method: "POST",
             body: JSON.stringify({
-                chall_id, titlePost, promptPost, flagPost, hintArray, pointsPost, visiblePost
+                chall_id, titlePost, promptPost, flagPost, hintArray, pointsPost, visiblePost, filesPost
             })
         })
 
@@ -68,8 +70,19 @@ function EditPrompt(props: Props){
         setHints(data)
     }
 
+    const removeFile = (event) => {
+        const index = parseInt(event.target.getAttribute("id").splice(8));
+        let data = [...files]
+        data.splice(index, 1)
+        setFiles(data)
+    }
+
     const addHint = () => {
         setHints([...hints, ""]);
+    }
+
+    const addFile = () => {
+        setFiles([...files, ""]);
     }
 
     const changeTitle = () => {
@@ -99,6 +112,13 @@ function EditPrompt(props: Props){
         setHints(data);
     }
 
+    const handleFileChange = (event) => {
+        const index = parseInt(event.target.getAttribute("id").slice(10))
+        let data = [...files]
+        data[index] = event.target.value;
+        setFiles(data);
+    }
+
     const visibility = () => {
         setChallVisibilty(!challVisibility)
     }
@@ -106,7 +126,7 @@ function EditPrompt(props: Props){
     return(
         <div className="relative w-11/12 sm:w-fit flex flex-col justify-center rounded-lg pt-4 px-5 pb-5 gap-4 top-32 h-fit" style={{ backgroundColor: "rgba(255, 255, 255, 0.1)"}}>
             <button className="bg-red-600 hover:bg-red-400 rounded w-fit self-end transition ease-in-out duration-300" onClick={ () => props.setVisible(false) }> <img src="/static/assets/close_icon.svg" width="30px"/> </button>
-            <input id="challtitle" className="sm:w-150 bg-transparent pb-1 uppercase font-bungee text-xl outline-none focus:border-indigo-600 border-b-2 border-gray-500 text-center" value={ title }  onChange={ changeTitle }></input>
+            <input id="challtitle" className="sm:w-150 bg-transparent pb-1 font-bungee text-xl outline-none focus:border-indigo-600 border-b-2 border-gray-500 text-center" value={ title }  onChange={ changeTitle }></input>
             <div>
                 <div className="text-slate-400">prompt</div>
                 <textarea className="sm:w-150 bg-transparent p-2 border-2 rounded-md outline-none border-gray-500 focus:border-indigo-600 h-fit" id="prompt" value={ prompt }  onChange={ changePrompt }></textarea>
@@ -119,16 +139,22 @@ function EditPrompt(props: Props){
             <div>
                 <div className="text-slate-400">hints</div>
                 <div className="sm:w-150 flex flex-col bg-transparent px-3 py-4 border-2 rounded-md outline-none border-gray-500 h-fit gap-3" id="hints">
+                    
+                </div>
+            </div>
+            <div>
+                <div className="text-slate-400">files</div>
+                <div className="sm:w-150 flex flex-col bg-transparent px-3 py-4 border-2 rounded-md outline-none border-gray-500 h-fit gap-3" id="files">
                     {
-                        hints.map((hint, index) => {
+                        files.map((file, index) => {
                             return(
-                                <div id={ `div-${ index }` }key={ index } className="flex gap-3 items-center">
-                                    <input id={`input-${ index }` } className="bg-transparent outline-none  focus:border-indigo-600 border-b-2 border-gray-500 grow px-2" value={ hint } onChange={ handleChange }></input>
-                                    <button className="w-10 h-10 flex justify-center items-center hover:border rounded-full border-transparent transition ease-in-out duration-300 hover:bg-green-500 outline-none" onClick={ addHint }>
+                                <div id={ `filediv-${ index }` } key={ index } className="flex gap-3 items-center">
+                                    <input id={`fileinput-${ index }` } className="bg-transparent outline-none  focus:border-indigo-600 border-b-2 border-gray-500 grow px-2" value={ file } onChange={ handleFileChange }></input>
+                                    <button className="w-10 h-10 flex justify-center items-center hover:border rounded-full border-transparent transition ease-in-out duration-300 hover:bg-green-500 outline-none" onClick={ addFile }>
                                         <img src="/static/assets/add_icon.svg" width="30px"/>
                                     </button>
-                                    <button className="w-10 h-10 flex justify-center items-center hover:border rounded-full border-transparent transition ease-in-out duration-300 bg-red-600 hover:bg-red-400 outline-none" onClick={ removeHint }>
-                                        <img id={ `${ index }` } src="/static/assets/delete_icon.svg" width="30px"/>
+                                    <button className="w-10 h-10 flex justify-center items-center hover:border rounded-full border-transparent transition ease-in-out duration-300 bg-red-600 hover:bg-red-400 outline-none" onClick={ removeFile }>
+                                        <img id={ `fileimg-${ index }` } src="/static/assets/delete_icon.svg" width="30px"/>
                                     </button>
                                 </div>
                             )

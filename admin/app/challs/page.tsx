@@ -23,7 +23,8 @@ function Challenges(){
         points: -1,
         hints: [""],
         solves: -1,
-        visible: false
+        visible: false,
+        files: [""]
     })
 
     const getChalls = async () => {

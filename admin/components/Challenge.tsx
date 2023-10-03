@@ -9,6 +9,7 @@ export interface challItem{
     flag: string
     points: number
     hints: Array<string>
+    files: Array<string>
     solves: number
     visible: boolean
 }
