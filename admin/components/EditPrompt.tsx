@@ -63,14 +63,14 @@ function EditPrompt(props: Props){
         `)
     }
 
-    const removeHint = (event) => {
+    const removeHint = (event: any) => {
         const index = event.target.getAttribute("id");
         let data = [...hints]
         data.splice(index, 1)
         setHints(data)
     }
 
-    const removeFile = (event) => {
+    const removeFile = (event: any) => {
         const index = parseInt(event.target.getAttribute("id").splice(8));
         let data = [...files]
         data.splice(index, 1)
@@ -105,14 +105,14 @@ function EditPrompt(props: Props){
         setPoints(Number.isNaN(parseInt(pointsInput)) ? 0: parseInt(pointsInput))
     }
 
-    const handleChange = (event) => {
+    const handleChange = (event: any) => {
         const index = parseInt(event.target.getAttribute("id").slice(6))
         let data = [...hints]
         data[index] = event.target.value;
         setHints(data);
     }
 
-    const handleFileChange = (event) => {
+    const handleFileChange = (event: any) => {
         const index = parseInt(event.target.getAttribute("id").slice(10))
         let data = [...files]
         data[index] = event.target.value;
