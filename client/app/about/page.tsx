@@ -119,7 +119,6 @@ export default function() {
                         <p className={storyStyle}>
                             The Gaia Dominion, humanity’s newest world level government, created in 3000 AD, enlists Commander Alex Mercer, as the vanguard in their space exploration trying to extend their reaches towards the uncharted expanse outside the milky way. Alex's spacecraft, the Odyssey, hurtles through the fabric of spacetime on a fateful mission to explore the Triangulum Galaxy.
                         </p>
-                        <p className="absolute text-slate-400 font-md bottom-32">Image credits: Hello Games (No Man's Sky)</p>
                     </div>
                 </div>
                 <div className="story h-full w-full bg-slate-900 flex justify-center items-center bg-center bg-no-repeat bg-cover" style={{ backgroundImage: "url('/static/assets/slide_2.jpg')" }}>
@@ -127,7 +126,6 @@ export default function() {
                         <p className={storyStyle}>
                             Suddenly, a catastrophic malfunction engulfs his ship, spiralling it out of control and forcing a crash-landing on an uncharted planet within the Triangulum Galaxy. Regaining consciousness after the crash, Alex finds himself alone and stranded. The Odyssey lies in ruins, scattered across a landscape adorned with unknown flora and peculiar geological formations. The sky above is a mesmerising blend of colours, dancing with an otherworldly light.
                         </p>
-                        <p className="absolute text-slate-400 font-md bottom-32">Image credits: Hello Games (No Man's Sky)</p>
                     </div>
                 </div>
                 <div className="story h-full w-full bg-slate-900 flex justify-center items-center bg-center bg-no-repeat bg-cover" style={{ backgroundImage: "url('/static/assets/slide_3.jpg')" }}>
@@ -135,7 +133,6 @@ export default function() {
                         <p className={storyStyle}>
                             Survival becomes Alex's immediate priority. On further exploration Alex finds the ruins of an ancient technology civilization on the planet and learns about their usage of ‘luminite’ as a fuel to power their devices. Armed with his specialised cybersecurity skills during the astronaut training program, Alex embarks on this mission to reach home.
                         </p>
-                        <p className="absolute text-slate-400 font-md bottom-32">Image credits: Hello Games (No Man's Sky)</p>
                     </div>
                 </div>
             </div>
