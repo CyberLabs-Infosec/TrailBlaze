@@ -149,19 +149,19 @@ export default function() {
             <div id="howTo" className="w-full h-screen bg-slate-900 p-32 flex justify-center items-center">
                 <div className="relative top-4 h-full w-full rounded-lg bg-bottom bg-cover bg-no-repeat" style={{ backgroundImage: "url('/static/assets/venue.png')" }}>
                     <div className="h-full w-full rounded-lg backdrop-blur-sm grid grid-cols-2 grid-rows-2 gap-8 p-8" style={{ backgroundColor: "rgba(50, 50, 50, 0.7)" }}>
-                        <div className="flex grid-cols-1 grid-rows-1 rounded-lg flex flex-col items-center p-4 gap-4">
+                        <div className="grid-cols-1 grid-rows-1 rounded-lg flex flex-col items-center p-4 gap-4">
                             <p className="text-slate-300 font-bold text-5xl text-center">VENUE</p>
                             <hr className="border-2 border-slate-400 w-full"></hr>
                             <p className="font-bold text-2xl text-slate-300">TBD</p>
                         </div>
                         <div className="flex grid-cols-1 grid-rows-1 rounded-lg"></div>
                         <div className="flex grid-cols-1 grid-rows-1 rounded-lg"></div>
-                        <div className="flex grid-cols-1 grid-rows-1 rounded-lg flex flex-col items-center p-4 gap-4">
+                        <div className="flex grid-cols-1 grid-rows-1 rounded-lg flex-col items-center p-4 gap-4">
                             <p className="text-slate-300 font-bold text-5xl text-center">CONTACT</p>
                             <hr className="border-2 border-slate-400 w-full"></hr>
                             <div className="flex flex-col gap-3">
                                 <p className="font-bold text-2xl text-slate-300 tracking-wide">SUMIT GUPTA: 9309779260</p>
-                                <p className="font-bold text-2xl text-slate-300 tracking-wide">JIHENDRA NADH: 8688842828</p>
+                                <p className="font-bold text-2xl text-slate-300 tracking-wide">JITHENDRA NADH: 8688842828</p>
                             </div>
                         </div>
                     </div>
