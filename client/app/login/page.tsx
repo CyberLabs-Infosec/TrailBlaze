@@ -136,7 +136,7 @@ export default function LoginPage() {
                             <Link href={googleAuthURI}><div className={regOptStyle}><div className="h-6 w-6 bg-google bg-cover bg-center"></div><p className="text-slate-400">Login with google</p></div></Link>
                         </div>
                         <hr className="border-slate-500"></hr>
-                        <Link href="/register"><div className="text-blue-400 text-sm text-right underline">do not have account? register</div></Link>
+                        <Link href="/register"><div className="text-blue-400 text-sm text-center underline">Don't have an account? Register</div></Link>
                     </div>
                 </div>
             </div>

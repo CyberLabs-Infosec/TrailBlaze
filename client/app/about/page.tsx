@@ -99,6 +99,7 @@ export default function() {
             rotate: "360",
             scale: "7",
             x: "-500",
+            color: "rgba(100, 100, 100, 0.3)",
             ease: "none"
         })
 
@@ -138,7 +139,7 @@ export default function() {
             </div>
             <div id="disappearTrigger" className="relative w-full h-screen bg-slate-900">
                 <div id="howToQues" className="h-full w-full flex justify-center items-center">
-                    <div className="text-7xl text-slate-300 font-bold flex gap-2"><div>HOW DO I PLAY THIS GAME</div><div id="questionMark">?</div></div>
+                    <div className="text-7xl text-slate-300 font-bold flex gap-2"><div className="z-20">HOW DO I PLAY THIS GAME</div><div id="questionMark">?</div></div>
                 </div>
             </div>
             <div className="h-screen w-full bg-slate-900"></div>
