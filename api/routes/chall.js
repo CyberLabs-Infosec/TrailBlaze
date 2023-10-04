@@ -19,22 +19,16 @@ router.route("/getchalls").get(async (req, res) => {
 
 router.route("/submit").post(async (req, res) => {
     const { chall_id, flag } = req.body;
-    let ip;
-
-    try {
-        ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
-        ip = ip.split(", ")[1];
-    } catch {
-        ip = req.ip;
-    }
+    let ip = req.ips[0];
 
     if (!chall_id || !flag) {
         return res.status(400).json({ status: "fail", error: "Please submit a flag!" });
     }
 
     try {
-        const chall = await pool.query("SELECT flag, points, place FROM challenges WHERE chall_id=$1", [chall_id]);
-        const dbFlag = chall.rows[0].flag;
+        const chall = await pool.query("SELECT points, place FROM challenges WHERE chall_id=$1", [chall_id]);
+        const flagQuery = await pool.query("SELECT flags->$1 FROM teams WHERE team_id=$2", [chall_id, req.user.team_id]);
+        const dbFlag = flagQuery.rows[0]['?column?'];
         const place = chall.rows[0].place;
 
             /*

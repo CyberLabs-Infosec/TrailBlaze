@@ -4,7 +4,7 @@
         true,
         "Planet X-MAS",
         "description",
-        "flag{lol}",
+        "lol",
         100
     ],
     [
@@ -12,7 +12,7 @@
         false,
         "Challenge 1",
         "description",
-        "flag{lol}",
+        "lol",
         100
     ],
     [
@@ -20,7 +20,7 @@
         false,
         "Challenge 2",
         "description",
-        "flag{lol}",
+        "lol",
         100
     ],
     [
@@ -28,7 +28,7 @@
         true,
         "Planet +=+=+",
         "description",
-        "flag{lol}",
+        "lol",
         100
     ],
     [
@@ -36,7 +36,7 @@
         false,
         "Challenge 4",
         "description",
-        "flag{lol}",
+        "lol",
         100
     ],
     [
@@ -44,7 +44,7 @@
         false,
         "Challenge 5",
         "description",
-        "flag{lol}",
+        "lol",
         100
     ],
     [
@@ -52,7 +52,7 @@
         true,
         "Planet TRASS",
         "description",
-        "flag{lol}",
+        "lol",
         100
     ],
     [
@@ -60,7 +60,7 @@
         false,
         "Challenge 7",
         "description",
-        "flag{lol}",
+        "lol",
         100
     ],
     [
@@ -68,7 +68,7 @@
         false,
         "Challenge 8",
         "description",
-        "flag{lol}",
+        "lol",
         100
     ],
     [
@@ -76,7 +76,7 @@
         false,
         "Challenge 9",
         "description",
-        "flag{lol}",
+        "lol",
         100
     ],
     [
@@ -84,7 +84,7 @@
         false,
         "Challenge 10",
         "description",
-        "flag{lol}",
+        "lol",
         100
     ],
     [
@@ -92,7 +92,7 @@
         false,
         "Challenge 11",
         "description",
-        "flag{lol}",
+        "lol",
         100
     ],
     [
@@ -100,7 +100,7 @@
         true,
         "Planet Jinendra",
         "description",
-        "flag{lol}",
+        "lol",
         100
     ],
     [
@@ -108,7 +108,7 @@
         false,
         "Challenge 13",
         "description",
-        "flag{lol}",
+        "lol",
         100
     ],
     [
@@ -116,7 +116,7 @@
         false,
         "Challenge 14",
         "description",
-        "flag{lol}",
+        "lol",
         100
     ],
     [
@@ -124,7 +124,7 @@
         false,
         "Challenge 15",
         "description",
-        "flag{lol}",
+        "lol",
         100
     ],
     [
@@ -132,7 +132,7 @@
         false,
         "Challenge 16",
         "description",
-        "flag{lol}",
+        "lol",
         100
     ],
     [
@@ -140,7 +140,7 @@
         true,
         "Planet Uddagiri",
         "description",
-        "flag{lol}",
+        "lol",
         100
     ],
     [
@@ -148,7 +148,7 @@
         false,
         "Challenge 18",
         "description",
-        "flag{lol}",
+        "lol",
         100
     ],
     [
@@ -156,7 +156,7 @@
         false,
         "Challenge 19",
         "description",
-        "flag{lol}",
+        "lol",
         100
     ],
     [
@@ -164,7 +164,7 @@
         true,
         "Planet EARTH",
         "description",
-        "flag{lol}",
+        "lol",
         100
     ]
 ]

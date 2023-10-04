@@ -11,7 +11,7 @@ const pool = new Pool({
 function init_db() {
     return new Promise(async (resolve) => {
         await pool.query(
-            `CREATE TABLE IF NOT EXISTS challenges(
+            `DROP TABLE IF EXISTS challenges; CREATE TABLE challenges(
                 chall_id SERIAL PRIMARY KEY,
                 title VARCHAR(50) NOT NULL,
                 prompt VARCHAR(100) NOT NULL,
@@ -34,7 +34,8 @@ function init_db() {
                 team_members integer,
                 team_scores integer[][],
                 last_solved integer,
-                current_point integer
+                current_point integer,
+                flags json
             );`
         );
         await pool.query(

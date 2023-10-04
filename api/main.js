@@ -15,17 +15,19 @@ app.use("/api/user", userRoutes);
 app.use("/api/chall", challRoutes);
 app.use("/api/admin", adminRoutes);
 
+app.enable('trust proxy')
+
 var PORT = process.env.SERVICE_PORT;
 
 async function startApp() {
     await init_db();
 
     // THIS SECTION IS TO INITIALIZE 20 DUMMY CHALLENGES (!! TO BE DELETED LATER !!)
+    // IMP :- CHANGE THE DB INIT FOR CHALLENGES ELSE ALL CHALLS WILL BE LOST !!!!!!
 
     const challs = require("./dummy_challs/challs.json");
     const { pool } = require("./db");
     const format = require('pg-format');
-    await pool.query("DELETE FROM challenges");
     await pool.query(format("INSERT INTO challenges (place, checkPoint, title, prompt, flag, points) VALUES %L", challs));
     await pool.query(format(`UPDATE  challenges SET hints='{"this is one", "second hint"}'`));
 

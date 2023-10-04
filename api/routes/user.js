@@ -46,9 +46,17 @@ router.route("/createteam").post(async (req, res) => {
     }
 
     try {
+        // ADD unique flags for team
+        const challs = await pool.query("SELECT chall_id, flag FROM challenges");
+        var flags = {};
+        for (var i of challs.rows) {
+            hashedFlag = await bcrypt.hash(i.flag, 10);
+            flags[i.chall_id] = `flag{${i.flag}_${hashedFlag.substring(hashedFlag.length - 10)}}`;
+        }
+
         const hashedSecret = await bcrypt.hash(secret, 10);
         
-        await pool.query("INSERT INTO teams (teamname, secret, team_scores, team_members, captain_id, last_solved, current_point) VALUES ($1, $2, $3, $4, $5, $6, $7)", [teamname, hashedSecret, [[0, 0]], 1, req.user.uid, 0, 0]);
+        await pool.query("INSERT INTO teams (teamname, secret, team_scores, team_members, captain_id, last_solved, current_point, flags) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)", [teamname, hashedSecret, [[0, 0]], 1, req.user.uid, 0, 0, JSON.stringify(flags)]);
         const qRes = await pool.query("SELECT team_id FROM teams WHERE teamname=$1", [teamname]);
         await pool.query("UPDATE users SET team_id=$1 WHERE uid=$2", [qRes.rows[0].team_id, req.user.uid]);
 
