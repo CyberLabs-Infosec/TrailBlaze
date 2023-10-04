@@ -70,6 +70,7 @@ function init_db() {
                 sid SERIAL PRIMARY KEY,
                 chall_id integer NOT NULL REFERENCES challenges(chall_id),
                 team_id integer,
+                username VARCHAR(100),
                 flag VARCHAR(50) NOT NULL,
                 ip inet NOT NULL,
                 subtime TIMESTAMP NOT NULL,
