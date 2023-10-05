@@ -22,7 +22,8 @@ function init_db() {
                 hints text[],
                 solves integer,
                 visible boolean DEFAULT TRUE,
-                files text[] DEFAULT ARRAY[]::text[]
+                files text[] DEFAULT ARRAY[]::text[],
+                author text
             )`
         );
         await pool.query(
@@ -47,7 +48,6 @@ function init_db() {
                 user_scores integer[][],
                 email VARCHAR(50) NOT NULL UNIQUE,
                 method VARCHAR(50) NOT NULL,
-                adm_no VARCHAR(10) NOT NULL,
                 password VARCHAR(100) NOT NULL,
                 CONSTRAINT fk_team
                 FOREIGN KEY(team_id) 
@@ -60,7 +60,6 @@ function init_db() {
                 vid SERIAL PRIMARY KEY,
                 username VARCHAR(50) NOT NULL,
                 email VARCHAR(50) NOT NULL UNIQUE,
-                adm_no VARCHAR(10) NOT NULL,
                 password VARCHAR(100) NOT NULL,
                 rank integer NOT NULL
             );`

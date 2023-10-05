@@ -36,12 +36,12 @@ router.route("/verify/:token").get(async (req, res) => {
         `, [verified.mail]);
 
         if (result.rows.length != 0) {
-            const { vid, username, email, adm_no, password, rank } = result.rows[0];
+            const { vid, username, email, password, rank } = result.rows[0];
             
             try {
                 await pool.query(`
-                    INSERT INTO users (username, email, adm_no, method, password, rank, user_scores) VALUES ($1, $2, $3, $4, $5, $6, $7);
-                `, [username, email, adm_no, "regular", password, rank, [[0, 0]]]);
+                    INSERT INTO users (username, email, method, password, rank, user_scores) VALUES ($1, $2, $3, $4, $5, $6);
+                `, [username, email, "regular", password, rank, [[0, 0]]]);
             } catch(err) {
                 console.log(`Error inserting in database\n${err}`);
                 return res.status(500).json({ status: "fail", error: "There was an internal error, Please contact admin" });
@@ -56,7 +56,7 @@ router.route("/verify/:token").get(async (req, res) => {
             `, [vid]);
 
             res.set({
-                'Set-Cookie': `token=${getToken({ uid: inDB.rows[0].uid, username: username, email: email, adm_no: adm_no, rank: rank }, "12h")}; Path=/`
+                'Set-Cookie': `token=${getToken({ uid: inDB.rows[0].uid, username: username, email: email, rank: rank }, "12h")}; Path=/`
             });
             return res.status(200).redirect("/");
             
@@ -71,17 +71,15 @@ router.route("/register").post(async (req, res) => {
     const { method } = reqBody;
 
     if (method == "regular") {
-        let { username, email, adm_no, password } = reqBody;
+        let { username, email, password } = reqBody;
 
         // rank -> 1 = admin
         //         2 = manager
         //         3 = student
 
-        if (!(email && password && username && adm_no)) {
+        if (!(email && password && username)) {
             return res.status(400).json({ status: "fail", error: "All fields are required!" });
         }
-
-        adm_no = adm_no.toUpperCase();
 
         const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -94,8 +92,8 @@ router.route("/register").post(async (req, res) => {
 
             try {
                 await pool.query(`
-                    INSERT INTO toverify (username, email, adm_no, password, rank) VALUES ($1, $2, $3, $4, $5) ON CONFLICT (email) DO UPDATE SET username = excluded.username, password = excluded.password, rank = excluded.rank, adm_no = excluded.adm_no;
-                `, [username, email, adm_no, hashedPassword, 3]);
+                    INSERT INTO toverify (username, email, password, rank) VALUES ($1, $2, $3, $4) ON CONFLICT (email) DO UPDATE SET username = excluded.username, password = excluded.password, rank = excluded.rank;
+                `, [username, email, hashedPassword, 3]);
             } catch(err) {
                 console.log(`Error inserting in database\n${err}`);
                 return res.status(500).json({ status: "fail", error: "There was an internal error, Please contact admin" });
@@ -154,7 +152,7 @@ router.route("/register").post(async (req, res) => {
 
                     try {
                         await pool.query(`
-                            INSERT INTO users (username, email, adm_no, method, password, rank, user_scores) VALUES ($1, $2, $3, $4, $5, $6, $7);
+                            INSERT INTO users (username, email, method, password, rank, user_scores) VALUES ($1, $2, $3, $4, $5, $6);
                         `, [usrData.name, usrData.email, "", "google", "", 3, [[0, 0]]]);
                     } catch(err) {
                         console.log(err);
@@ -168,7 +166,7 @@ router.route("/register").post(async (req, res) => {
                         'Set-Cookie': `token=${getToken({ uid: inDB.rows[0].uid, username: inDB.rows[0].username, email: inDB.rows[0].email, rank: 3 }, "12h")}; Path=/`
                     });
                     const user = await pool.query(`
-                        SELECT u.uid, u.team_id, u.username, u.adm_no, u.email, u.rank, t.teamname FROM users AS u LEFT JOIN teams AS t ON u.team_id=t.team_id WHERE u.email=$1;
+                        SELECT u.uid, u.team_id, u.username, u.email, u.rank, t.teamname FROM users AS u LEFT JOIN teams AS t ON u.team_id=t.team_id WHERE u.email=$1;
                     `, [inDB.rows[0].email]);
                     return res.status(200).json({ status: "success", error: "", user: user.rows[0] })
                 } else {
@@ -208,7 +206,7 @@ router.route("/login").post(async (req, res) => {
                         'Set-Cookie': `token=${getToken({ uid: uid, username: username, email: email, rank: rank }, "12h")}; Path=/`
                     });
                     const user = await pool.query(`
-                        SELECT u.uid, u.team_id, u.username, u.adm_no, u.email, u.rank, t.teamname FROM users AS u LEFT JOIN teams AS t ON u.team_id=t.team_id WHERE u.email=$1;
+                        SELECT u.uid, u.team_id, u.username, u.email, u.rank, t.teamname FROM users AS u LEFT JOIN teams AS t ON u.team_id=t.team_id WHERE u.email=$1;
                     `, [email]);
                     res.status(200).json({ status: "success", error: "", user: user.rows[0] });
                 } else {
@@ -249,7 +247,7 @@ router.route("/login").post(async (req, res) => {
                     'Set-Cookie': `token=${getToken({ uid: result.rows[0].uid, username: usrData.name, email: usrData.email, rank: 3 }, "12h")}; Path=/`
                 });
                 const user = await pool.query(`
-                    SELECT u.uid, u.team_id, u.username, u.adm_no, u.email, u.rank, t.teamname FROM users AS u LEFT JOIN teams AS t ON u.team_id=t.team_id WHERE u.email=$1;
+                    SELECT u.uid, u.team_id, u.username, u.email, u.rank, t.teamname FROM users AS u LEFT JOIN teams AS t ON u.team_id=t.team_id WHERE u.email=$1;
                 `, [usrData.email]);
                 return res.status(200).json({ status: "success", error: "", user: user.rows[0] });
             }

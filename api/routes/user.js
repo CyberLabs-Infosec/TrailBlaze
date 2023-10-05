@@ -17,15 +17,14 @@ router.route("/verify").get(async (req, res) => {
 })
 
 router.route("/edit").post(async (req, res) => {
-    let { username, adm_no } = req.body;
-    adm_no = adm_no.toUpperCase();
+    let { username } = req.body;
 
-    if (!username || !adm_no) {
+    if (!username) {
         return res.status(401).json({ status: "fail", error: "All fields are required" });
     }
 
     try {
-        await pool.query("UPDATE users SET username=$1, adm_no=$2 WHERE email=$3", [username, adm_no, req.user.email]);
+        await pool.query("UPDATE users SET username=$1 WHERE email=$2", [username, req.user.email]);
     } catch {
         return res.status(401).json({ status: "fail", error: "This should not happen, Contact Admin!" });
     }

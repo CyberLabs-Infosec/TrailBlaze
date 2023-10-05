@@ -201,13 +201,8 @@ export default function Page() {
         if (respHook && !loggedin) {
             setNotification(true, "info", "Please login first");
             router.push("/login");
-        } else if (respHook && loggedin) {
-            if (userData.adm_no == "") {
-                setNotification(true, "info", "Please add your admission number");
-                router.push("/profile");
-            } else {
-                getTeamInfo();
-            }
+        } else {
+            getTeamInfo();
         }
     }, [respHook])
 
