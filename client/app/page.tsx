@@ -8,6 +8,7 @@ import { setNotification, getNotification } from '../utils/notification';
 import Timer from '../components/Timer';
 
 import nvcti from "../sponsor_logos/nvcti_logo.png";
+import pingsafe from "../sponsor_logos/pingSafe_logo.png";
 
 export default function Page() {
     const vals = ["REACH EARTH", "SOLVE CHALLS", "HACK GALAXY"];
@@ -59,10 +60,14 @@ export default function Page() {
             <div className='relative' style={{ top: "50vh" }}>
                 <p className='text-slate-400 text-4xl font-bold'>- OUR SPONSORS -</p>
                 <hr className='border-2 border-slate-500'></hr>
-                <div className='flex p-10 justify-center items-center'>
+                <div className='flex p-10 justify-center items-center gap-5'>
                     <Link href="https://people.iitism.ac.in/~research/files/NVCTI_Brochure.pdf" target='_blank'>
                         <img height="120" width="120" src={nvcti.src}></img>
                         <div className='text-slate-400 text-center mt-4'>NVCTI</div>
+                    </Link>
+                    <Link href="https://www.pingsafe.com/in/" target='_blank'>
+                        <img height="120" width="120" src={pingsafe.src}></img>
+                        <div className='text-slate-400 text-center mt-4'>PingSafe</div>
                     </Link>
                 </div>
             </div>

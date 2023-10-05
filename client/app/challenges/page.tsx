@@ -18,6 +18,8 @@ export default function Page() {
     const [challenges, setChallenges] = useState([]);
     const [placed, setPlaced] = useState(false);
     const [solved, setSolved] = useState(0);
+    const [totalPoints, setTotalPoints] = useState(0);
+    const [currentPoints, setCurrentPoints] = useState(0);
 
     const router = useRouter();
 
@@ -73,6 +75,8 @@ export default function Page() {
             return router.push("/logout");
         }
         setChallenges(challsToJson.data);
+        setTotalPoints(challsToJson.totalPoints);
+        setCurrentPoints(challsToJson.currentPoints);
         setSolved(challsToJson.solved);
     }
 
@@ -121,19 +125,16 @@ export default function Page() {
         loggedin ? currChall != null ?
         <>
         <div className="absolute flex justify-center items-center w-full min-h-screen bg-slate-900 gap-10 h-fit" id="map">
-            <div id="fuel" className="fixed top-20 right-4 backdrop-blur z-20 flex flex-col gap-2 px-2 py-3 rounded-md justify-center items-center" style={{ backgroundColor: "rgba(30, 41, 59, 0.5)" }}>
-                <p className="text-slate-400 font-bold text-xl">FUEL ({69}%)</p>
-                <div className="h-36 w-5 bg-slate-700 flex items-end">
-                    <span className="bg-green-300 w-full" style={{ height: "69%" }}></span>
+            <div id="scorepanel" className="fixed top-20 right-4 backdrop-blur z-20 flex flex-col gap-2 px-2 py-3 rounded-md justify-center items-center" style={{ backgroundColor: "rgba(30, 41, 59, 0.5)" }}>
+                <p className="text-slate-400 font-bold text-xl">FUEL ({Math.floor((currentPoints / totalPoints) * 100)}%)</p>
+                <div className="h-5 w-48 bg-slate-700 flex items-end">
+                    <span className="bg-green-300 h-full" style={{ width: `${Math.floor((currentPoints / totalPoints) * 100)}%` }}></span>
                 </div>
                 <div>
-                    <p className="text-slate-400 font-bold">Rate: -{1}% per hr</p>
+                    <p className="text-slate-400 font-bold">Your fuel decreases {1}% per hr</p>
                 </div>
             </div>
             <Challenge chall={currChall}></Challenge>
-            {/* <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 350 350" id="container">
-                <path id="trail" d="m 54 29 c 87 12.6667 208 -9 261 38 c 28 27 23 62 -11 73 c -80 16 -172 -19 -250 15 c -33 16 -21 66 4 69 c 89 11 161 -33 257 14 c 29 17 27 25 21 48 c -7 27 -101.6667 13 -151 18" stroke="#32374d" strokeWidth="1" strokeLinecap="round" strokeDasharray="3,3" fill="none"/>
-            </svg> */}
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 430 730" id="container">
                 <path id="trail" d="m 40 51 c 87 12.6667 208 -9 311 44 c 32 21 98 121 -16 150 c -80 16 -172 -19 -257 43 c -28 20 -97 100 5 146 c 104 35 194 -5 267 71 c 33 39 16 87 -3 115 c -25 36 -101.6667 13 -275 53" stroke="#32374d" strokeWidth="1" strokeLinecap="round" strokeDasharray="3,3" fill="none"/>
             </svg>

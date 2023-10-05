@@ -9,8 +9,9 @@ const { pool } = require("../db");
 router.route("/getchalls").get(async (req, res) => {
     try {
         const challs = await pool.query("SELECT chall_id, title, prompt, place, checkpoint, points, hints, solves, visible, files FROM challenges");
-        const solved = await pool.query("SELECT last_solved FROM teams WHERE team_id=$1", [req.user.team_id]);
-        return res.status(200).json({ status: "success", error: "", data: challs.rows, solved: solved.rows[0].last_solved });
+        const totalPoints = await pool.query("SELECT SUM(points) FROM challenges");
+        const solved = await pool.query("SELECT last_solved, current_point FROM teams WHERE team_id=$1", [req.user.team_id]);
+        return res.status(200).json({ status: "success", error: "", data: challs.rows, solved: solved.rows[0].last_solved, totalPoints: totalPoints.rows[0].sum, currentPoints: solved.rows[0].current_point });
     } catch (err) {
         console.log(err);
         return res.status(500).json({ status: "fail", error: "Internal server error occured, contact admin" });

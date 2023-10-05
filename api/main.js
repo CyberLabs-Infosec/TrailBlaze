@@ -10,10 +10,12 @@ const authRoutes = require("./routes/auth");
 const userRoutes = require("./routes/user");
 const challRoutes = require("./routes/chall");
 const adminRoutes = require("./routes/admin");
+const scoreRoutes = require("./routes/scoreboard");
 app.use("/api/auth", authRoutes);
 app.use("/api/user", userRoutes);
 app.use("/api/chall", challRoutes);
 app.use("/api/admin", adminRoutes);
+app.use("/api/scoreboard", scoreRoutes);
 
 app.enable('trust proxy')
 

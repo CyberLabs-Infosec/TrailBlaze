@@ -17,7 +17,7 @@ function init_db() {
                 prompt VARCHAR(100) NOT NULL,
                 place integer NOT NULL,
                 checkPoint boolean DEFAULT FALSE,
-                flag VARCHAR(50) NOT NULL,
+                flag text NOT NULL,
                 points integer NOT NULL,
                 hints text[],
                 solves integer,
