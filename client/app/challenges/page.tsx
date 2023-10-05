@@ -134,7 +134,7 @@ export default function Page() {
                     <p className="text-slate-400 font-bold">Your fuel decreases {1}% per hr</p>
                 </div>
             </div>
-            <Challenge chall={currChall}></Challenge>
+            <Challenge chall={currChall} setCurrentPoints={setCurrentPoints}></Challenge>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 430 730" id="container">
                 <path id="trail" d="m 40 51 c 87 12.6667 208 -9 311 44 c 32 21 98 121 -16 150 c -80 16 -172 -19 -257 43 c -28 20 -97 100 5 146 c 104 35 194 -5 267 71 c 33 39 16 87 -3 115 c -25 36 -101.6667 13 -275 53" stroke="#32374d" strokeWidth="1" strokeLinecap="round" strokeDasharray="3,3" fill="none"/>
             </svg>

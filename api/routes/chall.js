@@ -18,6 +18,16 @@ router.route("/getchalls").get(async (req, res) => {
     }
 })
 
+router.route("/getfuel").get(async (req, res) => {
+    try {
+        const solved = await pool.query("SELECT current_point FROM teams WHERE team_id=$1", [req.user.team_id]);
+        return res.status(200).json({ status: "success", error: "", fuel: solved.rows[0].current_point });
+    } catch (err) {
+        console.log(err);
+        return res.status(500).json({ status: "fail", error: "Internal server error occured, contact admin" });
+    }
+})
+
 router.route("/submit").post(async (req, res) => {
     const { chall_id, flag } = req.body;
     let ip = req.ips[0];

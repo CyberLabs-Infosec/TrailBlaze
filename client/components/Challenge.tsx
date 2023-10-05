@@ -43,6 +43,14 @@ export default function Challenge(props) {
                 challBox.classList.remove('bg-yellow-200', 'hover:bg-yellow-100');
                 challBox.classList.add('bg-green-400', 'hover:bg-green-200');
 
+                const res = await fetch ("/api/chall/getfuel", {
+                    headers: {
+                        "Authorization": `Bearer ${Cookies.get('token')}`,
+                    }
+                })
+                const resJson = await res.json();
+                props.setCurrentPoints(resJson.fuel);
+
                 if (nextChallBox) {
                     nextChallBox.classList.remove('bg-slate-800', 'hover:bg-violet-300', 'bg-violet-500', 'hover:bg-slate-600');
                     nextChallBox.classList.add('bg-yellow-200', 'hover:bg-yellow-100');

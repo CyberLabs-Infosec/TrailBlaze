@@ -46,11 +46,15 @@ router.route("/createteam").post(async (req, res) => {
 
     try {
         // ADD unique flags for team
-        const challs = await pool.query("SELECT chall_id, flag FROM challenges");
+        const challs = await pool.query("SELECT chall_id, flag, isStatic FROM challenges");
         var flags = {};
         for (var i of challs.rows) {
-            hashedFlag = await bcrypt.hash(i.flag, 10);
-            flags[i.chall_id] = `flag{${i.flag}_${hashedFlag.substring(hashedFlag.length - 10)}}`;
+            if (!i.isStatic) {
+                hashedFlag = await bcrypt.hash(i.flag, 10);
+                flags[i.chall_id] = `blaze{${i.flag}_${hashedFlag.substring(hashedFlag.length - 10)}}`;
+            } else {
+                flags[i.chall_id] = `blaze{${i.flag}}`;
+            }
         }
 
         const hashedSecret = await bcrypt.hash(secret, 10);

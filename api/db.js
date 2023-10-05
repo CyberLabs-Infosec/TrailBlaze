@@ -18,6 +18,7 @@ function init_db() {
                 place integer NOT NULL,
                 checkPoint boolean DEFAULT FALSE,
                 flag text NOT NULL,
+                isStatic boolean DEFAULT FALSE,
                 points integer NOT NULL,
                 hints text[],
                 solves integer,
