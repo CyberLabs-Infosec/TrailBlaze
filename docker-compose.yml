@@ -58,3 +58,9 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
+
+  docker_bot:
+    build: ./bot
+    depends_on:
+      postgres:
+        condition: service_healthy
