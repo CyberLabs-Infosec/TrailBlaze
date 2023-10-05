@@ -2,9 +2,15 @@
 
 import { useEffect, useState } from "react";
 import Cookies from 'js-cookie';
+import { getNotification, setNotification } from "../../utils/notification";
+import { toast } from "react-toastify";
+import { useRouter } from 'next/navigation'
+import { User } from "../layout";
 
 export default function Page() {
+    const { loggedin, respHook, userData } = User();
     const [scores, setScores] = useState([]);
+    const router = useRouter();
 
     useEffect(() => {
         const getScores = async () => {
@@ -14,10 +20,22 @@ export default function Page() {
                 }
             });
             const jsonData = await data.json();
-            setScores(jsonData.scores);
+            if (jsonData.status == "success") {
+                setScores(jsonData.scores);
+            } else {
+                setNotification(true, "info", "Please login again!");
+                return router.push("/login")
+            }
         }
         getScores();
     }, [])
+
+    useEffect(() => {
+        if (respHook && !loggedin) {
+            setNotification(true, "info", "Please login first");
+            router.push("/login");
+        }
+    }, [respHook])
 
     useEffect(() => {
         let toSort = scores;
@@ -33,14 +51,37 @@ export default function Page() {
         setScores(toSort);
     }, [scores])
 
+    useEffect(() => {
+        const {toShow, type, message} = getNotification();
+        if (toShow === "true") {
+            switch (type) {
+                case "info":
+                    toast.info(message);
+                    break;
+                case "success":
+                    toast.success(message);
+                    break;
+                case "warn":
+                    toast.warn(message);
+                    break;
+                case "error":
+                    toast.error(message);
+                default:
+                    toast(message);
+                    break;
+            }
+            setNotification();
+        }
+    }, [])
+
     return (
-        <div id="container" className="h-full w-full overflow-y-scroll flex flex-col gap-5 pt-48 items-center">
+        <div id="container" className="h-full w-full overflow-y-scroll flex flex-col gap-5 pt-32 items-center">
             <p className="text-5xl text-slate-400 font-bold">SCOREBOARD</p>
             <div id="scoreboard" className="rounded-md p-3 flex flex-col gap-2" style={{ width: "700px", minHeight: "200px" }}>
                 <div className="grid grid-cols-5 top-0 gap-2">
                     <div className="text-slate-300 col-span-3 bg-violet-500 p-2 text-xl text-center font-bold">TEAMNAME</div>
                     <div className="text-slate-300 col-span-1 bg-violet-500 p-2 text-xl text-center font-bold">SOLVED</div>
-                    <div className="text-slate-300 col-span-1 bg-violet-500 p-2 text-xl text-center font-bold">FUEL %</div>
+                    <div className="text-slate-300 col-span-1 bg-violet-500 p-2 text-xl text-center font-bold">FUEL</div>
                 </div>
                 {
                     scores.map((obj, i) => {
