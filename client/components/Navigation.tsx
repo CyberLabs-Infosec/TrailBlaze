@@ -12,6 +12,7 @@ export default function Navbar(props: Props) {
             <Link href="/about"><button className={navStyle}>About</button></Link>
             <Link href="/challenges"><button className={navStyle}>Challs</button></Link>
             <Link href="/team"><button className={navStyle}>Team</button></Link>
+            <Link href="/scoreboard"><button className={navStyle}>Scores</button></Link>
             <Link href="/profile"><button className={navStyle}>Profile</button></Link>
             <Link href={ props.loggedin ? "/logout" : "/login"}><button className='w-28 px-3 py-2 text-lg font-bold border-2 text-slate-600 bg-violet-600 text-white transition-all'>{ props.loggedin ? "Logout" : "Login" }</button></Link>
         </>
