@@ -24,7 +24,7 @@ function init_db() {
                 solves integer,
                 visible boolean DEFAULT TRUE,
                 files text[] DEFAULT ARRAY[]::text[],
-                author text
+                author text DEFAULT 'anonymous'
             )`
         );
         await pool.query(
