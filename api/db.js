@@ -11,10 +11,10 @@ const pool = new Pool({
 function init_db() {
     return new Promise(async (resolve) => {
         await pool.query(
-            `DROP TABLE IF EXISTS challenges; CREATE TABLE challenges(
+            `DROP TABLE IF EXISTS challenges; CREATE TABLE IF NOT EXISTS challenges(
                 chall_id SERIAL PRIMARY KEY,
                 title VARCHAR(50) NOT NULL,
-                prompt VARCHAR(100) NOT NULL,
+                prompt text NOT NULL,
                 place integer NOT NULL,
                 checkPoint boolean DEFAULT FALSE,
                 flag text NOT NULL,
@@ -71,7 +71,7 @@ function init_db() {
                 chall_id integer NOT NULL REFERENCES challenges(chall_id),
                 team_id integer,
                 username VARCHAR(100),
-                flag VARCHAR(50) NOT NULL,
+                flag text NOT NULL,
                 ip inet NOT NULL,
                 subtime TIMESTAMP NOT NULL,
                 correct boolean NOT NULL
