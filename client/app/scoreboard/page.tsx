@@ -78,7 +78,8 @@ export default function Page() {
         <div id="container" className="h-full w-full overflow-y-scroll flex flex-col gap-5 pt-32 items-center">
             <p className="text-5xl text-slate-400 font-bold">SCOREBOARD</p>
             <div id="scoreboard" className="rounded-md p-3 flex flex-col gap-2" style={{ width: "700px", minHeight: "200px" }}>
-                <div className="grid grid-cols-5 top-0 gap-2">
+                <div className="grid grid-cols-6 top-0 gap-2">
+                    <div className="text-slate-300 col-span-1 bg-violet-500 p-2 text-xl text-center font-bold">RANK</div>
                     <div className="text-slate-300 col-span-3 bg-violet-500 p-2 text-xl text-center font-bold">TEAMNAME</div>
                     <div className="text-slate-300 col-span-1 bg-violet-500 p-2 text-xl text-center font-bold">SOLVED</div>
                     <div className="text-slate-300 col-span-1 bg-violet-500 p-2 text-xl text-center font-bold">FUEL</div>
@@ -86,10 +87,11 @@ export default function Page() {
                 {
                     scores.map((obj, i) => {
                         return(
-                            <div key={i} className="grid grid-cols-5 top-0 gap-2">
-                                <div className="text-slate-300 col-span-3 bg-slate-700 p-2 text-center">{obj.teamname}</div>
-                                <div className="text-slate-300 col-span-1 bg-slate-700 p-2 text-center">{obj.last_solved}</div>
-                                <div className="text-slate-300 col-span-1 bg-slate-700 p-2 text-center">{obj.current_point}</div>
+                            <div key={i} className="grid grid-cols-6 top-0 gap-2">
+                                <div className="bg-slate-700 text-slate-300 col-span-1 p-2 text-center">{i + 1}</div>
+                                <div className={`${userData.team_id == obj.team_id ? "border border-yellow-600" : ""} bg-slate-700 text-slate-300 col-span-3 p-2 text-center`}>{obj.teamname}</div>
+                                <div className={`${userData.team_id == obj.team_id ? "border border-yellow-600" : ""} bg-slate-700 text-slate-300 col-span-1 p-2 text-center`}>{obj.last_solved}</div>
+                                <div className={`${userData.team_id == obj.team_id ? "border border-yellow-600" : ""} bg-slate-700 text-slate-300 col-span-1 p-2 text-center`}>{obj.current_point}</div>
                             </div>
                         )
                 })

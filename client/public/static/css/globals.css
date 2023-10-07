@@ -41,3 +41,28 @@
     background-clip: text;
   }
 }
+
+.swal-modal {
+  background-color: rgb(52, 62, 73);
+  border: solid 1px rgb(115, 122, 146);
+}
+
+.swal-button, .swal-button--confirm {
+  border: none;
+  outline: 0px;
+  background-color: blueviolet;
+}
+
+.swal-button:not([disabled]):hover {
+  background-color: rgb(159, 57, 255);
+}
+
+.swal-text {
+  background-color: #e7e3fe;
+  padding: 17px;
+  border: 1px solid #c6a1f0;
+  display: block;
+  margin: 22px;
+  text-align: center;
+  color: #614e61;
+}
