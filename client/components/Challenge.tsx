@@ -125,6 +125,30 @@ export default function Challenge(props) {
         }
     }, []);
 
+    const downloadFile = (e) => {
+        const fileUrl = e.target.dataset.url;
+        fetch(fileUrl, {
+            headers: {
+                "Authorization": `Bearer ${Cookies.get('token')}`
+            }
+        }).then((res) => {
+            if (res.status == 200) {
+                return res.blob();
+            } else {
+                toast.error("The file could not be downloaded, please contact admin");
+                return null;
+            }
+        }).then((blob) => {
+            if (blob == null) return;
+            var url = window.URL.createObjectURL(blob);
+            var a = document.createElement('a');
+            a.href = url;
+            document.body.appendChild(a);
+            a.click();    
+            a.remove();
+        })
+    }
+
     return (
         <div id="challPrompt" className="fixed flex justify-center items-center top-0 left-0 h-screen w-full z-20 backdrop-blur hidden">
             <div className="relative bg-slate-800 rounded-xl p-4 flex flex-col items-center" style={{ minHeight: "400px", width: "600px" }}>
@@ -135,7 +159,7 @@ export default function Challenge(props) {
                 <div className="relative h-max p-4 text-slate-400 text-lg flex grow">{props.chall.prompt}</div>
                 <div className="flex gap-3 m-3">
                     {
-                        props.chall.files.map((k, i) => <a href={k} key={i} className="text-blue-400 underline">{k.split("/").slice(-1)}</a>)
+                        props.chall.files.map((k, i) => <div onClick={downloadFile} data-url={`${k}?chall_id=${props.chall.chall_id}&place=${props.chall.place}`} key={i} className="text-blue-400 underline cursor-pointer">{k.split("/").slice(-1)}</div>)
                     }
                 </div>
                 <div className="absolute text-slate-400 font-bold -bottom-14 right-0 p-3 bg-slate-800 rounded-lg">Author: {props.chall.author}</div>
