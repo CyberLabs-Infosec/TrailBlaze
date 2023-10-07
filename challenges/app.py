@@ -2,8 +2,23 @@ from flask import Flask
 from flask import send_file, request
 from support import buildFile
 import os
+import jwt
 
 app = Flask(__name__)
+app.config["secret"] = "L6LdwHrLcvEh7CwkxGGhAy7xKWUoHaEN9GTjr1dc2O4y2CkGsuQvAtOYYpyJBG1H"
+
+
+def verify(req):
+    try:
+        token = req.cookies["token"]
+    except Exception as e:
+        return {"success": False, "data": f"Token not found: {e}"}
+    
+    try:
+        data = jwt.decode(token, app.config["secret"])
+        return {"success": True, "data": ""}
+    except Exception as e:
+        return {"success": False, "data": f"Token verification failed: {e}"}
 
 
 @app.route("/files/ping")
@@ -13,6 +28,10 @@ def ping():
 
 @app.route("/files/<file>", methods=["GET"])
 def returnFiles(file):
+    result = verify(request)
+    if not result["success"]:
+        app.logger.warning(result["data"])
+        return {"status": "fail", "error": "There was an internal error, Please contact admin"}
     try:
         chall_id = request.args.get("chall_id")
         place = request.args.get("place")
@@ -37,6 +56,3 @@ def returnFiles(file):
     except Exception as e:
         app.logger.warning(f"Error in Sending file - {e}")
         return {"status": "fail", "error": "There was an internal error, Please contact admin"}
-
-if __name__ == "__main__":
-    app.run(debug=True, port=15004, host="0.0.0.0")
