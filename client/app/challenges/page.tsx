@@ -23,8 +23,8 @@ export default function Page() {
 
     const router = useRouter();
 
-    const placeOnPath = (obj) => {
-        var pos = obj.place / (challenges.length - 1);
+    const placeOnPath = (obj, i) => {
+        var pos = i / (challenges.length - 1);
         var isCheckPoint = obj.checkpoint;
 
         var trail = (document.getElementById("trail") as unknown as SVGGeometryElement);
@@ -59,8 +59,17 @@ export default function Page() {
 
     useEffect(() => {
         if (loggedin && currChall != null && !placed) {
+            challenges.sort((c1, c2) => {
+                if (c1.place > c2.place) {
+                    return 1;
+                } else {
+                    return -1;
+                } 
+            })
+            let i = 0;
             for (var chall of challenges) {
-                placeOnPath(chall);
+                placeOnPath(chall, i);
+                i++;
             }
             setPlaced(true)
         }
