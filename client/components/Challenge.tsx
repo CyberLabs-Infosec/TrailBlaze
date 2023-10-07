@@ -127,6 +127,7 @@ export default function Challenge(props) {
 
     const downloadFile = (e) => {
         const fileUrl = e.target.dataset.url;
+        const fileName = e.target.dataset.filename;
         fetch(fileUrl, {
             headers: {
                 "Authorization": `Bearer ${Cookies.get('token')}`
@@ -143,6 +144,7 @@ export default function Challenge(props) {
             var url = window.URL.createObjectURL(blob);
             var a = document.createElement('a');
             a.href = url;
+            a.download = fileName;
             document.body.appendChild(a);
             a.click();    
             a.remove();
@@ -159,7 +161,7 @@ export default function Challenge(props) {
                 <div className="relative h-max p-4 text-slate-400 text-lg flex grow">{props.chall.prompt}</div>
                 <div className="flex gap-3 m-3">
                     {
-                        props.chall.files.map((k, i) => <div onClick={downloadFile} data-url={`${k}?chall_id=${props.chall.chall_id}&place=${props.chall.place}`} key={i} className="text-blue-400 underline cursor-pointer">{k.split("/").slice(-1)}</div>)
+                        props.chall.files.map((k, i) => <div onClick={downloadFile} data-filename={k.split("/").slice(-1)} data-url={`${k}?chall_id=${props.chall.chall_id}&place=${props.chall.place}`} key={i} className="text-blue-400 underline cursor-pointer">{k.split("/").slice(-1)}</div>)
                     }
                 </div>
                 <div className="absolute text-slate-400 font-bold -bottom-14 right-0 p-3 bg-slate-800 rounded-lg">Author: {props.chall.author}</div>
