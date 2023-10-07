@@ -64,12 +64,26 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
-
-  level_11:
-    build: challenges/level_11/
+      
+  file_server:
+    build: ./challenges/
+    volumes:
+      - ./challenges:/project
     ports:
-      - 16000:8003
+      - 15004:15004
     depends_on:
       postgres:
         condition: service_healthy
     restart: always
+
+  level_11:
+    build: ./challenges/
+    ports:
+      - 16000:8003
+    volumes:
+      - ./challenges/level_11/build:/project
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: always
+  
