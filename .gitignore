@@ -11,3 +11,4 @@ admin/.next
 # Build caches
 client/build
 admin/build
+challenges/__pycache__
