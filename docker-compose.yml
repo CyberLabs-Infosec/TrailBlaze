@@ -64,3 +64,12 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
+
+  level_11:
+    build: challenges/level_11/
+    ports:
+      - 16000:8003
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: always

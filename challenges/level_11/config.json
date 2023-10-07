@@ -1,0 +1,14 @@
+{
+    "title": "",
+    "prompt": "While cruising through the vast expanse of space, your ship is suddenly hit by a football sized asteroid. Although the collision did not harm the engine, the debris clogged the coolant's drainage system, which caused an overflow of the coolant into the sensors room. Alex must repair the damage before the sensors fail.",
+    "place": 11,
+    "checkPoint": false,
+    "flag": "0verflow_s0lved",
+    "isStatic": false,
+    "points": 300,
+    "hints": [],
+    "solves": 0,
+    "visible": true,
+    "files": ["/files/11/repairMe.c"],
+    "author": "e4stw1nd"
+}

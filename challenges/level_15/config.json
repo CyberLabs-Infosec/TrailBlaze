@@ -1,0 +1,14 @@
+{
+    "title": "QR: 660, Binary: 660",
+    "prompt": "Alex gets his hands on a file named 660*660.txt He says its a simple binary file, but I say its an image!!! Find out urself",
+    "place": 15,
+    "checkPoint": true,
+    "flag": "b1n4r13s_c0uld_b3_0f_gr34t_us3",
+    "isStatic": false,
+    "points": 300,
+    "hints": [],
+    "solves": 0,
+    "visible": true,
+    "files": ["/files/660*660.txt"],
+    "author": "itzmelucifer"
+}

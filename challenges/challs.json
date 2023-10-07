@@ -1,0 +1,72 @@
+[
+    {
+        "title": "Sanity Check",
+        "prompt": "Welcome Pilot! Prove your identity.",
+        "place": 0,
+        "checkPoint": true,
+        "flag": "",
+        "isStatic": true,
+        "points": 500,
+        "hints": ["Check #announcements in Discord"],
+        "solves": 0,
+        "visible": true,
+        "files": [],
+        "author": ""
+    },
+    {
+        "title": "NOX for seeds",
+        "prompt": "According to the star map, Alex is on the final leg of his voyage.\nAfter spending such a long time in space he is very eager to reach home, he\nwants to find a token of remembrance for his wife, whom he misses dearly.\nHe decides to get a SEED of his wife's favourite flowers. In front of him lies a challenge. Forsythia is only found on planet NOX, known for its brutal and xenophobic species.\n\nHelp Alex get that SEED!",
+        "place": 17,
+        "checkPoint": false,
+        "flag": "r37r13v31ng_7he_fl0w3r_w4s_r34lly_d4ng3r0us_s71ll_w1f3y_w1ll_b3_h4ppy",
+        "isStatic": false,
+        "points": 500,
+        "hints": [],
+        "solves": 0,
+        "visible": true,
+        "files": ["/files/seed.py"],
+        "author": "s4yCh33se!"
+    },
+    {
+        "title": "QR: 660, Binary: 660",
+        "prompt": "Alex gets his hands on a file named 660*660.txt He says its a simple binary file, but I say its an image!!! Find out urself",
+        "place": 15,
+        "checkPoint": true,
+        "flag": "b1n4r13s_c0uld_b3_0f_gr34t_us3",
+        "isStatic": false,
+        "points": 300,
+        "hints": [],
+        "solves": 0,
+        "visible": true,
+        "files": ["/files/660*660.txt"],
+        "author": "itzmelucifer"
+    },
+    {
+        "title": "",
+        "prompt": "While cruising through the vast expanse of space, your ship is suddenly hit by a football sized asteroid. Although the collision did not harm the engine, the debris clogged the coolant's drainage system, which caused an overflow of the coolant into the sensors room. Alex must repair the damage before the sensors fail.",
+        "place": 11,
+        "checkPoint": false,
+        "flag": "0verflow_s0lved",
+        "isStatic": false,
+        "points": 300,
+        "hints": [],
+        "solves": 0,
+        "visible": true,
+        "files": ["/files/repairMe.c"],
+        "author": "e4stw1nd"
+    },
+    {
+        "title": "",
+        "prompt": "The crew is now in the Milky Way. The receiver of the Hope detected some weird signal, but the ship's SONIC ANALYZER faultered and failed to DCODE it. Help Alex in interpreting the signal.",
+        "place": 12,
+        "checkPoint": true,
+        "flag": "533_7hr0u9h_4ud10",
+        "isStatic": true,
+        "points": 300,
+        "hints": [],
+        "solves": 0,
+        "visible": true,
+        "files": ["/files/signal.wav"],
+        "author": "DragonBeast"
+    }
+]
