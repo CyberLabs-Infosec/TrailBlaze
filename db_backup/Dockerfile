@@ -7,12 +7,7 @@ RUN chown postgres:postgres /run/postgresql/
 
 WORKDIR /var/lib/postgresql
 
-COPY --chown=postgres:postgres pgpass .pgpass
-COPY --chown=postgres:postgres script.sh .
-
-RUN chmod 600 .pgpass
-RUN chmod +x script.sh
-
 COPY cronjob /etc/crontabs/root
+RUN chown -R postgres .
 
-CMD [ "crond", "-f", "-d", "8" ]
+# CMD [ "crond", "-f", "-d", "8" ]
