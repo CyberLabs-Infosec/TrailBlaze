@@ -27,12 +27,12 @@ async function startApp() {
     // THIS SECTION IS TO INITIALIZE 20 DUMMY CHALLENGES (!! TO BE DELETED LATER !!)
     // IMP :- CHANGE THE DB INIT FOR CHALLENGES ELSE ALL CHALLS WILL BE LOST !!!!!!
 
-    const challs = require("./dummy_challs/challs.json");
+    const challs = require("./dummy_challs/new.json");
     const { pool } = require("./db");
-    const format = require('pg-format');
-    await pool.query(format("INSERT INTO challenges (place, checkPoint, title, prompt, flag, points) VALUES %L", challs));
-    await pool.query(format(`UPDATE  challenges SET hints='{"this is one", "second hint"}'`));
 
+    for (chall of challs) {
+        await pool.query("INSERT INTO challenges (title, prompt, place, checkPoint, flag, isStatic, points, hints, solves, visible, files, author) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)", chall);
+    }
     // END OF THE SECTION
 
     console.log("Tables created successfully !");
