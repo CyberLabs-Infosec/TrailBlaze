@@ -1,19 +1,14 @@
 from flask import Flask
 from flask import send_file, request
+
 from support import buildFile
-import psycopg2
+from db import getFlag, getTeamID
+
 import os
 import jwt
 
 app = Flask(__name__)
 app.config["secret"] = "1mokPoWeR73vWcDTTJIDZqjsypEOSxnF2Iwrf4ADc9wAx8a3jp9Yx3hJHr99E0U7"
-config = {
-    "user": "postgres",
-    "password": "secret",
-    "host": "postgres"
-}
-
-conn = psycopg2.connect(host=config["host"], user=config["user"], password=config["password"])
 
 def verify(req):
     try:
@@ -24,29 +19,12 @@ def verify(req):
     try:
         data = jwt.decode(token, app.config["secret"], algorithms=["HS256"])
         uid = data["uid"]
+        status = getTeamID(uid)
         
-        try:
-            curr = conn.cursor()
-        except psycopg2.InterfaceError as e:
-            print('{} - connection will be reset'.format(e))
-            # Close old connection 
-            if conn:
-                if curr:
-                    curr.close()
-                conn.close()
-            conn = None
-            curr = None
-            
-            # Reconnect 
-            conn = psycopg2.connect(host=config["host"], user=config["user"], password=config["password"])
-            
-        curr = conn.cursor()
-        curr.execute("""
-                        SELECT team_id FROM users WHERE uid=%s;
-                    """, (uid, ))
-        team_id = curr.fetchone()[0]
-
-        return {"success": True, "data": {"team_id": team_id}}
+        if not status["success"]:
+            app.logger.warning(status["data"])
+            return {"status": "fail", "error": "There was an internal error, Please contact admin"}
+        return {"success": True, "data": status["data"]}
     except Exception as e:
         return {"success": False, "data": f"Token verification failed: {e}"}
 

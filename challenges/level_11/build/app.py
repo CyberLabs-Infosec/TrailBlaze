@@ -1,73 +1,10 @@
 from flask import Flask, render_template, request
-import psycopg2
 import jwt
+
+from db import getFlag, getTeamID
 
 app = Flask(__name__)
 app.config["secret"] = "1mokPoWeR73vWcDTTJIDZqjsypEOSxnF2Iwrf4ADc9wAx8a3jp9Yx3hJHr99E0U7"
-config = {
-    "user": "postgres",
-    "password": "secret",
-    "host": "postgres"
-}
-
-conn = psycopg2.connect(host=config["host"], user=config["user"], password=config["password"])
-
-def getFlag(team_id, place):
-    try:
-        curr = conn.cursor()
-    except psycopg2.InterfaceError as e:
-        print('{} - connection will be reset'.format(e))
-        # Close old connection 
-        if conn:
-            if curr:
-                curr.close()
-            conn.close()
-        conn = None
-        curr = None
-        
-        # Reconnect 
-        conn = psycopg2.connect(host=config["host"], user=config["user"], password=config["password"])
-        curr = conn.cursor()
-    try:
-        curr.execute("""
-                    SELECT chall_id FROM challenges WHERE place=%s;
-                    """, (place, ))
-        chall_id = curr.fetchone()
-
-        if chall_id is None:
-            return {"success": False, "data": f"chall_id does not exist for place: {place}"}
-    except Exception as e:
-        return {"success": False, "data": f"Error in retrieving chall_id: {e}"}
-
-    try:
-        try:
-            curr = conn.cursor()
-        except psycopg2.InterfaceError as e:
-            print('{} - connection will be reset'.format(e))
-            # Close old connection 
-            if conn:
-                if curr:
-                    curr.close()
-                conn.close()
-            conn = None
-            curr = None
-            
-            # Reconnect 
-            conn = psycopg2.connect(host=config["host"], user=config["user"], password=config["password"])
-            curr = conn.cursor()
-
-        curr.execute("""
-                    SELECT flags FROM teams WHERE team_id=%s;
-                    """, (team_id,))
-        flags = curr.fetchone()[0]
-
-    except Exception as e:
-        return {"success": False, "data": f"Error in retrieving flags: {e}"}
-    try:
-        tobeSent = flags[chall_id]
-    except Exception as e:
-        return {"success": False, "data": f"flag not found for given chall_id {chall_id}"}
-    return {"success": True, "data": tobeSent}
 
 
 def verify(req):
@@ -79,33 +16,16 @@ def verify(req):
     try:
         data = jwt.decode(token, app.config["secret"], algorithms=["HS256"])
         uid = data["uid"]
+        status = getTeamID(uid)
         
-        try:
-            curr = conn.cursor()
-        except psycopg2.InterfaceError as e:
-            print('{} - connection will be reset'.format(e))
-            # Close old connection 
-            if conn:
-                if curr:
-                    curr.close()
-                conn.close()
-            conn = None
-            curr = None
-            
-            # Reconnect 
-            conn = psycopg2.connect(host=config["host"], user=config["user"], password=config["password"])
-            curr = conn.cursor()
-
-        curr.execute("""
-                        SELECT team_id FROM users WHERE uid=%s;
-                    """, (uid, ))
-        team_id = curr.fetchone()[0]
-
-        return {"success": True, "data": {"team_id": team_id}}
+        if not status["success"]:
+            app.logger.warning(status["data"])
+            return {"status": "fail", "error": "There was an internal error, Please contact admin"}
+        return {"success": True, "data": status["data"]}
     except Exception as e:
         return {"success": False, "data": f"Token verification failed: {e}"}
-    
-                                        
+
+           
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -117,7 +37,7 @@ def test_form():
     if not result["success"]:
         app.logger.warning(result["data"])
         return render_template("index.html", result="There was an internal error, Please contact admin")
-    team_id = result["team_id"]
+    team_id = result["data"]["team_id"]
     result = getFlag(team_id, place=11)
     if not result["success"]:
         app.logger.warning(result["data"])

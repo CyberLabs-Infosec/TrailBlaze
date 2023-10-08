@@ -1,19 +1,9 @@
-import psycopg2
-import psycopg2.extras
 from hashlib import md5
 import segno
 from PIL import Image
+from db import getFlag
 
 import os, base64, random, json
-
-config = {
-    "user": "postgres",
-    "password": "secret",
-    "host": "postgres"
-}
-
-conn = psycopg2.connect(host=config["host"], user=config["user"], password=config["password"])
-
 
 class buildFile:
     def run(self, chall_id, file, place, team_id):        
@@ -80,58 +70,4 @@ class buildFile:
             except Exception as e:
                 return {"success": False, "data": f"Error in level_11: sharing {e}"}
             
-            
-def getFlag(chall_id, team_id, place):
-    try:
-        curr = conn.cursor()
-    except psycopg2.InterfaceError as e:
-        print('{} - connection will be reset'.format(e))
-        # Close old connection 
-        if conn:
-            if curr:
-                curr.close()
-            conn.close()
-        conn = None
-        curr = None
-        
-        # Reconnect 
-        conn = psycopg2.connect(host=config["host"], user=config["user"], password=config["password"])
-        curr = conn.cursor()
-    try:
-        curr.execute("""
-                    SELECT flag FROM challenges WHERE chall_id=%s AND place=%s;
-                    """, (chall_id, place, ))
-        test = curr.fetchone()
-        if test is None:
-            return {"success": False, "data": f"chall_id: {chall_id} and place: {place} doesn't match"}
-    except Exception as e:
-        return {"success": False, "data": f"Error in checking chall_id and place: {e}"}
-
-    try:
-        try:
-            curr = conn.cursor()
-        except psycopg2.InterfaceError as e:
-            print('{} - connection will be reset'.format(e))
-            # Close old connection 
-            if conn:
-                if curr:
-                    curr.close()
-                conn.close()
-            conn = None
-            curr = None
-            
-            # Reconnect 
-            conn = psycopg2.connect(host=config["host"], user=config["user"], password=config["password"])
-            
-        curr = conn.cursor()
-        curr.execute("""
-                    SELECT flags FROM teams WHERE team_id=%s;
-                    """, (team_id,))
-        flags = curr.fetchone()[0]
-    except Exception as e:
-        return {"success": False, "data": f"Error in retrieving flag: {e}"}
-    try:
-        tobeSent = flags[chall_id]
-    except Exception as e:
-        return {"success": False, "data": f"flag not found for given chall_id {chall_id}"}
-    return {"success": True, "data": tobeSent}
+  
