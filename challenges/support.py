@@ -82,25 +82,51 @@ class buildFile:
             
             
 def getFlag(chall_id, team_id, place):
-    curr = conn.cursor()
+    try:
+        curr = conn.cursor()
+    except psycopg2.InterfaceError as e:
+        print('{} - connection will be reset'.format(e))
+        # Close old connection 
+        if conn:
+            if curr:
+                curr.close()
+            conn.close()
+        conn = None
+        curr = None
+        
+        # Reconnect 
+        conn = psycopg2.connect(host=config["host"], user=config["user"], password=config["password"])
+        curr = conn.cursor()
     try:
         curr.execute("""
                     SELECT flag FROM challenges WHERE chall_id=%s AND place=%s;
                     """, (chall_id, place, ))
         test = curr.fetchone()
-        curr.close()
         if test is None:
             return {"success": False, "data": f"chall_id: {chall_id} and place: {place} doesn't match"}
     except Exception as e:
         return {"success": False, "data": f"Error in checking chall_id and place: {e}"}
 
     try:
-        curr = conn.cursor()
+        try:
+            curr = conn.cursor()
+        except psycopg2.InterfaceError as e:
+            print('{} - connection will be reset'.format(e))
+            # Close old connection 
+            if conn:
+                if curr:
+                    curr.close()
+                conn.close()
+            conn = None
+            curr = None
+            
+            # Reconnect 
+            conn = psycopg2.connect(host=config["host"], user=config["user"], password=config["password"])
+            curr = conn.cursor()
         curr.execute("""
                     SELECT flags FROM teams WHERE team_id=%s;
                     """, (team_id,))
         flags = curr.fetchone()[0]
-        curr.close()
     except Exception as e:
         return {"success": False, "data": f"Error in retrieving flag: {e}"}
     try:

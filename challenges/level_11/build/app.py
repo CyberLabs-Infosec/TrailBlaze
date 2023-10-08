@@ -13,25 +13,54 @@ config = {
 conn = psycopg2.connect(host=config["host"], user=config["user"], password=config["password"])
 
 def getFlag(team_id, place):
-    curr = conn.cursor()
+    try:
+        curr = conn.cursor()
+    except psycopg2.InterfaceError as e:
+        print('{} - connection will be reset'.format(e))
+        # Close old connection 
+        if conn:
+            if curr:
+                curr.close()
+            conn.close()
+        conn = None
+        curr = None
+        
+        # Reconnect 
+        conn = psycopg2.connect(host=config["host"], user=config["user"], password=config["password"])
+        curr = conn.cursor()
     try:
         curr.execute("""
                     SELECT chall_id FROM challenges WHERE place=%s;
                     """, (place, ))
         chall_id = curr.fetchone()
-        curr.close()
+
         if chall_id is None:
             return {"success": False, "data": f"chall_id does not exist for place: {place}"}
     except Exception as e:
         return {"success": False, "data": f"Error in retrieving chall_id: {e}"}
 
     try:
-        curr = conn.cursor()
+        try:
+            curr = conn.cursor()
+        except psycopg2.InterfaceError as e:
+            print('{} - connection will be reset'.format(e))
+            # Close old connection 
+            if conn:
+                if curr:
+                    curr.close()
+                conn.close()
+            conn = None
+            curr = None
+            
+            # Reconnect 
+            conn = psycopg2.connect(host=config["host"], user=config["user"], password=config["password"])
+            curr = conn.cursor()
+
         curr.execute("""
                     SELECT flags FROM teams WHERE team_id=%s;
                     """, (team_id,))
         flags = curr.fetchone()[0]
-        curr.close()
+
     except Exception as e:
         return {"success": False, "data": f"Error in retrieving flags: {e}"}
     try:
@@ -50,12 +79,28 @@ def verify(req):
     try:
         data = jwt.decode(token, app.config["secret"], algorithms=["HS256"])
         uid = data["uid"]
-        curr = conn.cursor()
+        
+        try:
+            curr = conn.cursor()
+        except psycopg2.InterfaceError as e:
+            print('{} - connection will be reset'.format(e))
+            # Close old connection 
+            if conn:
+                if curr:
+                    curr.close()
+                conn.close()
+            conn = None
+            curr = None
+            
+            # Reconnect 
+            conn = psycopg2.connect(host=config["host"], user=config["user"], password=config["password"])
+            curr = conn.cursor()
+
         curr.execute("""
                         SELECT team_id FROM users WHERE uid=%s;
                     """, (uid, ))
         team_id = curr.fetchone()[0]
-        curr.close()
+
         return {"success": True, "data": {"team_id": team_id}}
     except Exception as e:
         return {"success": False, "data": f"Token verification failed: {e}"}
