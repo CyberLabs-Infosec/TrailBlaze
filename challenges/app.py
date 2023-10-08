@@ -15,7 +15,7 @@ def verify(req):
         return {"success": False, "data": f"Token not found: {e}"}
     
     try:
-        data = jwt.decode(token, app.config["secret"])
+        data = jwt.decode(token, app.config["secret"], algorithms=["HS256"])
         return {"success": True, "data": ""}
     except Exception as e:
         return {"success": False, "data": f"Token verification failed: {e}"}
@@ -31,7 +31,7 @@ def returnFiles(file):
     result = verify(request)
     if not result["success"]:
         app.logger.warning(result["data"])
-        return {"status": "fail", "error": "There was an internal error, Please contact admin"}
+        return {"status": "fail", "error": "Please login again!"}
     try:
         chall_id = request.args.get("chall_id")
         place = request.args.get("place")

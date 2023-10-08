@@ -48,7 +48,7 @@ def verify(req):
         return {"success": False, "data": f"Token not found: {e}"}
     
     try:
-        data = jwt.decode(token, app.config["secret"])
+        data = jwt.decode(token, app.config["secret"], algorithms=["HS256"])
         uid = data["uid"]
         curr = conn.cursor()
         curr.execute("""
