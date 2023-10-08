@@ -1,14 +1,14 @@
 {
-    "title": "",
-    "prompt": "",
+    "title": "Meta - verse",
+    "prompt": "After getting the creds of the system, Alex and crew begin investigating its contents. They stumble upon an image 'starmap'. Drawing from his experience, Alex suspects that it might conceal additional data.",
     "place": 3,
     "checkPoint": true,
-    "flag": "",
-    "isStatic": false,
+    "flag": "c1v1l1s4t10ns_ch4ng3_5t4rm4p_d03snt",
+    "isStatic": true,
     "points": 100,
     "hints": [],
     "solves": 0,
     "visible": true,
-    "files": ["/files/3/"],
-    "author": ""
+    "files": ["/files/starmap.jpg"],
+    "author": "itzmelucifer"
 }

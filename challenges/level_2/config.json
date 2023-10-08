@@ -1,14 +1,14 @@
 {
-    "title": "",
-    "prompt": "",
+    "title": "HEXagonal Basement",
+    "prompt": "The crew move on to the communications base, at the basement of which lies it's control centre. There lay a lot of abandoned devices, but most of them didn’t stand the test of time. However, they found an old BASE’ic blackbox, which keeps generating what appears to be encoded gibberish texts. But are they really that useless?",
     "place": 2,
     "checkPoint": false,
-    "flag": "",
+    "flag": "5up3r_53cur3_3nc0d1ng",
     "isStatic": false,
     "points": 100,
     "hints": [],
     "solves": 0,
     "visible": true,
-    "files": ["/files/2/"],
-    "author": ""
+    "files": ["/files/encoded.txt"],
+    "author": "n0tsane"
 }
