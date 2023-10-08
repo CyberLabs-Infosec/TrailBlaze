@@ -5,7 +5,7 @@ conn = psycopg2.connect(host="postgres", user="postgres", password="secret")
 cursor = conn.cursor()
 
 RATE = -50
-EVENT_START = datetime.datetime(2023, 9, 30, 6)
+EVENT_START = datetime.datetime(2023, 10, 13, 13)
 
 def getTeamData():
     cursor.execute("SELECT c.checkpoint, t.team_id, t.current_point FROM teams AS t, challenges AS c WHERE c.place=t.last_solved")
