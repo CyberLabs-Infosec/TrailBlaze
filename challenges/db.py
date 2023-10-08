@@ -11,7 +11,7 @@ def getFlag(chall_id, team_id, place):
     if test is None:
         return {"success": False, "data": f"chall_id: {chall_id} and place: {place} doesn't match"}
     cursor.execute("SELECT flags->%s FROM teams WHERE team_id=%s", (str(chall_id), str(team_id)))
-    d = cursor.fetchone()["?column?"]
+    d = cursor.fetchone()[0]
     return {"success": True, "data": d}
 
 
