@@ -11,7 +11,7 @@ def getFlag(team_id, place):
     if test is None:
         return {"success": False, "data": f"chall_id doesn't exist for place: {place}"}
     chall_id = test[0]
-    cursor.execute("SELECT flags->'%s' FROM teams WHERE team_id=%s", (str(chall_id), str(team_id)))
+    cursor.execute("SELECT flags->%s FROM teams WHERE team_id=%s", (str(chall_id), str(team_id)))
     d = cursor.fetchone()["?column?"]
     return {"success": True, "data": d}
 
