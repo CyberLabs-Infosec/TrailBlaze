@@ -42,7 +42,7 @@ class buildFile:
                 return {"success": False, "data": f"{file} not found place={place}"}
             try:
                 qr = segno.make_qr(flag)
-                tempName = md5(random.randbytes(5)).hexdigest()
+                tempName = md5(os.urandom(5)).hexdigest()
                 qr.save(f"tmp/{tempName}.png", scale=20, border=2)
                 img = Image.open(f"tmp/{tempName}.png")
                 pixels = list(img.getdata())

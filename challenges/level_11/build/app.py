@@ -65,6 +65,9 @@ def evaluate(val):
     return val
 
 def check_overflow(a, b, flag):
+    a = int(a)
+    b = int(b)
+    
     if a < 0 or b < 0:
         return("Hehe! You can't trick me, Only postive numbers allowed!")
 
