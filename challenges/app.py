@@ -39,8 +39,8 @@ def verify(req):
             
             # Reconnect 
             conn = psycopg2.connect(host=config["host"], user=config["user"], password=config["password"])
-            curr = conn.cursor()
-
+            
+        curr = conn.cursor()
         curr.execute("""
                         SELECT team_id FROM users WHERE uid=%s;
                     """, (uid, ))
@@ -66,7 +66,7 @@ def returnFiles(file):
         chall_id = request.args.get("chall_id")
         place = request.args.get("place")
         team_id = result["data"]["team_id"]
-        
+
     except Exception as e:
         app.logger.warning(f"Error in Request parameters - {e}")
         return {"status": "fail", "error": "There was an internal error, Please contact admin"}

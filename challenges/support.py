@@ -122,7 +122,8 @@ def getFlag(chall_id, team_id, place):
             
             # Reconnect 
             conn = psycopg2.connect(host=config["host"], user=config["user"], password=config["password"])
-            curr = conn.cursor()
+            
+        curr = conn.cursor()
         curr.execute("""
                     SELECT flags FROM teams WHERE team_id=%s;
                     """, (team_id,))
