@@ -64,6 +64,16 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
+    restart: always
+
+  # backup:
+  #   build: ./db_backup
+  #   volumes:
+  #     - ./db_backup/backups/:/var/lib/postgresql/
+  #   command: "crond -f -d 8"
+  #   depends_on:
+  #     postgres:
+  #       condition: service_healthy
       
   file_server:
     build: ./challenges/
