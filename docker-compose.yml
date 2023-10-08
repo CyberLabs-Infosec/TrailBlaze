@@ -80,7 +80,7 @@ services:
     volumes:
       - ./challenges:/project
     ports:
-      - 15004:15004
+      - 15004:8003
     depends_on:
       postgres:
         condition: service_healthy

@@ -42,7 +42,7 @@
         "itzmelucifer"
     ],
     [
-        "",
+        "Overflow",
         "While cruising through the vast expanse of space, your ship is suddenly hit by a football sized asteroid. Although the collision did not harm the engine, the debris clogged the coolant's drainage system, which caused an overflow of the coolant into the sensors room. Alex must repair the damage before the sensors fail.",
         11,
         false,
@@ -56,7 +56,7 @@
         "e4stw1nd"
     ],
     [
-        "",
+        "Spectrogram",
         "The crew is now in the Milky Way. The receiver of the Hope detected some weird signal, but the ship's SONIC ANALYZER faultered and failed to DCODE it. Help Alex in interpreting the signal.",
         12,
         true,
@@ -68,5 +68,61 @@
         true,
         ["/files/signal.wav"],
         "DragonBeast"
+    ],
+    [
+        "HEXagonal Basement",
+        "The crew move on to the communications base, at the basement of which lies it's control centre. There lay a lot of abandoned devices, but most of them didn’t stand the test of time. However, they found an old BASE’ic blackbox, which keeps generating what appears to be encoded gibberish texts. But are they really that useless?",
+        2,
+        false,
+        "5up3r_53cur3_3nc0d1ng",
+        false,
+        100,
+        [],
+        0,
+        true,
+        ["/files/encoded.txt"],
+        "n0tsane"
+    ],
+    [
+        "Meta - verse",
+        "After getting the creds of the system, Alex and crew begin investigating its contents. They stumble upon an image 'starmap'. Drawing from his experience, Alex suspects that it might conceal additional data.",
+        3,
+        true,
+        "c1v1l1s4t10ns_ch4ng3_5t4rm4p_d03snt",
+        true,
+        100,
+        [],
+        0,
+        true,
+        ["/files/starmap.jpg"],
+        "itzmelucifer"
+    ],
+    [
+        "._..__._..._ recording",
+        "The investigation continues, and now they come across an audio file. However, dcoding an audio created by the ancient MORtals poses a perplexing challenge.",
+        4,
+        false,
+        "TH3R3ISST1LLHOP3",
+        true,
+        100,
+        [],
+        0,
+        true,
+        ["/files/audio.wav"],
+        "Mystic"
+    ],
+    [
+        "Alien? Human? Symbol?!",
+        "Upon regaining consciousness, Alex and his crew immediately embarked on a quest to secure their rescue. During their exploration, they stumbled upon a weird, ancient engraving. Their primary mission: deciphering the enigmatic SYMBOLS, in the pursuit of uncovering the mysteries of this alien world.\n\n   Enclose the obtained flag in blaze[]",
+        1,
+        false,
+        "S1MPUL_SYMB0L_C1PH3R_Y4YYYY",
+        true,
+        100,
+        [],
+        0,
+        true,
+        ["/files/inscription.txt"],
+        "4darsh"
     ]
 ]
