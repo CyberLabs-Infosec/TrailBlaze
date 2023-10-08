@@ -5,7 +5,7 @@ import os
 import jwt
 
 app = Flask(__name__)
-app.config["secret"] = "L6LdwHrLcvEh7CwkxGGhAy7xKWUoHaEN9GTjr1dc2O4y2CkGsuQvAtOYYpyJBG1H"
+app.config["secret"] = "1mokPoWeR73vWcDTTJIDZqjsypEOSxnF2Iwrf4ADc9wAx8a3jp9Yx3hJHr99E0U7"
 
 
 def verify(req):
