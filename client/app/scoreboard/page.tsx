@@ -21,6 +21,15 @@ export default function Page() {
             });
             const jsonData = await data.json();
             if (jsonData.status == "success") {
+                jsonData.scores.sort((obj1, obj2) => {
+                    if (obj2.last_solved > obj1.last_solved) {
+                        return 1;
+                    } else if (obj2.last_solved < obj1.last_solved) {
+                        return -1;
+                    } else {
+                        return obj2.current_points > obj1.current_points ? 1 : -1;
+                    }
+                })
                 setScores(jsonData.scores);
             } else {
                 setNotification(true, "info", "Please login again!");
@@ -37,19 +46,23 @@ export default function Page() {
         }
     }, [respHook])
 
-    useEffect(() => {
-        let toSort = scores;
-        toSort.sort((obj1, obj2) => {
-            if (obj2.last_solved > obj1.last_solved) {
-                return 1;
-            } else if (obj2.last_solved < obj1.last_solved) {
-                return -1;
-            } else {
-                return obj2.current_points > obj1.current_points ? 1 : -1;
-            }
-        })
-        setScores(toSort);
-    }, [scores])
+    // useEffect(() => {
+    //     let toSort = scores;
+    //     toSort.sort((obj1, obj2) => {
+    //         if (obj2.last_solved > obj1.last_solved) {
+    //             return 1;
+    //         } else if (obj2.last_solved < obj1.last_solved) {
+    //             return -1;
+    //         } else {
+    //             return obj2.current_points > obj1.current_points ? 1 : -1;
+    //         }
+    //     })
+    //     setScores(toSort);
+    // }, [scores])
+
+    // useEffect(() => {
+    //     console.log(scores);
+    // }, [scores])
 
     useEffect(() => {
         const {toShow, type, message} = getNotification();

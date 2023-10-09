@@ -153,7 +153,7 @@ router.route("/register").post(async (req, res) => {
                     try {
                         await pool.query(`
                             INSERT INTO users (username, email, method, password, rank, user_scores) VALUES ($1, $2, $3, $4, $5, $6);
-                        `, [usrData.name, usrData.email, "", "google", "", 3, [[0, 0]]]);
+                        `, [usrData.name, usrData.email, "google", "", 3, [[0, 0]]]);
                     } catch(err) {
                         console.log(err);
                         return res.status(500).json({ status: "fail", error: "There was an internal error, Please contact admin" });

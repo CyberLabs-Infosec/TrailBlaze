@@ -40,7 +40,7 @@ export default function Challenge(props) {
             jsonRes.correct ? successAnime.current.play() : wrongAnime.current.play()
             if (jsonRes.correct) {
                 const challBox = document.getElementById(`chall-${props.chall.chall_id}`);
-                const nextChallBox = document.getElementById(`chall-${props.chall.chall_id + 1}`);
+                const nextChallBox = challBox.nextElementSibling;
                 challBox.classList.remove('bg-yellow-200', 'hover:bg-yellow-100');
                 challBox.classList.add('bg-green-400', 'hover:bg-green-200');
 

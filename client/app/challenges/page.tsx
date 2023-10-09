@@ -143,7 +143,7 @@ export default function Page() {
                     <span className="bg-green-300 h-full" style={{ width: `${Math.floor((currentPoints / totalPoints) * 100)}%` }}></span>
                 </div>
                 <div>
-                    <p className="text-slate-400 font-bold">Your fuel decreases {1}% per hr</p>
+                    <p className="text-slate-400 font-bold">Fuel decreases 50 units / hr</p>
                 </div>
             </div>
             <Challenge chall={currChall} setCurrentPoints={setCurrentPoints}></Challenge>
