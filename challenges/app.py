@@ -23,9 +23,9 @@ def verify(req):
         
         if not status["success"]:
             if status["data"] == "Please create/join team":
-                return {"status": "fail", "error": "Please create/join team"}
+                return {"success": "fail", "error": "Please create/join team"}
             app.logger.warning(status["data"])
-            return {"status": "fail", "error": "There was an internal error, Please contact admin"}
+            return {"success": "fail", "error": "There was an internal error, Please contact admin"}
         return {"success": True, "data": status["data"]}
     except Exception as e:
         return {"success": False, "data": f"Token verification failed: {e}"}
