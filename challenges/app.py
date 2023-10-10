@@ -22,7 +22,7 @@ def verify(req):
         status = getTeamID(uid)
         
         if not status["success"]:
-            if status["data"] == "Please create/join team":
+            if "create/join" in status["data"]:
                 return {"success": False, "data": "Please create/join team"}
             app.logger.warning(status["data"])
             return {"success": False, "data": "There was an internal error, Please contact admin"}
