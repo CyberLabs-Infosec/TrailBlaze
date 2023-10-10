@@ -1,1 +1,0 @@
-rm -rf */.next; rm -rf */node_modules; cd client; npm i sharp; npm i; npm run build; cd ../admin; npm i; npm run build; cd ../api; npm i; docker compose up -d
