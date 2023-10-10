@@ -8,12 +8,13 @@ RATE = -50
 EVENT_START = datetime.datetime(2023, 10, 13, 13)
 
 def getTeamData():
-    cursor.execute("SELECT c.checkpoint, t.team_id, t.current_point FROM teams AS t, challenges AS c WHERE c.place=t.last_solved")
+    cursor.execute("SELECT c.checkpoint, t.team_id, t.current_point, t.teamname FROM teams AS t, challenges AS c WHERE c.place=t.last_solved")
     return cursor.fetchall()
 
 def decreasePoints(teams):
     for team in teams:
         if not team[0]:
+            print(f"Decreasing {RATE} points for team {team[3]} at {datetime.datetime.now()}")
             team_id = team[1]
             current_point = team[2]
 

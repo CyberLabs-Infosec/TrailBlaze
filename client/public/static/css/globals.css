@@ -66,3 +66,8 @@
   text-align: center;
   color: #614e61;
 }
+
+#challDesc > a {
+  text-decoration: underline;
+  color: rgb(0, 195, 255);
+}
