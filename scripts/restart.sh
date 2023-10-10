@@ -1,15 +1,15 @@
 #!/bin/bash
 
-containers = ("trailblaze-file_server-1", "trailblaze-level_11-1", "trailblaze-frontend-1", "trailblaze-admin-1", "trailblaze-backend-1", "trailblaze-postgres-1")
-images = ("trailblaze-level_11", "trailblaze-file_server")
+containers=(trailblaze-file_server-1 trailblaze-level_11-1 trailblaze-frontend-1 trailblaze-admin-1 trailblaze-backend-1 trailblaze-postgres-1)
+images=(trailblaze-level_11 trailblaze-file_server)
 
-for i in containers
+for i in "${containers[@]}"
 do
     docker stop $i
     docker rm $i
 done
 
-for i in images
+for i in "${images[@]}"
 do
     docker rmi $i
 done
