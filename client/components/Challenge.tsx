@@ -158,7 +158,7 @@ export default function Challenge(props) {
                 <div className="absolute -top-16 left-0 text-slate-400 bg-slate-800 rounded-lg p-3 text-2xl font-bold">Fuel: +{props.chall.points}</div>
                 <div className="font-bold text-4xl text-slate-400 mb-3">{props.chall.title}</div>
                 <hr className="w-full border-slate-500"></hr>
-                <div className="relative h-max p-4 text-slate-400 text-lg flex grow">{props.chall.prompt}</div>
+                <div id="challDesc" className="relative h-max p-4 text-slate-400 text-lg flex flex-col gap-2 grow" dangerouslySetInnerHTML={{ __html: props.chall.prompt }}></div>
                 <div className="flex gap-3 m-3">
                     {
                         props.chall.files.map((k, i) => <div onClick={downloadFile} data-filename={k.split("/").slice(-1)} data-url={`${k}?chall_id=${props.chall.chall_id}&place=${props.chall.place}`} key={i} className="text-blue-400 underline cursor-pointer">{k.split("/").slice(-1)}</div>)
