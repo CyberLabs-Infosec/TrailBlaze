@@ -35,6 +35,9 @@ def index():
 def test_form():
     result = verify(request)
     if not result["success"]:
+        if "Token not found" in result["data"]:
+            app.logger.warning(result["data"])
+            return render_template("index.html", result="Please login to your trailblaze account at https://trailblaze.space/. If the issue doesn't resolve, please contact admin")
         app.logger.warning(result["data"])
         return render_template("index.html", result="There was an internal error, Please contact admin")
     team_id = result["data"]["team_id"]
