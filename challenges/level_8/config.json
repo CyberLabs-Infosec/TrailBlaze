@@ -1,14 +1,14 @@
 {
-    "title": "",
-    "prompt": "",
+    "title": "Reverse the JS panel",
+    "prompt": "The crew has finally reached the H.O.P.E. Its entrance reads \"You must authenticate yourself to use this emergency craft!\".",
     "place": 8,
     "checkPoint": false,
-    "flag": "",
-    "isStatic": false,
+    "flag": "cl13n7_s1d3_4u7h_r34lly_sucks",
+    "isStatic": true,
     "points": 200,
     "hints": [],
     "solves": 0,
     "visible": true,
-    "files": ["/files/8/"],
-    "author": ""
+    "files": [],
+    "author": "itzmelucifer"
 }

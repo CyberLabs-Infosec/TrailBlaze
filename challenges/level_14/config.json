@@ -1,14 +1,14 @@
 {
-    "title": "",
-    "prompt": "",
+    "title": "VIA GALACTICA",
+    "prompt": "While Alex is in his own galaxy, the spacecraft has fallen short of luminite, so he gets to the nearest fuel station installed by the Gaia Dominion. However, he has to authenticate himself using some method which their founder, Gaius Julius Caesar, invented. Help him decipher this code to get the fuel.",
     "place": 14,
     "checkPoint": false,
-    "flag": "",
+    "flag": "c43s4r_w4s_sm4rt_5ub5t1tut10n_1s_n0t",
     "isStatic": false,
     "points": 300,
     "hints": [],
     "solves": 0,
     "visible": true,
-    "files": ["/files/14/"],
-    "author": ""
+    "files": ["files/auth.py"],
+    "author": "n0tsane"
 }

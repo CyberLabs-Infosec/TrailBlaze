@@ -1,14 +1,14 @@
 {
-    "title": "",
-    "prompt": "",
+    "title": "Look for the WORDs",
+    "prompt": "Alex and his team have finally entered the spacecraft. To, use the it, they must read the instruction manuals kept inside. Unfortunately, for security reasons, parts of the DOCX have been redacted. They must CONTROL over ALL the hidden information to activate H.O.P.E.",
     "place": 9,
     "checkPoint": true,
-    "flag": "",
-    "isStatic": false,
+    "flag": "lum1n1t3_f0st3rs_h0p3",
+    "isStatic": true,
     "points": 200,
     "hints": [],
     "solves": 0,
     "visible": true,
-    "files": ["/files/9/"],
-    "author": ""
+    "files": ["/files/manual.pdf"],
+    "author": "Pr0meth3u5"
 }

@@ -1,14 +1,14 @@
 {
-    "title": "",
-    "prompt": "",
+    "title": "Spectrogram",
+    "prompt": "Commander Mercer is now in the Milky Way. The receiver of the Hope detected some weird signal, but the ship's SONIC ANALYZER faultered and failed to DCODE it. Help Alex in interpreting the signal.",
     "place": 13,
     "checkPoint": false,
-    "flag": "",
-    "isStatic": false,
+    "flag": "533_7hr0u9h_4ud10",
+    "isStatic": true,
     "points": 300,
     "hints": [],
     "solves": 0,
     "visible": true,
-    "files": ["/files/13/"],
-    "author": ""
+    "files": ["/files/signal.wav"],
+    "author": "DragonBeast"
 }

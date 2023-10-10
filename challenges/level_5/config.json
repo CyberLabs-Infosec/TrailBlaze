@@ -1,14 +1,14 @@
 {
-    "title": "",
-    "prompt": "",
+    "title": "3 Hopeful Inspections",
+    "prompt": "On further INSPECTion, the team finds a classified document named 'HOPE Articulation', which explains what HOPE is. However, the document seems incomplete. Is there more information here?",
     "place": 5,
     "checkPoint": false,
-    "flag": "",
-    "isStatic": false,
+    "flag": "1sp3ct_y0ur_w4y_0ut",
+    "isStatic": true,
     "points": 100,
     "hints": [],
     "solves": 0,
     "visible": true,
-    "files": ["/files/5/"],
-    "author": ""
+    "files": [],
+    "author": "itzmelucifer"
 }

@@ -1,14 +1,14 @@
 {
-    "title": "",
-    "prompt": "",
+    "title": "White or Blank",
+    "prompt": "Turns out the Hyperstellar Operations and Planetary Exploration craft is situated somewhere on the planet. Just when they try to extract its details, the command centre loses its power. While they attempt to find their way out, Alex finds a ‘Security Manual’, but its all WHITE pages. The crew must decipher this secretive manual.",
     "place": 6,
     "checkPoint": true,
-    "flag": "",
-    "isStatic": false,
+    "flag": "4ll_th4ts_bl4nk_15nt_3mpty",
+    "isStatic": true,
     "points": 200,
     "hints": [],
     "solves": 0,
     "visible": true,
-    "files": ["/files/6/"],
-    "author": ""
+    "files": [],
+    "author": "DragonBeast"
 }

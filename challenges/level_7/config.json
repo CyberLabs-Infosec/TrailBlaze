@@ -1,14 +1,14 @@
 {
-    "title": "",
-    "prompt": "",
+    "title": "Check for sum MDs",
+    "prompt": "Commander Mercer and crew finally get out of the communications base. To get to H.O.P.E., they require a password to override the controls of the Hoverboard. The SecUrity Manual contained a link, but its as blank as the manual itself. Does it really contain something?",
     "place": 7,
     "checkPoint": false,
-    "flag": "",
+    "flag": "pa55w0rd_0v3rwr1te_s3quenc3_5ucc3sful",
     "isStatic": false,
     "points": 200,
     "hints": [],
     "solves": 0,
     "visible": true,
-    "files": ["/files/7/"],
-    "author": ""
+    "files": [],
+    "author": "e4stw1nd"
 }

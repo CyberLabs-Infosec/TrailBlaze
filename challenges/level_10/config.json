@@ -1,14 +1,14 @@
 {
-    "title": "",
-    "prompt": "",
+    "title": "Your Way Out",
+    "prompt": "The manuals unveiled the presence of Luminite, a unique fuel utilized within the spacecraft. The physical switch to activate the ignition systems, however, are located in a hidden location within the spacecraft. An XOR tool (present therein) reveals the location if its output has all bits set to 1. The crew must find the location.",
     "place": 10,
     "checkPoint": false,
-    "flag": "",
+    "flag": "4di3u_tr14ngulum",
     "isStatic": false,
     "points": 200,
     "hints": [],
     "solves": 0,
     "visible": true,
-    "files": ["/files/10/"],
-    "author": ""
+    "files": [],
+    "author": "cyb3rpunk_b4ddi3"
 }

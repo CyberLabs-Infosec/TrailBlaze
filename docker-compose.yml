@@ -94,6 +94,28 @@ services:
         condition: service_healthy
     restart: always
 
+  level_7:
+    build: ./challenges/
+    ports:
+      - 16001:8003
+    volumes:
+      - ./challenges/level_7/build:/project
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: always
+
+  level_8:
+    image: httpd
+    ports:
+      - 16002:80
+    volumes:
+      - ./challenges/level_8/build:/usr/local/apache2/htdocs/
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: always
+
   level_11:
     build: ./challenges/
     ports:

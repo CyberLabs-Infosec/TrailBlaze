@@ -1,1 +1,0 @@
-FLAG = "c43s4r_w4s_sm4rt_5ub5t1tut10n_1s_n0t"

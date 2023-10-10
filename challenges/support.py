@@ -70,4 +70,26 @@ class buildFile:
             except Exception as e:
                 return {"success": False, "data": f"Error in level_11: sharing {e}"}
             
-  
+        if str(place) == "14":
+            alphabet = 'abcdefghijklmnopqrstuvwxyz0123456789_{}'
+            cipher = ""
+            rot = random.randint(0, 25)
+
+            def weird_func(plain_text, n):
+                cipher_text = ""
+                for k in range(len(plain_text)):
+                    position = alphabet.find(plain_text[k])
+                    cipher_text = cipher_text + alphabet[(position + n) % len(alphabet)]
+                return cipher_text
+
+            for i in range(0, len(flag), 4):
+                plain = flag[i: i + 4]
+                cipher += weird_func(plain, rot)
+                rot += 2
+
+            try:
+                data = open(f"level_14/sources/{file}", "r").read()
+                open(f"tmp/{fileName}", "w").write(data + f"# What gibberish is this? {cipher}")
+                return {"success": True, "data": f"tmp/{fileName}"}
+            except:
+                return {"success": False, "data": f"{file} not found place={place}"}
