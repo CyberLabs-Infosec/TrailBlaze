@@ -21,6 +21,8 @@ def getTeamID(uid):
                     """, (uid, ))
     try:
         team_id = cursor.fetchone()[0]
+        if team_id is None:
+            return {"success": False, "data": "Please create/join team"}
         return {"success": True, "data": {"team_id": team_id}}
     except Exception as e:
         return {"success": False, "data": f"Error in retrieving team_id for uid-{uid}: {e}"}

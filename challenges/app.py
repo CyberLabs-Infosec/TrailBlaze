@@ -22,8 +22,10 @@ def verify(req):
         status = getTeamID(uid)
         
         if not status["success"]:
+            if "create/join" in status["data"]:
+                return {"success": False, "data": "Please create/join team"}
             app.logger.warning(status["data"])
-            return {"status": "fail", "error": "There was an internal error, Please contact admin"}
+            return {"success": False, "data": "There was an internal error, Please contact admin"}
         return {"success": True, "data": status["data"]}
     except Exception as e:
         return {"success": False, "data": f"Token verification failed: {e}"}
@@ -38,6 +40,9 @@ def ping():
 def returnFiles(file):
     result = verify(request)
     if not result["success"]:
+        if "create/join" in result["data"]:
+            app.logger.warning(result["data"])
+            return {"status": "fail", "error": "Please create/join team!"}
         app.logger.warning(result["data"])
         return {"status": "fail", "error": "Please login again!"}
     try:

@@ -11,3 +11,5 @@ admin/.next
 # Build caches
 client/build
 admin/build
+challenges/__pycache__
+challenges/level_11/build/__pycache__

@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect
 import jwt
 
 from db import getFlag, getTeamID
@@ -19,8 +19,9 @@ def verify(req):
         status = getTeamID(uid)
         
         if not status["success"]:
-            app.logger.warning(status["data"])
-            return {"status": "fail", "error": "There was an internal error, Please contact admin"}
+            if "create/join" in status["data"]:
+                return {"success": False, "data": "Please create/join team"}
+            return {"success": False, "data": "There was an internal error, Please contact admin"}
         return {"success": True, "data": status["data"]}
     except Exception as e:
         return {"success": False, "data": f"Token verification failed: {e}"}
@@ -31,13 +32,18 @@ def index():
     return render_template('index.html')
 
 
-@app.route('/test_form', methods=['POST'])
+@app.route('/test_form', methods=['POST', "GET"])
 def test_form():
+    if request.method == "GET":
+        return redirect("/")
     result = verify(request)
     if not result["success"]:
         if "Token not found" in result["data"]:
             app.logger.warning(result["data"])
             return render_template("index.html", result="Please login to your trailblaze account at https://trailblaze.space/. If the issue doesn't resolve, please contact admin")
+        if "create/join" in result["data"]:
+            app.logger.warning(result["data"])
+            return render_template("index.html", result="Please join/create a team")
         app.logger.warning(result["data"])
         return render_template("index.html", result="There was an internal error, Please contact admin")
     team_id = result["data"]["team_id"]
@@ -55,7 +61,7 @@ def test_form():
     
     if not a.isnumeric() or not b.isnumeric():
         app.logger.warning("Entered non numeric characters")
-        return render_template("index.html", result="Only numbers allowed!")
+        return render_template("index.html", result="Only positive numbers allowed!")
 
     res = check_overflow(a, b, flag)
     return render_template('index.html', result=res)
