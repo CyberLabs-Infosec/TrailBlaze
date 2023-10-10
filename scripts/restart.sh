@@ -1,9 +1,9 @@
 #!/bin/bash
 
-containers=(trailblaze-file_server-1 trailblaze-level_11-1 trailblaze-frontend-1 trailblaze-admin-1 trailblaze-backend-1 trailblaze-postgres-1)
+containers=(trailblaze-file_server-1 trailblaze-level_11-1 trailblaze-frontend-1 trailblaze-admin-1 trailblaze-backend-1)
 images=(trailblaze-level_11 trailblaze-file_server)
 
-echo "[*] removing old containers"
+echo "[*] removing old containers (except database)"
 for i in "${containers[@]}"
 do
     docker stop $i
