@@ -19,6 +19,8 @@ def verify(req):
         status = getTeamID(uid)
         
         if not status["success"]:
+            if status["data"] == "Please create/join team":
+                return {"status": "fail", "error": "Please create/join team"}
             app.logger.warning(status["data"])
             return {"status": "fail", "error": "There was an internal error, Please contact admin"}
         return {"success": True, "data": status["data"]}
