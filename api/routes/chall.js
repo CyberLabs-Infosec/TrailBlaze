@@ -7,6 +7,10 @@ router.use(userMiddleware);
 const { pool } = require("../db");
 
 router.route("/getchalls").get(async (req, res) => {
+    // if (new Date() < new Date(process.env.EVENT_START)) {
+    //     return res.status(403).json({ status: "fail", error: "EVENT_NOT_STARTED" });
+    // }
+
     try {
         const challs = await pool.query("SELECT chall_id, title, prompt, place, checkpoint, points, hints, solves, visible, files, author FROM challenges");
         const totalPoints = await pool.query("SELECT SUM(points) FROM challenges");
@@ -31,6 +35,10 @@ router.route("/getfuel").get(async (req, res) => {
 router.route("/submit").post(async (req, res) => {
     const { chall_id, flag } = req.body;
     let ip = req.ips[0];
+
+    // if (new Date() < new Date(process.env.EVENT_START)) {
+    //     return res.status(403).json({ status: "fail", error: "EVENT_NOT_STARTED" });
+    // }
 
     if (!chall_id || !flag) {
         return res.status(400).json({ status: "fail", error: "Please submit a flag!" });
