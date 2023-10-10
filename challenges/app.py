@@ -40,6 +40,9 @@ def ping():
 def returnFiles(file):
     result = verify(request)
     if not result["success"]:
+        if "create/join" in result["data"]:
+            app.logger.warning(result["data"])
+            return {"status": "fail", "error": "Please create/join team!"}
         app.logger.warning(result["data"])
         return {"status": "fail", "error": "Please login again!"}
     try:

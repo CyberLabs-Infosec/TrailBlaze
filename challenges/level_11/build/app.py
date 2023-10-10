@@ -61,7 +61,7 @@ def test_form():
     
     if not a.isnumeric() or not b.isnumeric():
         app.logger.warning("Entered non numeric characters")
-        return render_template("index.html", result="Only numbers allowed!")
+        return render_template("index.html", result="Only positive numbers allowed!")
 
     res = check_overflow(a, b, flag)
     return render_template('index.html', result=res)
