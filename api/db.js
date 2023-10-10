@@ -11,7 +11,7 @@ const pool = new Pool({
 function init_db() {
     return new Promise(async (resolve) => {
         await pool.query(
-            `DROP TABLE IF EXISTS challenges; CREATE TABLE IF NOT EXISTS challenges(
+            `DROP TABLE IF EXISTS challenges CASCADE; CREATE TABLE IF NOT EXISTS challenges(
                 chall_id SERIAL PRIMARY KEY,
                 title VARCHAR(50) NOT NULL,
                 prompt text NOT NULL,

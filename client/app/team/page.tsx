@@ -172,6 +172,9 @@ export default function Page() {
         const jsonData = await data.json();
 
         if (jsonData.status == "fail") {
+            if (jsonData.error == "CANNOT_LEAVE_TEAM_AFTER_EVENT_STARTS") {
+                return toast.error("You cannot leave team once the event has started")
+            }
             toast.error(jsonData.error);
         } else if (jsonData.status == "info") {
             setNotification(true, "warn", "The team was deleted since you were the captain");

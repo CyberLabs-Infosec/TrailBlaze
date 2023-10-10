@@ -20,6 +20,7 @@ export default function Page() {
     const [solved, setSolved] = useState(0);
     const [totalPoints, setTotalPoints] = useState(0);
     const [currentPoints, setCurrentPoints] = useState(0);
+    const [eventStarted, setEventStarted] = useState(true);
 
     const router = useRouter();
 
@@ -82,7 +83,12 @@ export default function Page() {
             }
         });
         const challsToJson = await challs.json();
-        if (challsToJson.status == "error")  {
+
+        if (challsToJson.status == "fail")  {
+            if (challsToJson.error == "EVENT_NOT_STARTED") {
+                setEventStarted(false);
+                return toast.error("Event has not started yet!");
+            }
             setNotification(true, "error", "Please login again");
             return router.push("/logout");
         }
@@ -134,28 +140,32 @@ export default function Page() {
     }, [])
 
     return (
-        loggedin ? currChall != null ?
-        <>
-        <div className="absolute flex justify-center items-center w-full min-h-screen bg-slate-900 gap-10 h-fit" id="map">
-            <div id="scorepanel" className="fixed top-20 right-4 backdrop-blur z-20 flex flex-col gap-2 px-2 py-3 rounded-md justify-center items-center" style={{ backgroundColor: "rgba(30, 41, 59, 0.5)" }}>
-                <p className="text-slate-400 font-bold text-xl">FUEL ({Math.floor((currentPoints / totalPoints) * 100)}%)</p>
-                <div className="h-5 w-48 bg-slate-700 flex items-end">
-                    <span className="bg-green-300 h-full" style={{ width: `${Math.floor((currentPoints / totalPoints) * 100)}%` }}></span>
+        eventStarted ?
+            loggedin ? currChall != null ?
+            <>
+            <div className="absolute flex justify-center items-center w-full min-h-screen bg-slate-900 gap-10 h-fit" id="map">
+                <div id="scorepanel" className="fixed top-20 right-4 backdrop-blur z-20 flex flex-col gap-2 px-2 py-3 rounded-md justify-center items-center" style={{ backgroundColor: "rgba(30, 41, 59, 0.5)" }}>
+                    <p className="text-slate-400 font-bold text-xl">FUEL ({Math.floor((currentPoints / totalPoints) * 100)}%)</p>
+                    <div className="h-5 w-48 bg-slate-700 flex items-end">
+                        <span className="bg-green-300 h-full" style={{ width: `${Math.floor((currentPoints / totalPoints) * 100)}%` }}></span>
+                    </div>
+                    <div>
+                        <p className="text-slate-400 font-bold">Fuel decreases 50 units / hr</p>
+                    </div>
                 </div>
-                <div>
-                    <p className="text-slate-400 font-bold">Fuel decreases 50 units / hr</p>
-                </div>
+                <Challenge chall={currChall} setCurrentPoints={setCurrentPoints}></Challenge>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 430 730" id="container">
+                    <path id="trail" d="m 40 51 c 87 12.6667 208 -9 311 44 c 32 21 98 121 -16 150 c -80 16 -172 -19 -257 43 c -28 20 -97 100 5 146 c 104 35 194 -5 267 71 c 33 39 16 87 -3 115 c -25 36 -101.6667 13 -275 53" stroke="#32374d" strokeWidth="1" strokeLinecap="round" strokeDasharray="3,3" fill="none"/>
+                </svg>
+            </div></>: 
+            <div className='text-center text-3xl font-bold text-slate-400'>
+                <Loading text={JSON.stringify(["Loading challenges"])}></Loading>
+            </div>:
+            <div className='text-center text-3xl font-bold text-slate-400'>
+                <Loading text={JSON.stringify(["getting ready", "loading challs", "deploying containers"])}></Loading>
             </div>
-            <Challenge chall={currChall} setCurrentPoints={setCurrentPoints}></Challenge>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 430 730" id="container">
-                <path id="trail" d="m 40 51 c 87 12.6667 208 -9 311 44 c 32 21 98 121 -16 150 c -80 16 -172 -19 -257 43 c -28 20 -97 100 5 146 c 104 35 194 -5 267 71 c 33 39 16 87 -3 115 c -25 36 -101.6667 13 -275 53" stroke="#32374d" strokeWidth="1" strokeLinecap="round" strokeDasharray="3,3" fill="none"/>
-            </svg>
-        </div></>: 
-        <div className='text-center text-3xl font-bold text-slate-400'>
-            <Loading text={JSON.stringify(["Loading challenges"])}></Loading>
-        </div>:
-        <div className='text-center text-3xl font-bold text-slate-400'>
-            <Loading text=""></Loading>
-        </div>
+        : <div className="absolute h-full w-full flex justify-center items-center">
+            <img src={`/static/memes/event_not_started_${Math.round(Math.random() * 3) + 1}.jpg`}></img>
+        </div> 
     )
 }

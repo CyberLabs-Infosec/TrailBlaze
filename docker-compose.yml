@@ -74,6 +74,14 @@ services:
   #   depends_on:
   #     postgres:
   #       condition: service_healthy
+
+  fuel_cronjob:
+    build: ./fuel
+    command: "crond -f -d 8"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: always
       
   file_server:
     build: ./challenges/
