@@ -53,7 +53,7 @@ export default function Page() {
             setCurrChall(challenges.filter((c) => `chall-${c.chall_id}` == (e.target as HTMLElement).id)[0]);
         })
 
-        chall.innerHTML = `<p style="position: absolute; top: -40px; left: -15px; font-weight: 600; color: #a7adb8; width: max-content; padding: 5px 10px 5px 10px; background-color: #22262e; border-radius: 10px;">${obj.title}</p>`
+        chall.innerHTML = `<p style="pointer-events: none; position: absolute; top: -40px; left: -15px; font-weight: 600; color: #a7adb8; width: max-content; padding: 5px 10px 5px 10px; background-color: #22262e; border-radius: 10px;">${obj.title}</p>`
 
         document.getElementById("map").appendChild(chall);
     }
