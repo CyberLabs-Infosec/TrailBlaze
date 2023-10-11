@@ -19,7 +19,7 @@
 								if (checkpass.substring(split*5, split*6) == 'lly_') {
 									if (checkpass.substring(split*2, split*3) == '1d3_') {
 										if (checkpass.substring(split*7, split*8) == 's') {
-											alert("Access granted!")
+											alert(`The flag is blaze{${checkpass}}`)
 											return;
 										} else {
 											alert("Incorrect password");
