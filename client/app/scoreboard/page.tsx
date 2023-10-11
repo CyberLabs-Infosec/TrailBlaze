@@ -21,7 +21,8 @@ export default function Page() {
             });
             const jsonData = await data.json();
             if (jsonData.status == "success") {
-                jsonData.scores.sort((obj1, obj2) => {
+                var scores = jsonData.scores;
+                scores.sort((obj1, obj2) => {
                     if (obj2.last_solved > obj1.last_solved) {
                         return 1;
                     } else if (obj2.last_solved < obj1.last_solved) {
@@ -30,7 +31,7 @@ export default function Page() {
                         return obj2.current_point > obj1.current_point ? 1 : -1;
                     }
                 })
-                setScores(jsonData.scores);
+                setScores(scores);
             } else {
                 setNotification(true, "info", "Please login again!");
                 return router.push("/login")
