@@ -71,7 +71,7 @@
     ],
     [
         "3 Hopeful Inspections",
-        "On further INSPECTion, the team finds a classified document named 'HOPE Articulation', which explains what HOPE is. However, the document seems incomplete. Is there more information here?",
+        "On further INSPECTion, the team finds a classified document named 'HOPE Articulation', which explains what HOPE is. However, the document seems incomplete. Is there more information here?<br><a href='https://inspect.trailblaze.space/'>https://inspect.trailblaze.space/</a>",
         5,
         false,
         "1sp3ct_y0ur_w4y_0ut",
@@ -94,12 +94,12 @@
         [],
         0,
         true,
-        [],
+        ["/files/readme.txt"],
         "DragonBeast"
     ],
     [
         "Check for sum MDs",
-        "Commander Mercer and crew finally get out of the communications base. To get to H.O.P.E., they require a password to override the controls of the Hoverboard. The SecUrity Manual contained a link, but its as blank as the manual itself.  Does it really contain something?",
+        "Commander Mercer and crew finally get out of the communications base. To get to H.O.P.E., they require a password to override the controls of the Hoverboard. The SecUrity Manual contained a link, but its as blank as the manual itself.  Does it really contain something?<br><a href='https://checkforsum.trailblaze.space/'>https://checkforsum.trailblaze.space/</a>",
         7,
         false,
         "pa55w0rd_0v3rwr1te_s3quenc3_5ucc3sful",
@@ -113,7 +113,7 @@
     ],
     [
         "Reverse the JS panel",
-        "The crew has finally reached the H.O.P.E. Its entrance reads \"You must authenticate yourself to use this emergency craft!\".",
+        "The crew has finally reached the H.O.P.E. Its entrance reads \"You must authenticate yourself to use this emergency craft!\". Enclose the obtained flag in blaze{}.<br><a href='https://revjs.trailblaze.space/'>https://revjs.trailblaze.space/</a>",
         8,
         false,
         "cl13n7_s1d3_4u7h_r34lly_sucks",
@@ -141,7 +141,7 @@
     ],
     [
         "Your Way Out",
-        "The manuals unveiled the presence of Luminite, a unique fuel utilized within the spacecraft. The physical switch to activate the ignition systems, however, are located in a hidden location within the spacecraft. An XOR tool (present therein) reveals the location if its output has all bits set to 1. The crew must find the location.",
+        "The manuals unveiled the presence of Luminite, a unique fuel utilized within the spacecraft. The physical switch to activate the ignition systems, however, are located in a hidden location within the spacecraft. An XOR tool (present therein) reveals the location if its output has all bits set to 1. The crew must find the location.<br><a href='https://maxxor.trailblaze.space/'>https://maxxor.trailblaze.space/</a>",
         10,
         false,
         "4di3u_tr14ngulum",
@@ -155,7 +155,7 @@
     ],
     [
         "Overflow",
-        "While cruising through the vast expanse of space, your ship is suddenly hit by a football sized asteroid. Although the collision did not harm the engine, the debris clogged the coolant's drainage system, which caused an overflow of the coolant into the sensors room. Alex must repair the damage before the sensors fail.",
+        "While cruising through the vast expanse of space, your ship is suddenly hit by a football sized asteroid. Although the collision did not harm the engine, the debris clogged the coolant's drainage system, which caused an overflow of the coolant into the sensors room. Alex must repair the damage before the sensors fail.<br><a href='https://overflow.trailblaze.space/'>https://overflow.trailblaze.space/</a>",
         11,
         false,
         "0verflow_s0lved",
@@ -168,18 +168,18 @@
         "e4stw1nd"
     ],
     [
-        "level_12",
-        "nothing",
+        "Precise Navigation",
+        "The spaceship must now be maneuvered in the direction of the Milky Way. The coordinates are given in this strange site. Find them out.<br><a href='https://readme.trailblaze.space/'>https://readme.trailblaze.space/</a>",
         12,
         true,
-        "level_12",
+        "m1lky_w4y_1s_0ut_7h3r3",
         true,
         300,
         [],
         0,
         true,
         [],
-        "placeholder"
+        "Devadamdar*69"
     ],
     [
         "Spectrogram",
@@ -224,6 +224,20 @@
         "itzmelucifer"
     ],
     [
+        "Basic cookies",
+        "level_16 - basic cookies <br><a href='https://cookie.trailblaze.space/'>https://cookie.trailblaze.space/</a>",
+        16,
+        false,
+        "level_16",
+        false,
+        500,
+        [],
+        0,
+        true,
+        [],
+        "anonymous"
+    ],
+    [
         "NOX for seeds",
         "According to the star map, Alex is on the final leg of his voyage.\nAfter spending such a long time in space he is very eager to reach home, he\nwants to find a token of remembrance for his wife, whom he misses dearly.\nHe decides to get a SEED of his wife's favourite flowers. In front of him lies a challenge. Forsythia is only found on planet NOX, known for its brutal and xenophobic species.\n\nHelp Alex get that SEED!",
         17,
@@ -236,5 +250,47 @@
         true,
         ["/files/seed.py"],
         "s4yCh33se!"
+    ],
+    [
+        "jwt",
+        "level_18 - jwt <br><a href='https://jwt.trailblaze.space/'>https://jwt.trailblaze.space/</a>",
+        18,
+        true,
+        "level_18",
+        false,
+        500,
+        [],
+        0,
+        true,
+        [],
+        "anonymous"
+    ],
+    [
+        "bluff",
+        "level_19 - bluff websites <br><a href='https://bluff.trailblaze.space/'>https://bluff.trailblaze.space/</a>",
+        19,
+        true,
+        "level_19",
+        false,
+        500,
+        [],
+        0,
+        true,
+        [],
+        "anonymous"
+    ],
+    [
+        "earth",
+        "level_20 - huge image reconstruct",
+        20,
+        true,
+        "level_20",
+        false,
+        500,
+        [],
+        0,
+        true,
+        [],
+        "anonymous"
     ]
 ]
