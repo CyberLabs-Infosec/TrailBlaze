@@ -1,7 +1,7 @@
 #!/bin/bash
 
-containers=(trailblaze-file_server-1 trailblaze-level_11-1 trailblaze-frontend-1 trailblaze-admin-1 trailblaze-backend-1)
-images=(trailblaze-level_11 trailblaze-file_server)
+containers=(trailblaze-file_server-1 trailblaze-level_11-1 trailblaze-frontend-1 trailblaze-admin-1 trailblaze-backend-1 trailblaze-docker_bot-1 trailblaze-level_8-1 trailblaze-level_7-1)
+images=(trailblaze-level_11 trailblaze-file_server trailblaze-docker_bot trailblaze-level_7)
 
 echo "[*] removing old containers (except database)"
 for i in "${containers[@]}"
@@ -35,3 +35,5 @@ npm i
 cd ~/TrailBlaze/
 
 docker compose up -d
+
+echo "[*] delete files in challenges/tmp"
