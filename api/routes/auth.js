@@ -103,10 +103,12 @@ router.route("/register").post(async (req, res) => {
                 to: email,
                 subject: "Activate your account",
                 html: `
-                <div>
-                    <p>Welcome to TrailBlaze: Lost in Space! Click on link below to verify your account</p>
-                    <br><a href=${req.get('origin')}/api/auth/verify/${token}>${req.get('origin')}/api/auth/verify/${token}</a>
-                </div>
+                <section style="background-image: url('https://trailblaze.space/static/assets/mail_bg.svg'); background-size: cover; width: 100%; height: 100%; margin: 0 auto;">
+                    <section style="position: absolute; background-color: rgba(71, 78, 100, 0.95); height: 100vh; height: min-content; align-items: center; padding: 20px; left: 50%; top: 50%; translate: -50% -150%;">
+                        <p style="font-size: 20px; font-weight: 300; font-family: sans-serif; text-align: left; color: azure;">Attention Sergeant,<br>Stranded in space in an uninhabited galaxy, along with your team and Commander Alex.<br>Are you ready to brave the unknown and dangers to fight your way back home to Earth?<br>Help Alex in fulfilling his mission and reach his home safe.</p>
+                        <a href=${req.get('origin')}/api/auth/verify/${token} style="border: none; width: 100%; color: rgb(255, 255, 255); border-radius: 5px; outline: 0px; cursor: pointer; padding: 10px 15px 10px 15px; font-size: 20px; font-weight: 600; background-color: rgb(170, 80, 255);">Click here to verify</a>
+                    </section>
+                </section>
                 `,
                 textEncoding: 'base64',
                 headers: [
