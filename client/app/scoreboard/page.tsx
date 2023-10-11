@@ -27,7 +27,7 @@ export default function Page() {
                     } else if (obj2.last_solved < obj1.last_solved) {
                         return -1;
                     } else {
-                        return obj2.current_points > obj1.current_points ? 1 : -1;
+                        return obj2.current_point > obj1.current_point ? 1 : -1;
                     }
                 })
                 setScores(jsonData.scores);
