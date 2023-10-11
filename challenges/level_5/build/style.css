@@ -1,0 +1,109 @@
+@import url('https://fonts.googleapis.com/css2?family=Tektur&family=Ubuntu:ital,wght@0,500;1,300&display=swap');
+
+body{
+    margin: 0;
+    padding: 0;
+    background-color :rgb(255, 200, 97);
+}
+
+h1{
+    font-family: 'Tektur', cursive;
+    font-size: 3.5rem;
+}
+.container{
+    font-family: 'Ubuntu', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation-name: harry;
+
+}
+
+.box{
+    background-color :rgb(255, 235, 163);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid black;
+width: 50vw;
+height: 40vh;
+font-size: 1.3rem;
+}
+.outerbar{
+    border: 3px solid black;
+    height: 25px;
+    width: 30vw;
+    background-color: white;
+    margin: 10px;
+    padding: 1px;
+}
+
+#textt{
+    margin: 10px;
+    padding: 7px;
+    
+
+}
+
+.box input{
+    margin: 0px 0px;
+    padding: 0px 0px;
+width: 10vw;
+height: 18px;
+}
+
+#text{
+    height: 15px;
+    width: 25vw;
+    margin-top: 18px;
+    padding: 26px 0px;
+    text-align: center;
+    font-size: 1.8rem;
+    
+    
+}
+
+.innerbar{
+    
+background-color: rgb(94, 235, 94);
+height: 25px;
+
+
+animation-name: harry;
+animation-duration: 7.3s;
+animation-iteration-count: 1;
+
+
+
+
+}
+@keyframes harry{
+from{
+    width: 0vw;
+    
+}
+to{
+    transition-timing-function: linear;
+    width: 30vw;
+}
+}
+@keyframes harry2{
+0%{
+
+}
+}
+#dis{
+display: none;
+}
+
+footer{
+    display: flex;
+    font-size: 1.3rem;
+    align-items: center;
+    justify-content: center;
+    font-style: italic;
+    margin-top: 30px;
+}
+
+/* Flag Part 2: sp3ct_y0ur_ */
