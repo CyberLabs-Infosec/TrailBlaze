@@ -110,9 +110,9 @@ router.route("/jointeam").post(async (req, res) => {
 })
 
 router.route("/leaveteam").get(async (req, res) => {
-    // if (new Date() > new Date(process.env.EVENT_START)) {
-    //     return res.status(403).json({ status: "fail", error: "CANNOT_LEAVE_TEAM_AFTER_EVENT_STARTS" });
-    // }
+    if (new Date() > new Date(process.env.EVENT_START)) {
+        return res.status(403).json({ status: "fail", error: "CANNOT_LEAVE_TEAM_AFTER_EVENT_STARTS" });
+    }
     
     try {
         const qRes = await pool.query("SELECT captain_id, team_members FROM teams WHERE team_id=$1", [req.user.team_id]);
