@@ -125,30 +125,34 @@ export default function Challenge(props) {
         }
     }, []);
 
-    const downloadFile = (e) => {
+    const downloadFile = async (e) => {
         const fileUrl = e.target.dataset.url;
         const fileName = e.target.dataset.filename;
-        fetch(fileUrl, {
+        const res = await toast.promise(fetch(fileUrl, {
             headers: {
                 "Authorization": `Bearer ${Cookies.get('token')}`
             }
-        }).then((res) => {
-            if (res.status == 200) {
-                return res.blob();
+        }), {
+            pending: "Requesting file"
+        })
+        if (res.status == 200) {
+            const blob = await res.blob();
+            if (blob) {
+                var url = window.URL.createObjectURL(blob);
+                var a = document.createElement('a');
+                a.href = url;
+                a.download = fileName;
+                document.body.appendChild(a);
+                a.click();    
+                a.remove();
             } else {
                 toast.error("The file could not be downloaded, please contact admin");
-                return null;
+                return;
             }
-        }).then((blob) => {
-            if (blob == null) return;
-            var url = window.URL.createObjectURL(blob);
-            var a = document.createElement('a');
-            a.href = url;
-            a.download = fileName;
-            document.body.appendChild(a);
-            a.click();    
-            a.remove();
-        })
+        } else {
+            toast.error("The file could not be downloaded, please contact admin");
+            return;
+        }
     }
 
     return (
