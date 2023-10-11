@@ -16,3 +16,7 @@ def getFlags(team_id):
 def getLogs(max):
     cursor.execute("SELECT chall_id, team_id, username, flag, ip, subtime, correct FROM sublogs")
     return cursor.fetchall()[-max:]
+
+def getChalls():
+    cursor.execute("SELECT place, chall_id, title FROM challenges")
+    return cursor.fetchall()
