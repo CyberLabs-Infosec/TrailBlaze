@@ -141,7 +141,7 @@
     ],
     [
         "Your Way Out",
-        "The manuals unveiled the presence of Luminite, a unique fuel utilized within the spacecraft. The physical switch to activate the ignition systems, however, are located in a hidden location within the spacecraft. An XOR tool (present therein) reveals the location if its output has all bits set to 1. The crew must find the location.<br><a href='https://trailblaze.space:16004/'>https://trailblaze.space:16004/</a>",
+        "The manuals unveiled the presence of Luminite, a unique fuel utilized within the spacecraft. The physical switch to activate the ignition systems, however, is located in a hidden location within the spacecraft. An XOR tool (present therein) reveals the location if its output has all bits (10 bits) set to 1. The crew must find the location.<br><a href='https://trailblaze.space:16004/'>https://trailblaze.space:16004/</a>",
         10,
         false,
         "4di3u_tr14ngulum",
