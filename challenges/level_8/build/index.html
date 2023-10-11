@@ -13,25 +13,46 @@
 			split = 4;
 			if (checkpass.substring(0, split) == 'cl13') {
 				if (checkpass.substring(split*6, split*7) == 'suck') {
-					if (checkpass.substring(split, split*2) == 'nt_s') {
-						if (checkpass.substring(split*4, split*5) == '_rea') {
-							if (checkpass.substring(split*3, split*4) == 'auth') {
+					if (checkpass.substring(split, split*2) == 'n7_s') {
+						if (checkpass.substring(split*4, split*5) == '_r34') {
+							if (checkpass.substring(split*3, split*4) == '4u7h') {
 								if (checkpass.substring(split*5, split*6) == 'lly_') {
-									if (checkpass.substring(split*2, split*3) == 'ide_') {
+									if (checkpass.substring(split*2, split*3) == '1d3_') {
 										if (checkpass.substring(split*7, split*8) == 's') {
 											alert("Access granted!")
+											return;
+										} else {
+											alert("Incorrect password");
+											return;
 										}
+									} else {
+										alert("Incorrect password");
+										return;
 									}
+								} else {
+									alert("Incorrect password");
+									return;
 								}
+							} else {
+								alert("Incorrect password");
+								return;
 							}
+						} else {
+							alert("Incorrect password");
+							return;
 						}
+					} else {
+						alert("Incorrect password");
+						return;
 					}
+				} else {
+					alert("Incorrect password");
+					return;
 				}
-			}
-			else {
+			} else {
 				alert("Incorrect password");
+				return;
 			}
-			
 		}
 		</script>
 		<div style="position:relative; padding:5px;top:50px; left:38%; width:350px; height:140px; background-color: dimgrey;">
@@ -40,7 +61,7 @@
 				<p>Yaa its contradictory but still....</p>
 				<form action="index.html" method="post">
 					<input type="password" id="pass" size="8" /><br/>
-					<input type="submit" value="verify" onclick="verify(); return false;" />
+					<input type="submit" value="verify" onclick="verify()" />
 				</form>
 			</div>
 		</div>

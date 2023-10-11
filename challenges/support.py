@@ -71,7 +71,7 @@ class buildFile:
                 return {"success": False, "data": f"Error in level_11: sharing {e}"}
             
         if str(place) == "14":
-            alphabet = 'abcdefghijklmnopqrstuvwxyz0123456789_{}'
+            alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_{.}'
             cipher = ""
             rot = random.randint(0, 25)
 
