@@ -1,1 +1,1 @@
-*/1 * * * * /var/lib/postgresql/script.sh
+*/2 * * * * /var/lib/postgresql/script.sh
