@@ -15,7 +15,7 @@
     ],
     [
         "Alien? Human? Symbol?!",
-        "Upon regaining consciousness, Alex and his crew immediately embarked on a quest to secure their rescue. During their exploration, they stumbled upon a weird, ancient engraving. Their primary mission: deciphering the enigmatic SYMBOLS, in the pursuit of uncovering the mysteries of this alien world.\n\n   Enclose the obtained flag in blaze{}",
+        "Upon regaining consciousness, Alex and his crew immediately embarked on a quest to secure their rescue. During their exploration, they stumbled upon a weird, ancient engraving. Their primary mission: deciphering the enigmatic SYMBOLS, in the pursuit of uncovering the mysteries of this alien world.",
         1,
         false,
         "S1MPUL_SYMB0L_C1PH3R_Y4YYYY",
@@ -29,7 +29,7 @@
     ],
     [
         "HEXagonal Basement",
-        "The crew move on to the communications base, at the basement of which lies it's control centre. There lay a lot of abandoned devices, but most of them didn’t stand the test of time. However, they found an old BASE’ic blackbox, which keeps generating what appears to be encoded gibberish texts. But are they really that useless?",
+        "The crew move on to the communications base, at the basement of which lies its control centre. There lay a lot of abandoned devices, but most of them didn’t stand the test of time. However, they found an old BASE’ic blackbox, which keeps generating what appears to be encoded gibberish texts. But are they really that useless?",
         2,
         false,
         "5up3r_53cur3_3nc0d1ng",
@@ -71,7 +71,7 @@
     ],
     [
         "3 Hopeful Inspections",
-        "On further INSPECTion, the team finds a classified document named 'HOPE Articulation', which explains what HOPE is. However, the document seems incomplete. Is there more information here?<br><a href='https://inspect.trailblaze.space/'>https://inspect.trailblaze.space/</a>",
+        "On further INSPECTion, the team finds a classified document named 'HOPE Articulation', which explains what HOPE is. However, the document seems incomplete. Is there more information here?<br><a href='https://trailblaze.space:16003'>https://trailblaze.space:16003</a>",
         5,
         false,
         "1sp3ct_y0ur_w4y_0ut",
@@ -99,7 +99,7 @@
     ],
     [
         "Check for sum MDs",
-        "Commander Mercer and crew finally get out of the communications base. To get to H.O.P.E., they require a password to override the controls of the Hoverboard. The SecUrity Manual contained a link, but its as blank as the manual itself.  Does it really contain something?<br><a href='https://checkforsum.trailblaze.space/'>https://checkforsum.trailblaze.space/</a>",
+        "Commander Mercer and crew finally get out of the communications base. To get to H.O.P.E., they require a password to override the controls of the Hoverboard. The SecUrity Manual contained a link, but its as blank as the manual itself.  Does it really contain something?<br><a href='https://trailblaze.space:16001/'>https://trailblaze.space:16001/</a>",
         7,
         false,
         "pa55w0rd_0v3rwr1te_s3quenc3_5ucc3sful",
@@ -113,7 +113,7 @@
     ],
     [
         "Reverse the JS panel",
-        "The crew has finally reached the H.O.P.E. Its entrance reads \"You must authenticate yourself to use this emergency craft!\". Enclose the obtained flag in blaze{}.<br><a href='https://revjs.trailblaze.space/'>https://revjs.trailblaze.space/</a>",
+        "The crew has finally reached the H.O.P.E. Its entrance reads \"You must authenticate yourself to use this emergency craft!\". Enclose the obtained flag in blaze{}.<br><a href='https://trailblaze.space:16002/'>https://trailblaze.space:16002/</a>",
         8,
         false,
         "cl13n7_s1d3_4u7h_r34lly_sucks",
@@ -141,7 +141,7 @@
     ],
     [
         "Your Way Out",
-        "The manuals unveiled the presence of Luminite, a unique fuel utilized within the spacecraft. The physical switch to activate the ignition systems, however, are located in a hidden location within the spacecraft. An XOR tool (present therein) reveals the location if its output has all bits set to 1. The crew must find the location.<br><a href='https://maxxor.trailblaze.space/'>https://maxxor.trailblaze.space/</a>",
+        "The manuals unveiled the presence of Luminite, a unique fuel utilized within the spacecraft. The physical switch to activate the ignition systems, however, are located in a hidden location within the spacecraft. An XOR tool (present therein) reveals the location if its output has all bits set to 1. The crew must find the location.<br><a href='https://trailblaze.space:16004/'>https://trailblaze.space:16004/</a>",
         10,
         false,
         "4di3u_tr14ngulum",
@@ -155,7 +155,7 @@
     ],
     [
         "Overflow",
-        "While cruising through the vast expanse of space, your ship is suddenly hit by a football sized asteroid. Although the collision did not harm the engine, the debris clogged the coolant's drainage system, which caused an overflow of the coolant into the sensors room. Alex must repair the damage before the sensors fail.<br><a href='https://overflow.trailblaze.space/'>https://overflow.trailblaze.space/</a>",
+        "While cruising through the vast expanse of space, your ship is suddenly hit by a football sized asteroid. Although the collision did not harm the engine, the debris clogged the coolant's drainage system, which caused an overflow of the coolant into the sensors room. Alex must repair the damage before the sensors fail.<br><a href='https://trailblaze.space:16000/'>https://trailblaze.space:16000/</a>",
         11,
         false,
         "0verflow_s0lved",
@@ -169,7 +169,7 @@
     ],
     [
         "Precise Navigation",
-        "The spaceship must now be maneuvered in the direction of the Milky Way. The coordinates are given in this strange site. Find them out.<br><a href='https://readme.trailblaze.space/'>https://readme.trailblaze.space/</a>",
+        "The spaceship must now be maneuvered in the direction of the Milky Way. The coordinates are given in this strange site. Find them out.<br><a href='https://trailblaze.space:16005/'>https://trailblaze.space:16005/</a>",
         12,
         true,
         "m1lky_w4y_1s_0ut_7h3r3",
@@ -225,7 +225,7 @@
     ],
     [
         "Basic cookies",
-        "level_16 - basic cookies <br><a href='https://cookie.trailblaze.space/'>https://cookie.trailblaze.space/</a>",
+        "level_16 - basic cookies <br><a href='https://trailblaze.space:16006/'>https://trailblaze.space:16006/</a>",
         16,
         false,
         "level_16",
@@ -253,7 +253,7 @@
     ],
     [
         "jwt",
-        "level_18 - jwt <br><a href='https://jwt.trailblaze.space/'>https://jwt.trailblaze.space/</a>",
+        "level_18 - jwt <br><a href='https://trailblaze.space:16007/'>https://trailblaze.space:16007/</a>",
         18,
         true,
         "level_18",
@@ -267,9 +267,9 @@
     ],
     [
         "bluff",
-        "level_19 - bluff websites <br><a href='https://bluff.trailblaze.space/'>https://bluff.trailblaze.space/</a>",
+        "level_19 - bluff websites <br><a href='https://trailblaze.space:16008/'>https://trailblaze.space:16008/</a>",
         19,
-        true,
+        false,
         "level_19",
         false,
         500,
