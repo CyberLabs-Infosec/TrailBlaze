@@ -1,14 +1,14 @@
 {
-    "title": "",
-    "prompt": "",
+    "title": "Jot",
+    "prompt": "Commander Mercer needs to communicate with earth through a SECRET website known only to space explorers. He must submit a TOKEN to get ahead in that website.",
     "place": 18,
     "checkPoint": true,
-    "flag": "",
+    "flag": "s3cr3t_r3v34l3d",
     "isStatic": false,
     "points": 500,
     "hints": [],
     "solves": 0,
     "visible": true,
-    "files": ["/files/18/"],
-    "author": ""
+    "files": [],
+    "author": "cyb3rpunk_b4ddie"
 }

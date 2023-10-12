@@ -64,5 +64,5 @@ def calculate():
     xor_result = int(num1) ^ int(num2)
     if xor_result == 1023:
         return render_template("index.html", result=f"Sequence matched! here is the location: {flag}")
-    return render_template("index.html", result=f"XOR result: {result}")    
+    return render_template("index.html", result=f"XOR result: {xor_result}")    
     

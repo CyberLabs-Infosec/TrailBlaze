@@ -15,7 +15,7 @@
     ],
     [
         "Alien? Human? Symbol?!",
-        "Upon regaining consciousness, Alex and his crew immediately embarked on a quest to secure their rescue. During their exploration, they stumbled upon a weird, ancient engraving. Their primary mission: deciphering the enigmatic SYMBOLS, in the pursuit of uncovering the mysteries of this alien world.",
+        "Upon regaining consciousness, Alex and his crew immediately embarked on a quest to secure their rescue. During their exploration, they stumbled upon a weird, ancient engraving. Their primary mission: deciphering the enigmatic SYMBOLS, in the pursuit of uncovering the mysteries of this alien world. Enclose the obtained flag in blaze{}",
         1,
         false,
         "S1MPUL_SYMB0L_C1PH3R_Y4YYYY",
@@ -57,7 +57,7 @@
     ],
     [
         "._..__._..._ recording",
-        "The investigation continues, and now they come across an audio file. However, dcoding an audio created by the ancient MORtals poses a perplexing challenge.",
+        "The investigation continues, and now they come across an audio file. However, dcoding an audio created by the ancient MORtals poses a perplexing challenge. Enclose the obtained flag in blaze{}",
         4,
         false,
         "TH3R3ISST1LLHOP3",
@@ -71,7 +71,7 @@
     ],
     [
         "3 Hopeful Inspections",
-        "On further INSPECTion, the team finds a classified document named 'HOPE Articulation', which explains what HOPE is. However, the document seems incomplete. Is there more information here?<br><a href='https://trailblaze.space:16003'>https://trailblaze.space:16003</a>",
+        "On further INSPECTion, the team finds a classified document named \"HOPE Articulation\", which explains what HOPE is. However, the document seems incomplete. Is there more information here?<br><a href='https://trailblaze.space:16003'>https://trailblaze.space:16003</a>",
         5,
         false,
         "1sp3ct_y0ur_w4y_0ut",
@@ -252,22 +252,22 @@
         "s4yCh33se!"
     ],
     [
-        "jwt",
-        "level_18 - jwt <br><a href='https://trailblaze.space:16007/'>https://trailblaze.space:16007/</a>",
+        "Jot",
+        "Commander Mercer needs to communicate with earth through a SECRET website known only to space explorers. He must submit a TOKEN to get ahead in that website.<br><a href='https://trailblaze.space:16007/'>https://trailblaze.space:16007/</a>",
         18,
         true,
-        "level_18",
+        "s3cr3t_r3v34l3d",
         false,
         500,
         [],
         0,
         true,
         [],
-        "anonymous"
+        "cyb3rpunk_b4ddie"
     ],
     [
-        "bluff",
-        "level_19 - bluff websites <br><a href='https://trailblaze.space:16008/'>https://trailblaze.space:16008/</a>",
+        "1?2?...500?",
+        "Commander Mercer is quite  near Earth now. However his difficulty is far from over. To reach Earth he needs to cross an asteroid belt. To do so, he needs to AUTOMATE the process which will GET the real time coordinates of the asteroids. The system has detected exactly 500 asteroids that he needs to dodge. <br><a href='https://trailblaze.space:16008/'>https://trailblaze.space:16008/</a>",
         19,
         false,
         "level_19",
@@ -277,7 +277,7 @@
         0,
         true,
         [],
-        "anonymous"
+        "e4stw1nd"
     ],
     [
         "earth",
