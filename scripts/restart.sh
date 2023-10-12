@@ -43,4 +43,5 @@ cd ~/TrailBlaze/
 
 docker compose up -d
 
+echo "[*] start the reset flag container"
 echo "[*] delete files in challenges/tmp"
