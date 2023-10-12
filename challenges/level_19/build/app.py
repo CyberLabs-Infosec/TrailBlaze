@@ -10,7 +10,6 @@ app.secret_key = "v3ryy_p00w3rphu11_s3cr37_k4y"
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
-session["page"] = None
 
 
 def verify(req):
@@ -57,7 +56,7 @@ def returnFlag(page):
         return render_template("index.html", result="There was an internal error, Please contact admin")
     flag = result["data"]
 
-    if not session["page"]:
+    if "page" not in session:
         session["page"] = random.choice(range(1, 500))
     
     if page == session["page"]:
