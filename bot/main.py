@@ -34,17 +34,17 @@ async def send_teams(ctx):
 
         await ctx.send(f"```\n{msg}\n```")
 
-@bot.command(name="flags")
-async def send_flags(ctx, team_id):
-    flags = db.getFlags(team_id=team_id)
+# @bot.command(name="flags")
+# async def send_flags(ctx, team_id):
+#     flags = db.getFlags(team_id=team_id)
 
-    for i in range(0, len(flags), 10):
-        msg = t2a(
-            header=["chall_id", "flag"],
-            body=flags[i : min(i + 10, len(flags))],
-            style = PresetStyle.thin_compact
-        )
-        await ctx.send(f"```\n{msg}\n```")
+#     for i in range(0, len(flags), 10):
+#         msg = t2a(
+#             header=["chall_id", "flag"],
+#             body=flags[i : min(i + 10, len(flags))],
+#             style = PresetStyle.thin_compact
+#         )
+#         await ctx.send(f"```\n{msg}\n```")
 
 @bot.command(name="logs")
 async def send_logs(ctx, *args):

@@ -94,7 +94,7 @@ router.route("/jointeam").post(async (req, res) => {
                     return res.status(400).json({ status: "fail", error: "Team is full :(" });
                 }
                 await pool.query("UPDATE users SET team_id=$1 WHERE uid=$2", [qRes.rows[0].team_id, req.user.uid]);
-                await pool.query("UPDATE teams SET team_members=$1", [qRes.rows[0].team_members + 1]);
+                await pool.query("UPDATE teams SET team_members=$1 WHERE team_id=$2", [qRes.rows[0].team_members + 1, qRes.rows[0].team_id]);
             } else {
                 return res.status(400).json({ status: "fail", error: "Incorrect team credentials" });
             }
@@ -123,7 +123,7 @@ router.route("/leaveteam").get(async (req, res) => {
         }
 
         await pool.query("UPDATE users SET team_id=$1 WHERE uid=$2", [null, req.user.uid]);
-        await pool.query("UPDATE teams SET team_members=$1", [qRes.rows[0].team_members - 1]);
+        await pool.query("UPDATE teams SET team_members=$1 WHERE team_id=$2", [qRes.rows[0].team_members - 1, req.user.team_id]);
 
         return res.status(200).json({ status: "success", error: "" });
     } catch(err) {
