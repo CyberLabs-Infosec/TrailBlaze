@@ -10,6 +10,7 @@ app.secret_key = "v3ryy_p00w3rphu11_s3cr37_k4y"
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
+session["page"] = None
 
 
 def verify(req):
