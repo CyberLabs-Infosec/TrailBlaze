@@ -51,8 +51,8 @@ def calculate():
         return render_template("index.html", result="There was an internal error, Please contact admin")
     flag = result["data"]
     try:
-        num1 = int(request.form['num1'])
-        num2 = int(request.form['num2'])
+        num1 = request.form['num1'].strip()
+        num2 = request.form['num2'].strip()
     except Exception as e:
         app.logger.warning("Missing request parameters")
         return render_template("index.html", result="Enter both the numbers")

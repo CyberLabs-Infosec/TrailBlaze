@@ -1,6 +1,6 @@
 {
     "title": "Reverse the JS panel",
-    "prompt": "The crew has finally reached the H.O.P.E. Its entrance reads \"You must authenticate yourself to use this emergency craft!\".",
+    "prompt": "The crew has finally reached the H.O.P.E. Its entrance reads \"You must authenticate yourself to use this emergency craft!\". Enclose the obtained flag in blaze{}.<br><a href='https://trailblaze.space:16002/'>https://trailblaze.space:16002/</a>",
     "place": 8,
     "checkPoint": false,
     "flag": "cl13n7_s1d3_4u7h_r34lly_sucks",
