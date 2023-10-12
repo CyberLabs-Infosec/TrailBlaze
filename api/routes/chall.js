@@ -50,12 +50,6 @@ router.route("/submit").post(async (req, res) => {
         const dbFlag = flagQuery.rows[0]['?column?'];
         const place = chall.rows[0].place;
 
-            /*
-                point allocation logic for submiting correct flag
-                1 -> Update user score [How timestamp ?]
-                2 -> Update team score
-            */
-
         try {
             const result = await pool.query("SELECT current_point, last_solved FROM teams WHERE team_id=$1", [req.user.team_id]);
 
