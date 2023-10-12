@@ -61,7 +61,7 @@ def calculate():
         app.logger.warning("Entered non numeric characters")
         return render_template("index.html", result="Only positive numbers allowed!")  
 
-    xor_result = num1 ^ num2
+    xor_result = int(num1) ^ int(num2)
     if xor_result == 1023:
         return render_template("index.html", result=f"Sequence matched! here is the location: {flag}")
     return render_template("index.html", result=f"XOR result: {result}")    
