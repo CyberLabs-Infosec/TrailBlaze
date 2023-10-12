@@ -1,7 +1,7 @@
 #!/bin/bash
 
-containers=(trailblaze-file_server-1 trailblaze-level_11-1 trailblaze-frontend-1 trailblaze-admin-1 trailblaze-backend-1 trailblaze-docker_bot-1 trailblaze-level_8-1 trailblaze-level_7-1)
-images=(trailblaze-level_11 trailblaze-file_server trailblaze-docker_bot trailblaze-level_7)
+containers=(trailblaze-file_server-1 trailblaze-level_11-1 trailblaze-frontend-1 trailblaze-admin-1 trailblaze-backend-1 trailblaze-docker_bot-1 trailblaze-level_8-1 trailblaze-level_7-1 trailblaze-level_12-1 trailblaze-level_16-1 trailblaze-level_18-1 trailblaze-level_19-1)
+images=(trailblaze-level_11 trailblaze-file_server trailblaze-docker_bot trailblaze-level_7 trailblaze-level_12 trailblaze-level_16 trailblaze-level_18 trailblaze-level_19)
 
 echo "[*] removing old containers (except database)"
 for i in "${containers[@]}"

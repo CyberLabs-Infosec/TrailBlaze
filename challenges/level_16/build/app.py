@@ -51,7 +51,7 @@ def index():
         Commander = request.cookies["Commander"]
         Name = request.cookies["Name"]
     except Exception as e:
-        app.logger.warn(f"Cookies not found: {e}")
+        app.logger.warning(f"Cookies not found: {e}")
         resp = make_response(render_template("index.html"))
         resp.set_cookie("Commander", "false")
         resp.set_cookie("Name", "Nobody")

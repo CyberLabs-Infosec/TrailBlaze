@@ -1,14 +1,14 @@
 {
-    "title": "level_12",
-    "prompt": "nothing",
+    "title": "Precise Navigation",
+    "prompt": "The spaceship must now be maneuvered in the direction of the Milky Way. The coordinates are given in this strange site. Find them out.<br><a href='https://trailblaze.space:16005/'>https://trailblaze.space:16005/</a>",
     "place": 12,
     "checkPoint": true,
-    "flag": "level_12",
+    "flag": "m1lky_w4y_1s_0ut_7h3r3",
     "isStatic": true,
     "points": 300,
     "hints": [],
     "solves": 0,
     "visible": true,
     "files": [],
-    "author": "placeholder"
+    "author": "Devadamdar*69"
 }

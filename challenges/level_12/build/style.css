@@ -1,0 +1,46 @@
+/* source: milkslap-milkslap.scss */
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+     }
+
+ 
+  a {
+    color: inherit; }
+
+    
+  /* .center {
+    width: 1280px;
+    height: 534px;
+    margin: 0 auto; } */
+  
+  #title{
+    font-family: '';
+    margin-top: -30px;
+    margin-left: 0px;
+    margin-bottom: 20px;
+  }
+  #description{
+    margin-top: -30px;
+  }
+  #image {
+    height: 534px;
+    width: 1280px;
+    margin-top: -20px;
+    margin-left: 30px;
+    margin-bottom: 20px;
+    background-image: url(concat_v.png);
+    background-position: 0 0; }
+
+  #foot {
+    margin-top: -10px;
+    margin-bottom: 0px;
+    margin-left: 0px;
+    color: #999999; }
+    #foot h1 {
+      font-family: serif;
+      font-weight: normal;
+      font-size: 1rem;
+      text-align: center; }
+  

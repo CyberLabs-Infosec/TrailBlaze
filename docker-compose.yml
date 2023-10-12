@@ -98,9 +98,6 @@ services:
       - 16003:80
     volumes:
       - ./challenges/level_5/build:/usr/local/apache2/htdocs/
-    depends_on:
-      postgres:
-        condition: service_healthy
     restart: always
 
   level_7:
@@ -120,9 +117,6 @@ services:
       - 16002:80
     volumes:
       - ./challenges/level_8/build:/usr/local/apache2/htdocs/
-    depends_on:
-      postgres:
-        condition: service_healthy
     restart: always
 
   level_10:
@@ -146,6 +140,14 @@ services:
       postgres:
         condition: service_healthy
     restart: always
+
+  level_12:
+    image: httpd
+    ports:
+      - 16005:80
+    volumes:
+      - ./challenges/level_12/build:/usr/local/apache2/htdocs/
+    restart: always
   
   level_16:
     build: ./challenges/
@@ -153,6 +155,28 @@ services:
       - 16006:8003
     volumes:
       - ./challenges/level_16/build:/project
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: always
+
+  level_18:
+    build: ./challenges/
+    ports:
+      - 16007:8003
+    volumes:
+      - ./challenges/level_18/build:/project
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: always
+
+  level_19:
+    build: ./challenges/
+    ports:
+      - 16008:8003
+    volumes:
+      - ./challenges/level_19/build:/project
     depends_on:
       postgres:
         condition: service_healthy

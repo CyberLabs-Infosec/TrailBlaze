@@ -1,6 +1,6 @@
 {
     "title": "QR: 660, Binary: 660",
-    "prompt": "Alex gets his hands on a file named 660*660.txt He says its a simple binary file, but I say its an image!!! Find out urself",
+    "prompt": "While in the fuel station, Alex gets his hands on something called 660*660.txt He’s thinks it’s a binary file, but he has doubts. Find out what this really is.",
     "place": 15,
     "checkPoint": true,
     "flag": "b1n4r13s_c0uld_b3_0f_gr34t_us3",
