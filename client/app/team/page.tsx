@@ -21,7 +21,7 @@ export default function Page() {
     const router = useRouter();
 
     const [chartData, setChartData] = useState([]);
-    const [solvedData, setSolvedData] = useState({ solved: 5, unsolved: 15 });
+    const [solvedData, setSolvedData] = useState({ solved: 0, unsolved: 21 });
 
     const [cap, setCap] = useState(null);
 
@@ -258,8 +258,8 @@ export default function Page() {
                 }
                 </div>
                 <div className='flex gap-5'>
-                    <div id='chart' className='bg-slate-800 rounded-lg' style={{ height: "400px", width: "800px" }}></div>
-                    <div id='solved' className='bg-slate-800 rounded-lg' style={{ height: "400px", width: "500px" }}></div>
+                    <div id='chart' className='bg-slate-800 rounded-lg' style={{ height: "350px", width: "700px" }}></div>
+                    <div id='solved' className='bg-slate-800 rounded-lg' style={{ height: "350px", width: "400px" }}></div>
                 </div>
                 <button onClick={handleLeave} className='bg-violet-600 text-white p-2 w-32 rounded-md shadow-md shadow-violet-500/50 grow'>Leave Team</button>
             </div>
