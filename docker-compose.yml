@@ -94,6 +94,19 @@ services:
         condition: service_healthy
     restart: always
 
+  reset_flag:
+    image: node:latest
+    user: node
+    working_dir: /home/node/app
+    environment:
+      - NODE_ENV=production
+    volumes:
+      - ./reset_flag:/home/node/app
+    command: "node main.js"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
   level_5:
     image: httpd
     ports:

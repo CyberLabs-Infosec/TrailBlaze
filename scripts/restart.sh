@@ -37,10 +37,10 @@ cd ~/TrailBlaze/api
 npm i
 cd ~/TrailBlaze/
 
+cd ~/TrailBlaze/reset_flag
+npm i
+cd ~/TrailBlaze/
+
 docker compose up -d
 
 echo "[*] delete files in challenges/tmp"
-
-cd ~/TrailBlaze/reset_flag
-npm i
-node main.js

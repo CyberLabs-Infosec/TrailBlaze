@@ -16,4 +16,8 @@ cd ~/TrailBlaze/api
 npm i
 cd ~/TrailBlaze/
 
+cd ~/TrailBlaze/reset_flag
+npm i
+cd ~/TrailBlaze/
+
 docker compose up -d
