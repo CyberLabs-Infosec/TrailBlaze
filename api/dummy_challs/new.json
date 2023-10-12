@@ -15,7 +15,7 @@
     ],
     [
         "Alien? Human? Symbol?!",
-        "Upon regaining consciousness, Alex and his crew immediately embarked on a quest to secure their rescue. During their exploration, they stumbled upon a weird, ancient engraving. Their primary mission: deciphering the enigmatic SYMBOLS, in the pursuit of uncovering the mysteries of this alien world.",
+        "Upon regaining consciousness, Alex and his crew immediately embarked on a quest to secure their rescue. During their exploration, they stumbled upon a weird, ancient engraving. Their primary mission: deciphering the enigmatic SYMBOLS, in the pursuit of uncovering the mysteries of this alien world. Enclose the obtained flag in blaze{}",
         1,
         false,
         "S1MPUL_SYMB0L_C1PH3R_Y4YYYY",
@@ -57,7 +57,7 @@
     ],
     [
         "._..__._..._ recording",
-        "The investigation continues, and now they come across an audio file. However, dcoding an audio created by the ancient MORtals poses a perplexing challenge.",
+        "The investigation continues, and now they come across an audio file. However, dcoding an audio created by the ancient MORtals poses a perplexing challenge. Enclose the obtained flag in blaze{}",
         4,
         false,
         "TH3R3ISST1LLHOP3",
