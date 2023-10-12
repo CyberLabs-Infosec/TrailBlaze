@@ -3,7 +3,7 @@
     "prompt": "On further INSPECTion, the team finds a classified document named \"HOPE Articulation\", which explains what HOPE is. However, the document seems incomplete. Is there more information here?<br><a href='https://trailblaze.space:16003'>https://trailblaze.space:16003</a>",
     "place": 5,
     "checkPoint": false,
-    "flag": "1sp3ct_y0ur_w4y_0ut",
+    "flag": "1nsp3ct_y0ur_w4y_0ut",
     "isStatic": true,
     "points": 100,
     "hints": [],
