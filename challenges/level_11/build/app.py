@@ -84,7 +84,6 @@ def check_overflow(a, b, flag):
     b = evaluate(b)
     sum = evaluate(a + b)
 
-    if sum > 0:
-        return("Sensors are high on coolant. REPAIR ASAP!")
-    else:
-        return(f"System repair initiated. Here is your reward: {flag}")
+    if sum == -5000:
+        return f"System repair initiated. Here is your reward: {flag}"
+    return f"Sensors are high on coolant. REPAIR ASAP! your result is {sum}"

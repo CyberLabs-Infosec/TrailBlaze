@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, session
+from flask_session import Session
 import jwt, random
 
 from db import getFlag, getTeamID
@@ -6,6 +7,9 @@ from db import getFlag, getTeamID
 app = Flask(__name__)
 app.config["secret"] = "1mokPoWeR73vWcDTTJIDZqjsypEOSxnF2Iwrf4ADc9wAx8a3jp9Yx3hJHr99E0U7"
 app.secret_key = "v3ryy_p00w3rphu11_s3cr37_k4y"
+app.config["SESSION_PERMANENT"] = False
+app.config["SESSION_TYPE"] = "filesystem"
+Session(app)
 
 
 def verify(req):

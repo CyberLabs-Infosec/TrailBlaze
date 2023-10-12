@@ -1,7 +1,7 @@
 from random import randint
 
 flag = "**********************"
-alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_{.}'
+alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_{.}/$'
 
 
 def weird_func(plain_text, n):

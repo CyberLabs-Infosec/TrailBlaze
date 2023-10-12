@@ -1,14 +1,14 @@
 {
-    "title": "",
-    "prompt": "",
+    "title": "Home Sweet Home",
+    "prompt": "Finally, after overcoming so many hardships, Alex and his team are about to land on earth. However, before they land, they need to send a special callsign to earth’s command centre for identification. For security reasons, this secret was split into several parts. Reconstruct it.",
     "place": 20,
-    "checkPoint": false,
-    "flag": "",
-    "isStatic": false,
+    "checkPoint": true,
+    "flag": "f1nally_b4ck_0n_34rth",
+    "isStatic": true,
     "points": 500,
     "hints": [],
     "solves": 0,
     "visible": true,
-    "files": ["/files/20/"],
-    "author": ""
+    "files": ["files/archive.7z"],
+    "author": "anonymous"
 }
