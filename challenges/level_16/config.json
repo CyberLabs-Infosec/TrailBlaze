@@ -1,14 +1,14 @@
 {
-    "title": "",
-    "prompt": "",
+    "title": "Snack Time",
+    "prompt": "Traveling across the galaxy has left our commander feeling hungry, and he has requested that you bring him some COOKIES. However, upon reaching the vending machine, you discover that only Commander Alex has access to it. Can you still manage to retrieve the snack?",
     "place": 16,
     "checkPoint": false,
-    "flag": "",
+    "flag": "sp4ce_c00kies_do_not_t4st3_good",
     "isStatic": false,
     "points": 500,
     "hints": [],
     "solves": 0,
     "visible": true,
-    "files": ["/files/16/"],
-    "author": ""
+    "files": [],
+    "author": "Pr0meth3u5"
 }
