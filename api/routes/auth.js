@@ -81,6 +81,14 @@ router.route("/register").post(async (req, res) => {
             return res.status(400).json({ status: "fail", error: "All fields are required!" });
         }
 
+        if (username.length > 30) {
+            return res.status(400).json({ status: "fail", error: "Username too long, must be within 30 characters" });
+        }
+
+        if (password.length > 18 || password.length < 8) {
+            return res.status(400).json({ status: "fail", error: "Password must be of length between 8-18" });
+        }
+
         const hashedPassword = await bcrypt.hash(password, 10);
 
         const result = await pool.query(`
