@@ -56,7 +56,7 @@ router.route("/verify/:token").get(async (req, res) => {
             `, [vid]);
 
             res.set({
-                'Set-Cookie': `token=${getToken({ uid: inDB.rows[0].uid, username: username, email: email, rank: rank }, "12h")}; Path=/`
+                'Set-Cookie': `token=${getToken({ uid: inDB.rows[0].uid, username: username, email: email, rank: rank }, "12h")}; Path=/; Domain=.trailblaze.space`
             });
             return res.status(200).redirect("/");
             
@@ -173,7 +173,7 @@ router.route("/register").post(async (req, res) => {
                         SELECT uid, username, email, method, password, rank FROM users WHERE email=$1;
                     `, [usrData.email])
                     res.set({
-                        'Set-Cookie': `token=${getToken({ uid: inDB.rows[0].uid, username: inDB.rows[0].username, email: inDB.rows[0].email, rank: 3 }, "12h")}; Path=/`
+                        'Set-Cookie': `token=${getToken({ uid: inDB.rows[0].uid, username: inDB.rows[0].username, email: inDB.rows[0].email, rank: 3 }, "12h")}; Path=/; Domain=.trailblaze.space`
                     });
                     const user = await pool.query(`
                         SELECT u.uid, u.team_id, u.username, u.email, u.rank, t.teamname FROM users AS u LEFT JOIN teams AS t ON u.team_id=t.team_id WHERE u.email=$1;
@@ -213,7 +213,7 @@ router.route("/login").post(async (req, res) => {
                 
                 if (match) {
                     res.set({
-                        'Set-Cookie': `token=${getToken({ uid: uid, username: username, email: email, rank: rank }, "12h")}; Path=/`
+                        'Set-Cookie': `token=${getToken({ uid: uid, username: username, email: email, rank: rank }, "12h")}; Path=/; Domain=.trailblaze.space`
                     });
                     const user = await pool.query(`
                         SELECT u.uid, u.team_id, u.username, u.email, u.rank, t.teamname FROM users AS u LEFT JOIN teams AS t ON u.team_id=t.team_id WHERE u.email=$1;
@@ -254,7 +254,7 @@ router.route("/login").post(async (req, res) => {
                 return res.status(400).json({ status: "fail", error: "E-mail is not registered" });
             } else {
                 res.set({
-                    'Set-Cookie': `token=${getToken({ uid: result.rows[0].uid, username: usrData.name, email: usrData.email, rank: 3 }, "12h")}; Path=/`
+                    'Set-Cookie': `token=${getToken({ uid: result.rows[0].uid, username: usrData.name, email: usrData.email, rank: 3 }, "12h")}; Path=/; Domain=.trailblaze.space`
                 });
                 const user = await pool.query(`
                     SELECT u.uid, u.team_id, u.username, u.email, u.rank, t.teamname FROM users AS u LEFT JOIN teams AS t ON u.team_id=t.team_id WHERE u.email=$1;
