@@ -4,7 +4,6 @@ sudo cp ~/TrailBlaze/scripts/nginx/trailblaze.conf ~/TrailBlaze/scripts/nginx/ad
 echo "[+] copied config files successfully to /etc/nginx/sites-available"
 
 sudo ln -s /etc/nginx/sites-available/trailblaze.conf /etc/nginx/sites-enabled
-sudo ln -s /etc/nginx/sites-available/admin.conf /etc/nginx/sites-enabled
 sudo ln -s /etc/nginx/sites-available/inspect.conf /etc/nginx/sites-enabled
 sudo ln -s /etc/nginx/sites-available/checkforsum.conf /etc/nginx/sites-enabled
 sudo ln -s /etc/nginx/sites-available/revjs.conf /etc/nginx/sites-enabled
