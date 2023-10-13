@@ -1,5 +1,5 @@
 from random import seed, shuffle
-from flag import FLAG
+from flag import FLAGgit 
 
 seed(0x1337)
 

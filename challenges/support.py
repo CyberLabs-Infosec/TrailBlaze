@@ -29,7 +29,7 @@ class buildFile:
             random.seed(0x1337)
             flag_list = list(flag)
             random.shuffle(flag_list)
-            shuffled_flag = "".join(char.encode().hex() for char in flag)
+            shuffled_flag = "".join(char.encode().hex() for char in flag_list)
             try:
                 data = open(f"level_17/sources/{file}", "r").read()
                 open(f"tmp/{fileName}", "w").write(data + f"# Modified flag is: {shuffled_flag}")

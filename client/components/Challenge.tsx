@@ -176,7 +176,7 @@ export default function Challenge(props) {
                 </div>
                 <div className="absolute -left-24 flex gap-2 flex-col">
                     {
-                        props.chall.hints.map((k, i) => <div key={i} onClick={() => swal(k)} className="cursor-pointer p-3 text-slate-400 text-xl bg-slate-800 rounded-lg font-bold">Hint {i}</div>)
+                        props.chall.hints.map((k, i) => <div key={i} onClick={() => swal(k)} className="cursor-pointer p-3 text-slate-400 text-xl bg-slate-800 rounded-lg font-bold">Hint {i + 1}</div>)
                     }
                 </div>
             </div>
