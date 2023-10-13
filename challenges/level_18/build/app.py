@@ -57,7 +57,7 @@ def verify_token():
     try:
         msg = jwt.decode(token, app.config["secret_key"], algorithms=['HS256'])
         user = msg["name"]
-    except:
+    except Exception as e:
         app.logger.warning(f"editme verification: {e}")
         return render_template("index.html", result="Intruder detected! Alerting all systems")
 

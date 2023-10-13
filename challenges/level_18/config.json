@@ -1,6 +1,6 @@
 {
     "title": "Jot",
-    "prompt": "Commander Mercer needs to communicate with earth through a SECRET website known only to space explorers. He must submit a TOKEN to get ahead in that website.",
+    "prompt": "Commander Mercer needs to communicate with earth through a SECRET website known only to space explorers. He must submit a TOKEN to get ahead in that website.<br><a href='https://trailblaze.space:16007/'>https://trailblaze.space:16007/</a>",
     "place": 18,
     "checkPoint": true,
     "flag": "s3cr3t_r3v34l3d",

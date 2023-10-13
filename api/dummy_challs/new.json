@@ -74,7 +74,7 @@
         "On further INSPECTion, the team finds a classified document named \"HOPE Articulation\", which explains what HOPE is. However, the document seems incomplete. Is there more information here?<br><a href='https://trailblaze.space:16003'>https://trailblaze.space:16003</a>",
         5,
         false,
-        "1sp3ct_y0ur_w4y_0ut",
+        "1nsp3ct_y0ur_w4y_0ut",
         true,
         100,
         [],
@@ -224,11 +224,11 @@
         "itzmelucifer"
     ],
     [
-        "Basic cookies",
+        "Snack Time",
         "Traveling across the galaxy has left our commander feeling hungry, and he has requested that you bring him some COOKIES. However, upon reaching the vending machine, you discover that only Commander Alex has access to it. Can you still manage to retrieve the snack?<br><a href='https://trailblaze.space:16006/'>https://trailblaze.space:16006/</a>",
         16,
         false,
-        "level_16",
+        "sp4ce_c00kies_do_not_t4st3_good",
         false,
         500,
         [],
@@ -270,7 +270,7 @@
         "Commander Mercer is quite  near Earth now. However his difficulty is far from over. To reach Earth he needs to cross an asteroid belt. To do so, he needs to AUTOMATE the process which will GET the real time coordinates of the asteroids. The system has detected exactly 500 asteroids that he needs to dodge. <br><a href='https://trailblaze.space:16008/'>https://trailblaze.space:16008/</a>",
         19,
         false,
-        "level_19",
+        "y0u_ar3_cl0se",
         false,
         500,
         [],
@@ -280,17 +280,17 @@
         "e4stw1nd"
     ],
     [
-        "earth",
-        "level_20 - huge image reconstruct",
+        "Home Sweet Home",
+        "Finally, after overcoming so many hardships, Alex and his team are about to land on earth. However, before they land, they need to send a special callsign to earth’s command centre for identification. For security reasons, this secret was split into several parts. Reconstruct it.",
         20,
         true,
-        "level_20",
-        false,
+        "f1nally_b4ck_0n_34rth",
+        true,
         500,
         [],
         0,
         true,
-        [],
+        ["files/archive.7z"],
         "anonymous"
     ]
 ]

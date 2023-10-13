@@ -139,20 +139,34 @@ function EditPrompt(props: Props){
             <div>
                 <div className="text-slate-400">hints</div>
                 <div className="sm:w-150 flex flex-col bg-transparent px-3 py-4 border-2 rounded-md outline-none border-gray-500 h-fit gap-3" id="hints">
-                    
+                <button className="w-10 h-10 flex justify-center items-center hover:border rounded-full border-transparent transition ease-in-out duration-300 hover:bg-green-500 outline-none" onClick={ addHint }>
+                        <img src="/static/assets/add_icon.svg" width="30px"/>
+                    </button>
+                    {
+                        hints.map((hint, index) => {
+                            return(
+                                <div id={ `div-${ index }` } key={ index } className="flex gap-3 items-center">
+                                    <input id={`input-${ index }`} className="bg-transparent outline-none  focus:border-indigo-600 border-b-2 border-gray-500 grow px-2" value={ hint } onChange={ handleChange }></input>
+                                    <button className="w-10 h-10 flex justify-center items-center hover:border rounded-full border-transparent transition ease-in-out duration-300 bg-red-600 hover:bg-red-400 outline-none" onClick={ removeHint }>
+                                        <img id={ `${ index }` } src="/static/assets/delete_icon.svg" width="30px"/>
+                                    </button>
+                                </div>
+                            )
+                        })
+                    }
                 </div>
             </div>
             <div>
                 <div className="text-slate-400">files</div>
                 <div className="sm:w-150 flex flex-col bg-transparent px-3 py-4 border-2 rounded-md outline-none border-gray-500 h-fit gap-3" id="files">
+                    <button className="w-10 h-10 flex justify-center items-center hover:border rounded-full border-transparent transition ease-in-out duration-300 hover:bg-green-500 outline-none" onClick={ addFile }>
+                        <img src="/static/assets/add_icon.svg" width="30px"/>
+                    </button>
                     {
                         files.map((file, index) => {
                             return(
                                 <div id={ `filediv-${ index }` } key={ index } className="flex gap-3 items-center">
                                     <input id={`fileinput-${ index }` } className="bg-transparent outline-none  focus:border-indigo-600 border-b-2 border-gray-500 grow px-2" value={ file } onChange={ handleFileChange }></input>
-                                    <button className="w-10 h-10 flex justify-center items-center hover:border rounded-full border-transparent transition ease-in-out duration-300 hover:bg-green-500 outline-none" onClick={ addFile }>
-                                        <img src="/static/assets/add_icon.svg" width="30px"/>
-                                    </button>
                                     <button className="w-10 h-10 flex justify-center items-center hover:border rounded-full border-transparent transition ease-in-out duration-300 bg-red-600 hover:bg-red-400 outline-none" onClick={ removeFile }>
                                         <img id={ `fileimg-${ index }` } src="/static/assets/delete_icon.svg" width="30px"/>
                                     </button>
