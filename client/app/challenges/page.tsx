@@ -89,6 +89,10 @@ export default function Page() {
                 setEventStarted(false);
                 return toast.error("Event has not started yet!");
             }
+            if (challsToJson.error = "EVENT_HAS_ENDED") {
+                setNotification(true, "error", "Event has ended");
+                return router.push("/");
+            }
             setNotification(true, "error", "Please login again");
             return router.push("/logout");
         }
