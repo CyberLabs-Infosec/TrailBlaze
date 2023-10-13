@@ -6,6 +6,7 @@ cursor = conn.cursor()
 
 RATE = -50
 EVENT_START = datetime.datetime(2023, 10, 13, 13)
+EVENT_END = datetime.datetime(2023, 10, 13, 19)
 
 def getTeamData():
     cursor.execute("SELECT c.checkpoint, t.team_id, t.current_point, t.teamname FROM teams AS t, challenges AS c WHERE c.place=t.last_solved")
@@ -25,5 +26,7 @@ def decreasePoints(teams):
             
     conn.commit()
 
-
-decreasePoints(getTeamData())
+if datetime.datetime.now() < EVENT_END:
+    decreasePoints(getTeamData())
+else:
+    pass

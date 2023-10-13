@@ -9,6 +9,7 @@ import Timer from '../components/Timer';
 
 import nvcti from "../sponsor_logos/nvcti_logo.png";
 import pingsafe from "../sponsor_logos/pingSafe_logo.png";
+import EndTimer from '../components/endTimer';
 
 export default function Page() {
     const vals = ["REACH EARTH", "SOLVE CHALLS", "HACK GALAXY"];
@@ -55,7 +56,7 @@ export default function Page() {
         <div className="flex absolute items-center w-full min-h-full bg-slate-900 flex flex-col gap-18 overflow-y-scroll">
             <div className='relative flex flex-col justify-center items-center gap-10 -translate-y-1/2' style={{ top: "50vh" }}>
                 <p className='font-PressStart text-slate-200 text-8xl text-center'>LET'S <span id='varVal' className='text-violet-400'>{vals[0]}</span></p>
-                <p className='font-ADLaM text-slate-300 text-6xl flex gap-5'><span>Event begins in</span> <Timer></Timer></p>
+                <p className='font-ADLaM text-slate-300 text-6xl flex gap-5'>{new Date() < new Date(process.env.NEXT_PUBLIC_EVENT_START) ? <><span>Event begins in</span> <Timer></Timer></> : <><span>Event ends in</span> <EndTimer></EndTimer></>}</p>
             </div>
             <div className='relative' style={{ top: "50vh" }}>
                 <p className='text-slate-400 text-4xl font-bold'>- OUR SPONSORS -</p>
