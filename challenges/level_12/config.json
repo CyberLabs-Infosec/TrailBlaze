@@ -1,6 +1,6 @@
 {
     "title": "Precise Navigation",
-    "prompt": "The spaceship must now be maneuvered in the direction of the Milky Way. The coordinates are given in this strange site. Find them out.<br><a href='https://trailblaze.space:16005/'>https://trailblaze.space:16005/</a>",
+    "prompt": "The spaceship must now be maneuvered in the direction of the Milky Way. The coordinates are given in this strange site. Find them out.<br><a href='https://readme.trailblaze.space'>https://readme.trailblaze.space</a>",
     "place": 12,
     "checkPoint": true,
     "flag": "m1lky_w4y_1s_0ut_7h3r3",

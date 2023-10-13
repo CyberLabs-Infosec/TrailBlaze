@@ -1,6 +1,6 @@
 {
     "title": "._..__._..._ recording",
-    "prompt": "The investigation continues, and now they come across an audio file. However, dcoding an audio created by the ancient MORtals poses a perplexing challenge. Enclose the obtained flag in blaze{}",
+    "prompt": "The investigation continues, and now they come across an audio file. However, dcoding an audio created by the ancient MORtals poses a perplexing challenge. Enclose the obtained flag in blaze{}<br>Submit the flag in caps similar to Alien? Human? Symbol?! challenge",
     "place": 4,
     "checkPoint": false,
     "flag": "TH3R3ISST1LLHOP3",
