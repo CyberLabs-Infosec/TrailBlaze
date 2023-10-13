@@ -45,7 +45,7 @@ def test_form():
             app.logger.warning(result["data"])
             return render_template("index.html", result="Please join/create a team")
         app.logger.warning(result["data"])
-        return render_template("index.html", result="There was an internal error, Please contact admin")
+        return render_template("index.html", result="Please login to your trailblaze account at https://trailblaze.space/. If the issue doesn't resolve, please contact admin")
     team_id = result["data"]["team_id"]
     result = getFlag(team_id, place=11)
     if not result["success"]:
