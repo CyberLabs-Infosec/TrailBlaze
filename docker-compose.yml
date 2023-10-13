@@ -44,27 +44,27 @@ services:
         condition: service_healthy
     restart: always
 
-  admin:
-    image: node:latest
-    user: node
-    working_dir: /home/node/app
-    environment:
-      - NODE_ENV=production
-    volumes:
-      - ./admin:/home/node/app
-    ports:
-      - 15003:15003
-    command: "npm run start"
-    depends_on:
-      postgres:
-        condition: service_healthy
-
-  # docker_bot:
-  #   build: ./bot
+  # admin:
+  #   image: node:latest
+  #   user: node
+  #   working_dir: /home/node/app
+  #   environment:
+  #     - NODE_ENV=production
+  #   volumes:
+  #     - ./admin:/home/node/app
+  #   ports:
+  #     - 15003:15003
+  #   command: "npm run start"
   #   depends_on:
   #     postgres:
   #       condition: service_healthy
-  #   restart: always
+
+  docker_bot:
+    build: ./bot
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: always
 
   backup:
     build: ./db_backup

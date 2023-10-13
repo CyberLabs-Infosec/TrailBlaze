@@ -7,9 +7,9 @@ router.use(userMiddleware);
 const { pool } = require("../db");
 
 router.route("/getchalls").get(async (req, res) => {
-    // if (new Date() < new Date(process.env.EVENT_START)) {
-    //     return res.status(403).json({ status: "fail", error: "EVENT_NOT_STARTED" });
-    // }
+    if (new Date() < new Date(process.env.EVENT_START)) {
+        return res.status(403).json({ status: "fail", error: "EVENT_NOT_STARTED" });
+    }
     if (new Date() > new Date(process.env.EVENT_END)) {
         return res.status(403).json({ status: "fail", error: "EVENT_HAS_ENDED" });
     }
@@ -39,9 +39,9 @@ router.route("/submit").post(async (req, res) => {
     const { chall_id, flag } = req.body;
     let ip = req.ips[0];
 
-    // if (new Date() < new Date(process.env.EVENT_START)) {
-    //     return res.status(403).json({ status: "fail", error: "EVENT_NOT_STARTED" });
-    // }
+    if (new Date() < new Date(process.env.EVENT_START)) {
+        return res.status(403).json({ status: "fail", error: "EVENT_NOT_STARTED" });
+    }
     if (new Date() > new Date(process.env.EVENT_END)) {
         return res.status(403).json({ status: "fail", error: "EVENT_HAS_ENDED" });
     }
