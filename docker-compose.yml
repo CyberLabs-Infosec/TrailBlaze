@@ -59,12 +59,12 @@ services:
       postgres:
         condition: service_healthy
 
-  # docker_bot:
-  #   build: ./bot
-  #   depends_on:
-  #     postgres:
-  #       condition: service_healthy
-  #   restart: always
+  docker_bot:
+    build: ./bot
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: always
 
   backup:
     build: ./db_backup
